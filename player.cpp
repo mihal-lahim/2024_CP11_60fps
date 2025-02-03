@@ -1,0 +1,246 @@
+#define CONIOEX
+#include"conioex.h"
+#include"game.h"
+#include"player.h"
+#include<iostream>
+#include"scene.h"
+#include"bullet.h"
+#include"collision.h"
+#include"inputkey.h"
+///////////////
+//グローバル変数
+////////////////
+PLAYER g_Player;
+
+
+///////////////
+//マクロ定義
+////////////////
+#define PLAYER_MOVE_SPEED_X (MOVE_SPEED_X * 1.0)
+#define PLAYER_MOVE_SPEED_Y (MOVE_SPEED_Y * 1.0)
+#define GRAVITY        (0.04)//重力
+#define JUMP_POWER     (0.75)//ジャンプ力
+#define RESIST_X       (0.4)//地上のX方向摩擦
+#define RESIST_X_AIR   (0.01)//空中のX方向摩擦
+
+//初期化処理
+void InitPlayer(void)
+{
+	memset(&g_Player, 0, sizeof(PLAYER));
+	g_Player.PosX = g_Player.OldPosX = 40;//プレイヤーのX位置
+	g_Player.PosY = g_Player.OldPosY = 23;//プレイヤーのY位置
+
+	g_Player.Direct = 0.0;//向き
+	g_Player.Hit = false;//当たってない
+}
+
+//終了処理
+void UnInitPlayer(void)
+{
+}
+
+//更新処理
+void UpdatePlayer(void)
+{
+	//現在の位置保存
+	g_Player.OldPosX = g_Player.PosX;
+	g_Player.OldPosY = g_Player.PosY;
+
+	//移動量のリセット
+	g_Player.SpeedX = 0;
+
+#ifdef ACTION
+	//アクションゲームでは使用しない
+#else//シューティング用
+	g_Player.SpeedY = 0;
+#endif
+
+	//カーソルキーの入力で上下左右に移動する
+	if (GetKeyPress(KEYNAME::KEY_W))
+	{
+#ifdef ACTION
+		if (g_Player.Jump)
+		{
+			if (!g_Player.SecondJump)
+			{
+				g_Player.SpeedY = -JUMP_POWER;
+				g_Player.SecondJump = true;
+			}
+		}
+#else//シューティング
+		g_Player.SpeedY = -PLAYER_MOVE_SPEED_Y;
+#endif
+		g_Player.Direct = 90; //上向き
+	}
+	if (GetKeyPress(KEYNAME::KEY_A))
+	{
+		g_Player.SpeedX = -PLAYER_MOVE_SPEED_X;
+		g_Player.Direct = 0; //左向き
+	}
+	if (GetKeyPress(KEYNAME::KEY_S))
+	{
+#ifdef ACTION
+	//アクションでは使わない
+#else
+		g_Player.SpeedY = PLAYER_MOVE_SPEED_Y;
+		g_Player.Direct = 270; //下向き
+#endif
+	}
+	if (GetKeyPress(KEYNAME::KEY_D))
+	{
+		g_Player.SpeedX = PLAYER_MOVE_SPEED_X;
+		g_Player.Direct = 180; //右向き
+	}
+	if (0)//スペースキー何か入れる
+	{
+#ifdef ACTION
+		if (!g_Player.Jump)
+		{
+			g_Player.SpeedY = -JUMP_POWER;
+			g_Player.Jump = true;
+		}
+#else //SHOOTING用
+		
+
+#endif
+	}
+
+	//座標更新
+#ifdef ACTION
+
+	//X座標の制御
+	
+	if (g_Player.Jump||g_Player.SecondJump)
+	{//ジャンプ中
+		g_Player.PosX += (-g_Player.SpeedX) * RESIST_X_AIR;//抵抗を加える
+	}
+	else
+	{//地上
+		g_Player.PosX += (-g_Player.SpeedX) * RESIST_X;//抵抗を加える
+	}
+	//ここで最終結果
+	g_Player.PosX += g_Player.SpeedX;
+
+	//Y座標の制御
+	g_Player.SpeedY += GRAVITY;//重力を加える
+
+	//ここで最終結果
+	g_Player.PosY += g_Player.SpeedY;
+
+	//地面に割り込んだ時
+	if (g_Player.PosY > SCREEN_BOTTOM)
+	{
+		g_Player.PosY = SCREEN_BOTTOM;//地面に場所を移動させる
+		g_Player.SpeedY = 0.0;//移動値のリセット
+		g_Player.Jump = false;
+		g_Player.SecondJump = false;
+	}
+#else//SHOOTING用
+	g_Player.PosX += g_Player.SpeedX;
+	g_Player.PosY += g_Player.SpeedY;
+#endif
+
+	//座標制御
+	if (g_Player.PosX > SCREEN_RIGHT)
+	{
+		g_Player.PosX = SCREEN_RIGHT;
+	}
+	if (g_Player.PosX <  SCREEN_LEFT)
+	{
+		g_Player.PosX = SCREEN_LEFT;
+	}
+	if (g_Player.PosY > SCREEN_BOTTOM)
+	{
+		g_Player.PosY = SCREEN_BOTTOM;
+	}
+	if (g_Player.PosY < SCREEN_TOP)
+	{
+		g_Player.PosY = SCREEN_TOP;
+	}
+
+	//弾発射　上下左右
+	if (GetKeyPress(KEYNAME::KEY_UP)	|| GetKeyPress(KEYNAME::KEY_DOWN) ||
+		GetKeyPress(KEYNAME::KEY_RIGHT) || GetKeyPress(KEYNAME::KEY_LEFT))
+	{
+		Shot();
+	}
+	
+	////ゲームクリア
+	//if (inport(PK_R))
+	//{
+	//	//シーンをゲーム結果へ移動させる
+	//	SetScene(SCENE_RESULT);
+	//}
+
+	//当たり判定///////////////////
+	//敵キャラクターとの当たり判定
+	g_Player.Hit = PlayerCollisionEnemy(&g_Player);
+
+	if (!g_Player.Hit)
+	{
+		//シーンをタイトルへ移動させる
+		//SetScene(SCENE_TITLE);
+	}
+}
+
+//描画処理
+void DrawPlayer(void)
+{
+	//座標が変化していた場合、過去の座標を消去する
+	if ((g_Player.PosX != g_Player.OldPosX) || (g_Player.PosY != g_Player.OldPosY))
+	{
+		gotoxy(g_Player.OldPosX, g_Player.OldPosY);
+		std::cout << "  ";
+	}
+	//キャラクター
+	gotoxy(g_Player.PosX, g_Player.PosY);
+	std::cout << "●";
+}
+
+//構造体情報取得
+PLAYER* GetPlayer()
+{
+	//構造体のポインターを返す
+	return &g_Player;
+}
+
+//ジャンプ関数
+void JumpPlayer(void)
+{
+	//接地判定
+	//if (g_Player.PosY == SCREEN_BOTTOM)
+	{
+		//ジャンプ力を速度に加える
+		g_Player.SpeedY += JUMP_POWER;
+	}
+	return;
+}
+
+//玉発射関数
+void Shot(void)
+{
+	//弾の速さの指定にもつかう
+	float direct_x = 0.0;//横方向
+	float direct_y = 0.0;//縦方向
+	if (GetKeyPress(KEYNAME::KEY_UP))
+	{
+		direct_y += -2;
+	}
+	if (GetKeyPress(KEYNAME::KEY_DOWN))
+	{
+		direct_y += 2;
+	}
+
+	if (GetKeyPress(KEYNAME::KEY_RIGHT))
+	{
+		direct_x += 4;
+	}
+	if (GetKeyPress(KEYNAME::KEY_LEFT))
+	{
+		direct_x += -4;
+	}
+
+
+	//弾生成
+	CreateBullet(g_Player.PosX, g_Player.PosY, direct_x, direct_y);
+}
