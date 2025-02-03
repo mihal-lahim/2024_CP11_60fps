@@ -165,13 +165,6 @@ void UpdatePlayer(void)
 		Shot();
 	}
 	
-	////ゲームクリア
-	//if (inport(PK_R))
-	//{
-	//	//シーンをゲーム結果へ移動させる
-	//	SetScene(SCENE_RESULT);
-	//}
-
 	//当たり判定///////////////////
 	//敵キャラクターとの当たり判定
 	g_Player.Hit = PlayerCollisionEnemy(&g_Player);
@@ -219,7 +212,7 @@ void JumpPlayer(void)
 //玉発射関数
 void Shot(void)
 {
-	//弾の速さの指定にもつかう
+	//弾の速さ（加える力）の指定に使用する
 	float direct_x = 0.0;//横方向
 	float direct_y = 0.0;//縦方向
 	if (GetKeyPress(KEYNAME::KEY_UP))
