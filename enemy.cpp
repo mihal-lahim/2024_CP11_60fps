@@ -152,7 +152,7 @@ void DrawEnemy()
 			}
 			gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
 			textcolor(g_Enemy[i].Color);//色変え
-			std::cout << "^^";
+			std::cout << "◆";
 			textcolor(WHITE);//色変え
 		}
 		if (g_Enemy[i].Life < 1)
@@ -179,8 +179,8 @@ void CreateEnemy(float X, float Y, float Mx, float My, int Color,int Life)
 			g_Enemy[i].PosY = g_Enemy[i].OldPosY = Y;
 			g_Enemy[i].SpeedX = Mx;
 			g_Enemy[i].SpeedY = My;
-			g_Enemy[i].Color = Color;
-			g_Enemy[i].Life = Life;
+			g_Enemy[i].Color  = Color;
+			g_Enemy[i].Life   = Life;
 
 			g_Enemy[i].Use = true;//使用中にする
 
