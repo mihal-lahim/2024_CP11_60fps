@@ -63,8 +63,8 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 	//キャラクターの短形を作成
 	float PlayerLeft  = ptPlayer->PosX - CHARACTER_COLLISION_SIZEX;
 	float PlayerRight = ptPlayer->PosX + CHARACTER_COLLISION_SIZEX;
-	float PlayerUp    = ptPlayer->PosY - CHARACTER_COLLISION_SIZEX;
-	float PlayerDown  = ptPlayer->PosX + CHARACTER_COLLISION_SIZEX;
+	float PlayerUp    = ptPlayer->PosY - CHARACTER_COLLISION_SIZEY;
+	float PlayerDown  = ptPlayer->PosY + CHARACTER_COLLISION_SIZEY;
 
 	//敵キャラクターの構造体ポインタを取得
 	ENEMY* tEnemy = GetEnemy();
@@ -76,10 +76,10 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 		if (tEnemy[i].Use == true)
 		{
 			//キャラクターの短形を作成
-			float EnemyLeft  = tEnemy[i].PosX - CHARACTER_COLLISION_SIZEX;
-			float EnemyRight = tEnemy[i].PosX + CHARACTER_COLLISION_SIZEX;
-			float EnemyUp    = tEnemy[i].PosY - CHARACTER_COLLISION_SIZEY;
-			float EnemyDown  = tEnemy[i].PosX + CHARACTER_COLLISION_SIZEY;
+			float EnemyLeft  = tEnemy[i].PosX - ENEMY_COLLISION_SIZEX;
+			float EnemyRight = tEnemy[i].PosX + ENEMY_COLLISION_SIZEX;
+			float EnemyUp    = tEnemy[i].PosY - ENEMY_COLLISION_SIZEY;
+			float EnemyDown  = tEnemy[i].PosY + ENEMY_COLLISION_SIZEY;
 
 			//当たり判定
 			if (PlayerRight < EnemyLeft)

@@ -28,7 +28,7 @@ void InitPlayer(void)
 {
 	memset(&g_Player, 0, sizeof(PLAYER));
 	g_Player.PosX = g_Player.OldPosX = 40;//プレイヤーのX位置
-	g_Player.PosY = g_Player.OldPosY = 23;//プレイヤーのY位置
+	g_Player.PosY = g_Player.OldPosY = 25;//プレイヤーのY位置
 
 	g_Player.Direct = 0.0;//向き
 	g_Player.Hit = false;//当たってない
@@ -176,10 +176,10 @@ void UpdatePlayer(void)
 	//敵キャラクターとの当たり判定
 	g_Player.Hit = PlayerCollisionEnemy(&g_Player);
 
-	if (!g_Player.Hit)
+	if (g_Player.Hit)
 	{
 		//シーンをタイトルへ移動させる
-		//SetScene(SCENE_TITLE);
+		SetScene(SCENE_TITLE);
 	}
 }
 
@@ -224,20 +224,20 @@ void Shot(void)
 	float direct_y = 0.0;//縦方向
 	if (GetKeyPress(KEYNAME::KEY_UP))
 	{
-		direct_y += -1;
+		direct_y += -0.5;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_DOWN))
 	{
-		direct_y += 1;
+		direct_y += 0.5;
 	}
 
 	if (GetKeyPress(KEYNAME::KEY_RIGHT))
 	{
-		direct_x += 2;
+		direct_x += 1;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_LEFT))
 	{
-		direct_x += -2;
+		direct_x += -1;
 	}
 
 
