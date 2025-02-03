@@ -224,20 +224,20 @@ void Shot(void)
 	float direct_y = 0.0;//ècï˚å¸
 	if (GetKeyPress(KEYNAME::KEY_UP))
 	{
-		direct_y += -2;
+		direct_y += -1;
 	}
-	if (GetKeyPress(KEYNAME::KEY_DOWN))
+	else if (GetKeyPress(KEYNAME::KEY_DOWN))
 	{
-		direct_y += 2;
+		direct_y += 1;
 	}
 
 	if (GetKeyPress(KEYNAME::KEY_RIGHT))
 	{
-		direct_x += 4;
+		direct_x += 2;
 	}
-	if (GetKeyPress(KEYNAME::KEY_LEFT))
+	else if (GetKeyPress(KEYNAME::KEY_LEFT))
 	{
-		direct_x += -4;
+		direct_x += -2;
 	}
 
 
