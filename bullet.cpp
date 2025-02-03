@@ -76,6 +76,7 @@ void DrawBullet(void)
 }
 
 //生成処理
+//seisei 
 void CreateBullet(float X,float Y,float Mx,float My)
 {
 	//未使用の構造体を見つけて、弾のデータをセット
