@@ -1,9 +1,6 @@
 #ifndef _SHIELD_H_
 #define _SHIELD_H_
 
-#include "player.h"
-
-
 ////////////////////////	
 //É}ÉNÉçíËã`
 ////////////////////////
@@ -38,8 +35,6 @@ void DrawShield(void);
 
 void CreateShield(float PlayerPosX, float PlayerPosY, float UnBraking);
 SHIELD* GetShield();
-
-PLAYER* GetPlayer(void);
 
 #endif
 
