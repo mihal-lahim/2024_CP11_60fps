@@ -101,3 +101,4 @@ BULLET* GetBullet()
 	//弾の構造体配列の先頭のポインターを返す
 	return &g_Bullet[0];
 }
+

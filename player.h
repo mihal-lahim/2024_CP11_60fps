@@ -27,7 +27,6 @@ void UpdatePlayer(void);
 void DrawPlayer(void);
 
 PLAYER* GetPlayer(void);
-void JumpPlayer(void);
 void Shot(void);
 
 #endif

@@ -7,7 +7,7 @@ enum	KEYNAME	//ゲーム内で使うキーの種類
 	KEY_S,
 	KEY_D,
 	KEY_A,
-	KEY_JUMP,
+	KEY_SPACE,
 	KEY_UP,
 	KEY_RIGHT,
 	KEY_LEFT,

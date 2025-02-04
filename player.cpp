@@ -7,6 +7,7 @@
 #include"bullet.h"
 #include"collision.h"
 #include"inputkey.h"
+#include"shield.h"
 ///////////////
 //グローバル変数
 ////////////////
@@ -91,7 +92,7 @@ void UpdatePlayer(void)
 		g_Player.SpeedX = PLAYER_MOVE_SPEED_X;
 		g_Player.Direct = 180; //右向き
 	}
-	if (0)//スペースキー何か入れる
+	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//シールド
 	{
 #ifdef ACTION
 		if (!g_Player.Jump)
@@ -100,7 +101,8 @@ void UpdatePlayer(void)
 			g_Player.Jump = true;
 		}
 #else //SHOOTING用
-		
+		//シールド生成
+		CreateShield(g_Player.PosX, g_Player.PosY, 1.0);
 
 #endif
 	}
@@ -140,7 +142,7 @@ void UpdatePlayer(void)
 	g_Player.PosY += g_Player.SpeedY;
 #endif
 
-	//座標制御
+	//座標制御 場外に出ないようにする
 	if (g_Player.PosX > SCREEN_RIGHT)
 	{
 		g_Player.PosX = SCREEN_RIGHT;
@@ -166,10 +168,11 @@ void UpdatePlayer(void)
 	}
 	
 	//当たり判定///////////////////
+	
 	//敵キャラクターとの当たり判定
 	g_Player.Hit = PlayerCollisionEnemy(&g_Player);
 
-	if (g_Player.Hit)
+	if (g_Player.Hit)//プレイヤーが死んだらタイトルへ移動　現在当たったらだが、体力制御にする
 	{
 		//シーンをタイトルへ移動させる
 		SetScene(SCENE_TITLE);
@@ -195,18 +198,6 @@ PLAYER* GetPlayer()
 {
 	//構造体のポインターを返す
 	return &g_Player;
-}
-
-//ジャンプ関数
-void JumpPlayer(void)
-{
-	//接地判定
-	//if (g_Player.PosY == SCREEN_BOTTOM)
-	{
-		//ジャンプ力を速度に加える
-		g_Player.SpeedY += JUMP_POWER;
-	}
-	return;
 }
 
 //玉発射関数

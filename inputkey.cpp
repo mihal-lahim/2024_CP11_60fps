@@ -24,7 +24,7 @@ KEYCONFIG nKey[KEY_CONFIG_MAX] =
 	{KEYNAME::KEY_S		,	PK_S		},
 	{KEYNAME::KEY_D		,	PK_D		},
 	{KEYNAME::KEY_A		,	PK_A		},
-	{KEYNAME::KEY_JUMP	,	PK_SP		},
+	{KEYNAME::KEY_SPACE	,	PK_SP		},
 	{KEYNAME::KEY_UP	,	PK_UP		},
 	{KEYNAME::KEY_RIGHT	,	PK_RIGHT	},
 	{KEYNAME::KEY_LEFT	,	PK_LEFT		},
@@ -96,7 +96,7 @@ void DrawKey()
 	std::cout << "KEY: ";
 	PrintButton(tKeyData[KEYNAME::KEY_W]);
 	std::cout << "   ";
-	PrintButton(tKeyData[KEYNAME::KEY_JUMP]);
+	PrintButton(tKeyData[KEYNAME::KEY_SPACE]);
 	std::cout << "   ";
 	PrintButton(tKeyData[KEYNAME::KEY_UP]);
 	gotoxy(nX, nY + 1);
