@@ -5,6 +5,7 @@
 #include"player.h"
 #include"enemy.h"
 #include"shield.h"
+#include"game.h"
 
 ////////////////
 //グローバル変数
@@ -41,6 +42,26 @@ void UpdateShield(void)
 			//現在の座標へ移動量を加算
 			g_Shield[i].PosX += tPlayer->SpeedX;
 			g_Shield[i].PosY += tPlayer->SpeedY;
+
+			// ウィンドウの境界を超えないように制御
+			if (g_Shield[i].PosX < SCREEN_LEFT)
+			{
+				g_Shield[i].PosX = SCREEN_LEFT;
+			}
+			else if (g_Shield[i].PosX > SCREEN_RIGHT)
+			{
+				g_Shield[i].PosX = SCREEN_RIGHT;
+			}
+
+			if (g_Shield[i].PosY < SCREEN_TOP)
+			{
+				g_Shield[i].PosY = SCREEN_TOP;
+			}
+			else if (g_Shield[i].PosY > SCREEN_BOTTOM)
+			{
+				g_Shield[i].PosY = SCREEN_BOTTOM;
+			}
+			
 		}
 	}
 }
@@ -62,9 +83,15 @@ void DrawShield(void)
 
 		if (g_Shield[i].Use == true)
 		{
-			//現在の座標に描画
-			gotoxy((int)g_Shield[i].PosX, (int)g_Shield[i].PosY);
-			printf("盾");
+			// ウィンドウの境界を超えないように制御
+			if (g_Shield[i].PosX >= SCREEN_LEFT && g_Shield[i].PosX <= SCREEN_RIGHT &&
+				g_Shield[i].PosY >= SCREEN_TOP && g_Shield[i].PosY <= SCREEN_BOTTOM)
+			{
+				//現在の座標に描画
+				gotoxy((int)g_Shield[i].PosX, (int)g_Shield[i].PosY);
+				printf("盾");
+			}
+				
 		}
 		else
 		{

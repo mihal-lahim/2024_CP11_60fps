@@ -69,6 +69,7 @@ void UpdatePlayer(void)
 			}
 		}
 #else//シューティング
+
 		g_Player.SpeedY = -PLAYER_MOVE_SPEED_Y;
 #endif
 		g_Player.Direct = 90; //上向き
@@ -143,21 +144,21 @@ void UpdatePlayer(void)
 #endif
 
 	//座標制御 場外に出ないようにする
-	if (g_Player.PosX > SCREEN_RIGHT)
+	if (g_Player.PosX > SCREEN_RIGHT - 2)
 	{
-		g_Player.PosX = SCREEN_RIGHT;
+		g_Player.PosX = SCREEN_RIGHT - 2;
 	}
-	if (g_Player.PosX <  SCREEN_LEFT)
+	if (g_Player.PosX <  SCREEN_LEFT + 2)
 	{
-		g_Player.PosX = SCREEN_LEFT;
+		g_Player.PosX = SCREEN_LEFT + 2;
 	}
-	if (g_Player.PosY > SCREEN_BOTTOM)
+	if (g_Player.PosY > SCREEN_BOTTOM - 1)
 	{
-		g_Player.PosY = SCREEN_BOTTOM;
+		g_Player.PosY = SCREEN_BOTTOM - 1;
 	}
-	if (g_Player.PosY < SCREEN_TOP)
+	if (g_Player.PosY < SCREEN_TOP + 1)
 	{
-		g_Player.PosY = SCREEN_TOP;
+		g_Player.PosY = SCREEN_TOP + 1;
 	}
 
 	//弾発射　上下左右
