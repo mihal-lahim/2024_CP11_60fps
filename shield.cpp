@@ -158,7 +158,6 @@ void CreateShield(float PlayerPosX, float PlayerPosY, float UnBraking)
 
 			//耐久力をセット
 			g_Shield[i].UnBreaking = UnBraking;
-			//break;
 		}
 	}
 }

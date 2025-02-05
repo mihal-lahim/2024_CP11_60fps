@@ -1,5 +1,5 @@
 #define CONIOEX
-#include "conioex.h"
+#include"conioex.h"
 #include"collision.h"
 #include<iostream>
 
@@ -106,3 +106,11 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 	//すべての敵と当たらなかったとき
 	return false;
 }
+
+//シールドと敵キャラクターの当たり判定
+//シールドから呼び出す関数
+//戻り値　true 当たり　false 外れ
+//bool ShieldCollisionEnemy(SHIELD* ptShield)
+//{
+//	return;
+//}

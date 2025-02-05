@@ -68,7 +68,7 @@ void DrawBullet(void)
 		{
 			gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);//¡‰ñ‚ÌêŠ‚Ö‚ÌˆÚ“®
 			textcolor(BLUE);//F•Ï‚¦
-			std::cout << "¡";
+			std::cout << "Z";
 			textcolor(WHITE);//F•Ï‚¦
 		}
 	}

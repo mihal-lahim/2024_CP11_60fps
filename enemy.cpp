@@ -27,20 +27,18 @@ struct EnemyData
 ///////////////////////////////////////
 EnemyData g_EnemyTable[] =
 {
-//	X位置, Y位置, X移動力,Y移動力,敵色,		   体力
-	{05.0,	06.0,	 0.15,	-0.20,GREEN,		 1}, //1体目
-	{09.0,	06.0,	 0.15,	-0.20,GREEN, 		 1}, //2体目
-	{15.0,	06.0,	 0.15,	-0.20,GREEN,		 1}, //3体目
-	{19.0,	06.0,	 0.15,	-0.20,GREEN,		 1}, //4体目
-	{21.0,	06.0,	 0.15,	-0.20,GREEN,		 1}, //5体目
-
-	{78.0,	06.0,	-0.20,	-0.20,LIGHTCYAN,	 1}, //6体目
-	{74.0,	06.0,	-0.20,	-0.20,LIGHTCYAN,	 1}, //7体目
-	{70.0,	06.0,	-0.20,	-0.20,LIGHTCYAN,	 1}, //8体目
-	{66.0,	06.0,	-0.20,	-0.20,LIGHTCYAN,	 1}, //9体目
-	{62.0,	06.0,	-0.20,	-0.20,LIGHTCYAN,	 1}, //10体目
+	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力
+		{10,	10	,  0.2,	-0.2,	GREEN,		 1}, //1体目
+		{20,	 4	, -0.2,	-0.45,	MAGENTA, 	 1}, //2体目
+		{30,	13	, -0.15, 0.25,	BROWN,		 1}, //3体目
+		{40,	23	,  0.1,	-0.3,	CYAN,		 1}, //4体目
+		{27,	17	,  0.2,  0.1,	GREEN,		 1}, //5体目
+		{78,	 1	,  0.3,  0.2,	LIGHTCYAN,	 1}, //6体目
+		{59,	 6	, -0.3,  0.2,	LIGHTMAGENTA,1}, //7体目
+		{12,	13	, -0.2,  0.1,	YELLOW,		 1}, //8体目
+		{64,	 6	, -0.1,  0.0,	LIGHTBLUE,	 1}, //9体目
+		{31,	 1.5, -0.3,  0.5,	DARKGRAY,	 1}, //10体目
 };
-
 //初期化
 void InitEnemy()
 {
@@ -63,11 +61,6 @@ void UnInitEnemy()
 //更新処理
 void UpdateEnemy()
 {
-	int EnemyScore = 0;//敵を倒した数
-
-	SCORE* tScore = GetScore();//スコアの取得
-	PLAYER* tPlayer = GetPlayer();//プレイヤーの取得
-
 	//使用中の構造体をすべて更新する
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
@@ -119,13 +112,13 @@ void UpdateEnemy()
 		//敵に弾が当たると消える
 		if (g_Enemy[i].Hit)
 		{
-
 			g_Enemy[i].Life--;
 			g_Enemy[i].Hit = false;
-			if (g_Enemy[i].Life < 1)
+
+			if (g_Enemy[i].Life <= 1)
 			{
 				g_Enemy[i].Use = false;
-				AddPoint(1);//スコア加算
+				AddPoint(10);//スコア加算
 			}
 		}
 	}

@@ -24,6 +24,7 @@ struct ENEMY
 	int  Color;		//色
 
 	bool Hit;		//ヒットフラグ
+	bool OldHit;	//前回のヒットフラグ
 
 	int	 Life;		//体力
 };

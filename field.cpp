@@ -13,6 +13,8 @@ bool g_UpdateFlg = true;
 //初期化
 void InitField()
 {
+	FieldUpdate();
+
 	for (int i = 0; i < FIELD_MAX; i++)
 	{
 		g_Field[i].PosX		= 0.0;
@@ -45,6 +47,29 @@ void UnInitField()
 
 void UpdateField()
 {
+	for (int i = 0; i < FIELD_MAX; i++)
+	{
+		if (g_Field[i].Use)
+		{
+			if (g_Field[i].Move)
+			{
+				//移動処理
+				g_Field[i].OldPosX = g_Field[i].PosX;
+				g_Field[i].OldPosY = g_Field[i].PosY;
+				g_Field[i].PosX += g_Field[i].SpeedX;
+				g_Field[i].PosY += g_Field[i].SpeedY;
+
+				//床移動
+				g_Field[i].Count++;
+				if (g_Field[i].Count > 80)
+				{
+					g_Field[i].SpeedX *= -1.0;//反転処理
+					g_Field[i].SpeedY *= -1.0;//反転処理
+					g_Field[i].Count = 0;//カウンターリセット
+				}
+			}
+		}
+	}
 }
 
 void DrawField()
@@ -55,6 +80,43 @@ void DrawField()
 		//フィールド全描画
 		UpdateDrawField();
 		g_UpdateFlg = false;
+	}
+	else
+	{
+		//動く床だけ描画
+		textcolor(LIGHTGRAY);//色設定
+		//ブロック
+		for (int i = 0; i < FIELD_MAX; i++)
+		{
+			if (g_Field[i].Use)
+			{
+				//移動処理
+				if (g_Field[i].Move)
+				{
+					//前回から座標が変化したら
+					if (g_Field[i].OldPosX != g_Field[i].PosX || g_Field[i].OldPosY != g_Field[i].PosY)
+					{
+						for (int Height = 0; Height < g_Field[i].Height; Height++)
+						{
+							gotoxy(g_Field[i].OldPosX, g_Field[i].OldPosY + Height);
+							for (int Width = 0; Width < g_Field[i].Width / 2; Width++)
+							{
+								std::cout << "  ";
+							}
+						}
+					}
+					//地面の表示
+					for (int Height = 0; Height < g_Field[i].Height; Height++)
+					{
+						gotoxy(g_Field[i].PosX, g_Field[i].PosY + Height);
+						for (int Width = 0; Width < g_Field[i].Width / 2; Width++)
+						{
+							std::cout << "□";
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
