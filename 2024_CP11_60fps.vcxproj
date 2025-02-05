@@ -130,12 +130,14 @@
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="field.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="inputkey.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="score.cpp" />
     <ClCompile Include="shield.cpp" />
     <ClCompile Include="title.cpp" />
   </ItemGroup>
@@ -144,11 +146,13 @@
     <ClInclude Include="collision.h" />
     <ClInclude Include="conioex.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="field.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="inputkey.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="score.h" />
     <ClInclude Include="shield.h" />
     <ClInclude Include="title.h" />
   </ItemGroup>

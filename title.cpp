@@ -4,6 +4,7 @@
 #include"scene.h"
 #include"title.h"
 #include"inputkey.h"
+#include"score.h"
 
 void InitTitle(void)
 {
@@ -19,6 +20,9 @@ void UpdateTitle(void)
 	{
 		//シーンをゲーム本編へ移動させる
 		SetScene(SCENE_GAME);
+
+		//スコアのリセット
+		ClearPoint();
 	}
 }
 

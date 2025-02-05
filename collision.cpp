@@ -60,7 +60,7 @@ bool EnemyCollisionBullet(ENEMY* ptEnemy)
 //戻り値　true 当たり　false 外れ
 bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 {
-	//キャラクターの短形を作成
+	//プレイヤーの短形を作成
 	float PlayerLeft  = ptPlayer->PosX - CHARACTER_COLLISION_SIZEX;
 	float PlayerRight = ptPlayer->PosX + CHARACTER_COLLISION_SIZEX;
 	float PlayerUp    = ptPlayer->PosY - CHARACTER_COLLISION_SIZEY;
@@ -69,7 +69,7 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 	//敵キャラクターの構造体ポインタを取得
 	ENEMY* tEnemy = GetEnemy();
 
-	//全ての構造体配列とチェック
+	//全ての敵構造体配列とチェック
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
 		//構造体が使用中か？

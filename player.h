@@ -1,6 +1,16 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+//////////////
+//マクロ定義
+//////////////
+#define PLAYER_MOVE_SPEED_X (MOVE_SPEED_X * 1.0)
+#define PLAYER_MOVE_SPEED_Y (MOVE_SPEED_Y * 1.0)
+#define GRAVITY        (0.04)//重力
+#define JUMP_POWER     (0.75)//ジャンプ力
+#define RESIST_X       (0.4)//地上のX方向摩擦
+#define RESIST_X_AIR   (0.01)//空中のX方向摩擦
+
 //プレイヤーデータ構造体
 struct PLAYER
 {
@@ -19,6 +29,8 @@ struct PLAYER
 	float Direct; //向き
 
 	bool Hit; //ヒットフラグ
+
+	int Kill; //敵を倒した数
 };
 //プロトタイプ宣言
 void InitPlayer(void);

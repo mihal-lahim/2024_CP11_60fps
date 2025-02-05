@@ -5,6 +5,8 @@
 #include "enemy.h"
 #include"collision.h"
 #include"scene.h"
+#include"score.h"
+
 
 ///////////////////////////////////////
 //グローバル変数
@@ -25,17 +27,17 @@ struct EnemyData
 ///////////////////////////////////////
 EnemyData g_EnemyTable[] =
 {
-//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力
-	{10,	10	,  0.2,	-0.2,	GREEN,		 1}, //1体目
-	{20,	 4	, -0.2,	-0.45,	MAGENTA, 	 1}, //2体目
-	{30,	13	, -0.15, 0.25,	BROWN,		 1}, //3体目
-	{40,	23	,  0.1,	-0.3,	CYAN,		 1}, //4体目
-	{27,	17	,  0.2,  0.1,	GREEN,		 1}, //5体目
-	{78,	 1	,  0.3,  0.2,	LIGHTCYAN,	 1}, //6体目
-	{59,	 6	, -0.3,  0.2,	LIGHTMAGENTA,1}, //7体目
-	{12,	13	, -0.2,  0.1,	YELLOW,		 1}, //8体目
-	{64,	 6	, -0.1,  0.0,	LIGHTBLUE,	 1}, //9体目
-	{31,	 2	, -0.3,  0.5,	DARKGRAY,	 1}, //10体目
+//	X位置, Y位置, X移動力,Y移動力,敵色,		   体力
+	{10.0,	10.0,	 0.20,	-0.20,GREEN,		 1}, //1体目
+	{20.0,	04.0,	-0.20,	-0.45,MAGENTA, 		 1}, //2体目
+	{30.0,	13.0,	-0.15,	 0.25,BROWN,		 1}, //3体目
+	{40.0,	23.0,	 0.10,	-0.30,CYAN,			 1}, //4体目
+	{27.0,	17.0,	 0.20,	 0.10,GREEN,		 1}, //5体目
+	{78.0,	01.0,	 0.30,	 0.20,LIGHTCYAN,	 1}, //6体目
+	{59.0,	06.0,	-0.30,	 0.20,LIGHTMAGENTA,  1}, //7体目
+	{12.0,	13.0,	-0.20,	 0.10,YELLOW,		 1}, //8体目
+	{64.0,	06.0,	-0.10,	 0.00,LIGHTBLUE,	 1}, //9体目
+	{31.0,	02.0,	-0.30,	 0.50,DARKGRAY,	     1}, //10体目
 };
 
 //初期化
@@ -61,6 +63,10 @@ void UnInitEnemy()
 void UpdateEnemy()
 {
 	int EnemyScore = 0;//敵を倒した数
+
+	SCORE* tScore = GetScore();//スコアの取得
+	PLAYER* tPlayer = GetPlayer();//プレイヤーの取得
+
 	//使用中の構造体をすべて更新する
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
@@ -68,7 +74,6 @@ void UpdateEnemy()
 		if (g_Enemy[i].Use == true)
 		{
 			
-
 			//現在の座標をOldへ保存
 			g_Enemy[i].OldPosX = g_Enemy[i].PosX;
 			g_Enemy[i].OldPosY = g_Enemy[i].PosY;
@@ -106,29 +111,21 @@ void UpdateEnemy()
 				g_Enemy[i].PosX = SCREEN_RIGHT;
 			}
 		}
-		else
-		{
-			//倒した敵の数加算
-			EnemyScore++;
-		}
 
-		//全ての敵を倒したらリザルト画面に遷移する
-		if (EnemyScore == ENEMY_MAX)
-		{
-			SetScene(SCENE_RESULT);
-		}
 		//弾との当たり判定
 		g_Enemy[i].Hit = EnemyCollisionBullet(&g_Enemy[i]);
 
 		//敵に弾が当たると消える
 		if (g_Enemy[i].Hit)
 		{
+
 			g_Enemy[i].Life--;
 			g_Enemy[i].Hit = false;
-		}
-		if (g_Enemy[i].Life < 1)
-		{
-			g_Enemy[i].Use = false;
+			if (g_Enemy[i].Life < 1)
+			{
+				g_Enemy[i].Use = false;
+				AddPoint(1);//スコア加算
+			}
 		}
 	}
 	

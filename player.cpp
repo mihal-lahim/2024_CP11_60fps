@@ -8,21 +8,11 @@
 #include"collision.h"
 #include"inputkey.h"
 #include"shield.h"
+
 ///////////////
 //グローバル変数
-////////////////
-PLAYER g_Player;
-
-
 ///////////////
-//マクロ定義
-////////////////
-#define PLAYER_MOVE_SPEED_X (MOVE_SPEED_X * 1.0)
-#define PLAYER_MOVE_SPEED_Y (MOVE_SPEED_Y * 1.0)
-#define GRAVITY        (0.04)//重力
-#define JUMP_POWER     (0.75)//ジャンプ力
-#define RESIST_X       (0.4)//地上のX方向摩擦
-#define RESIST_X_AIR   (0.01)//空中のX方向摩擦
+PLAYER g_Player;
 
 //初期化処理
 void InitPlayer(void)

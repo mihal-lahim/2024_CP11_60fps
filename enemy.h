@@ -11,19 +11,21 @@
 ////////////////////
 struct ENEMY
 {
-	float PosX;//現在のX座標
-	float PosY;//現在のY座標
+	float PosX;		//現在のX座標
+	float PosY;		//現在のY座標
 
-	float OldPosX;//過去のX座標
-	float OldPosY;//過去のY座標
+	float OldPosX;	//過去のX座標
+	float OldPosY;	//過去のY座標
 
-	float SpeedX;//X座標の移動量
-	float SpeedY;//Y座標の移動量
+	float SpeedX;	//X座標の移動量
+	float SpeedY;	//Y座標の移動量
 
-	bool Use;	 //使用判定
-	int  Color;	 //色
-	bool Hit;	 //ヒットフラグ
-	int	 Life;	 //体力
+	bool Use;		//使用判定
+	int  Color;		//色
+
+	bool Hit;		//ヒットフラグ
+
+	int	 Life;		//体力
 };
 ////////////////////
 //プロトタイプ宣言
