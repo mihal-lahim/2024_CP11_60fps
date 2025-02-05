@@ -57,38 +57,22 @@ void UpdatePlayer(void)
 #endif
 
 	//カーソルキーの入力で上下左右に移動する
-	if (GetKeyPress(KEYNAME::KEY_W))
+	if (GetKeyPress(KEYNAME::KEY_W) && g_Player.PosY > SCREEN_TOP + 2)
 	{
-#ifdef ACTION
-		if (g_Player.Jump)
-		{
-			if (!g_Player.SecondJump)
-			{
-				g_Player.SpeedY = -JUMP_POWER;
-				g_Player.SecondJump = true;
-			}
-		}
-#else//シューティング
-
 		g_Player.SpeedY = -PLAYER_MOVE_SPEED_Y;
-#endif
 		g_Player.Direct = 90; //上向き
 	}
-	if (GetKeyPress(KEYNAME::KEY_A))
+	if (GetKeyPress(KEYNAME::KEY_A) && g_Player.PosX > SCREEN_LEFT + 2)
 	{
 		g_Player.SpeedX = -PLAYER_MOVE_SPEED_X;
 		g_Player.Direct = 0; //左向き
 	}
-	if (GetKeyPress(KEYNAME::KEY_S))
+	if (GetKeyPress(KEYNAME::KEY_S) && g_Player.PosY < SCREEN_BOTTOM - 1)
 	{
-#ifdef ACTION
-	//アクションでは使わない
-#else
 		g_Player.SpeedY = PLAYER_MOVE_SPEED_Y;
 		g_Player.Direct = 270; //下向き
-#endif
 	}
-	if (GetKeyPress(KEYNAME::KEY_D))
+	if (GetKeyPress(KEYNAME::KEY_D) && g_Player.PosX < SCREEN_RIGHT - 2)
 	{
 		g_Player.SpeedX = PLAYER_MOVE_SPEED_X;
 		g_Player.Direct = 180; //右向き
@@ -143,23 +127,23 @@ void UpdatePlayer(void)
 	g_Player.PosY += g_Player.SpeedY;
 #endif
 
-	//座標制御 場外に出ないようにする
-	if (g_Player.PosX > SCREEN_RIGHT - 2)
-	{
-		g_Player.PosX = SCREEN_RIGHT - 2;
-	}
-	if (g_Player.PosX <  SCREEN_LEFT + 2)
-	{
-		g_Player.PosX = SCREEN_LEFT + 2;
-	}
-	if (g_Player.PosY > SCREEN_BOTTOM - 1)
-	{
-		g_Player.PosY = SCREEN_BOTTOM - 1;
-	}
-	if (g_Player.PosY < SCREEN_TOP + 1)
-	{
-		g_Player.PosY = SCREEN_TOP + 1;
-	}
+	////座標制御 場外に出ないようにする
+	//if (g_Player.PosX > SCREEN_RIGHT - 2)
+	//{
+	//	g_Player.PosX = SCREEN_RIGHT - 2;
+	//}
+	//if (g_Player.PosX <  SCREEN_LEFT + 2)
+	//{
+	//	g_Player.PosX = SCREEN_LEFT + 2;
+	//}
+	//if (g_Player.PosY > SCREEN_BOTTOM)
+	//{
+	//	g_Player.PosY = SCREEN_BOTTOM;
+	//}
+	//if (g_Player.PosY < SCREEN_TOP + 1)
+	//{
+	//	g_Player.PosY = SCREEN_TOP + 1;
+	//}
 
 	//弾発射　上下左右
 	if (GetKeyPress(KEYNAME::KEY_UP)	|| GetKeyPress(KEYNAME::KEY_DOWN) ||
