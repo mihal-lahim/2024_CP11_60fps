@@ -1,6 +1,7 @@
 #define CONIOEX
 #include "conioex.h"
 #include "field.h"
+#include"game.h"
 #include<iostream>
 
 //障害物の構造体配列
@@ -38,3 +39,123 @@ void InitField()
 	CreateField(46.0, 08.0, 30.0, 3.0, 0.0, 0.03);
 }
 
+void UnInitField()
+{
+}
+
+void UpdateField()
+{
+}
+
+void DrawField()
+{
+	//背景再描画フラグ
+	if (g_UpdateFlg)
+	{
+		//フィールド全描画
+		UpdateDrawField();
+		g_UpdateFlg = false;
+	}
+}
+
+void UpdateDrawField()
+{
+	//色設定
+	textcolor(LIGHTGRAY);
+
+	//外枠の設定
+	gotoxy(SCREEN_LEFT, SCREEN_TOP);
+	for (int i = SCREEN_LEFT - 1; i < SCREEN_RIGHT / 2; i++)
+	{
+		std::cout << "□";
+	}
+	for (int i = SCREEN_TOP + 1; i < SCREEN_BOTTOM; i++)
+	{
+		gotoxy(SCREEN_LEFT, i);
+		std::cout << "□";
+		gotoxy(SCREEN_RIGHT - 2, i);
+		std::cout << "□";
+	}
+	gotoxy(SCREEN_LEFT, SCREEN_BOTTOM);
+	for (int i = SCREEN_LEFT - 1; i < SCREEN_RIGHT / 2; i++)
+	{
+		std::cout << "□";
+	}
+
+	//ブロックの表示
+	for (int i = 0; i < FIELD_MAX; i++)
+	{
+		if (g_Field[i].Use)
+		{
+			//移動処理
+			if (g_Field[i].Move)
+			{
+				//前回から座標が変化したら
+				if (g_Field[i].OldPosX != g_Field[i].PosX || g_Field[i].OldPosY != g_Field[i].PosY)
+				{
+					for (int Height = 0; i < g_Field[i].Height; Height++)
+					{
+						gotoxy(g_Field[i].OldPosX, g_Field[i].OldPosY + Height);
+						for (int Width = 0; Width < g_Field[i].Width / 2; Width++)
+						{
+							std::cout << "  ";
+						}
+					}
+				}
+			}
+			for (int Height = 0; Height < g_Field[i].Height; Height++)
+			{
+				//地面の表示
+				gotoxy(g_Field[i].PosX, g_Field[i].PosY + Height);
+				for (int Width = 0; Width < g_Field[i].Width; Width++)
+				{
+					std::cout << "□";
+				}
+			}
+		}
+	}
+}
+
+void CreateField(float X, float Y, float Width, float Height, float Mx, float My)
+{
+	for (int i = 0; i < FIELD_MAX; i++)
+	{
+		if (g_Field[i].Use == false)
+		{
+			g_Field[i].PosX = X;
+			g_Field[i].PosY = Y;
+			g_Field[i].Width = Width;
+			g_Field[i].Height = Height;
+			g_Field[i].Use = true;
+
+			//移動処理用
+			g_Field[i].OldPosX = X;
+			g_Field[i].OldPosY = Y;
+			g_Field[i].SpeedX = Mx;
+			g_Field[i].SpeedY = My;
+
+			if (g_Field[i].SpeedX == 0.0f && g_Field[i].SpeedY == 0.0f)
+			{
+				//移動しない
+				g_Field[i].Move = false;
+			}
+			else
+			{
+				//移動する
+				g_Field[i].Move = true;
+			}
+			break;
+		}
+	}
+}
+
+//フィールドの構造体配列のポインタを取得
+FIELD* GetField()
+{
+	return &g_Field[0];
+}
+
+void FieldUpdate()
+{
+	g_UpdateFlg = true;
+}
