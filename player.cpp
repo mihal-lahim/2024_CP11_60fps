@@ -39,12 +39,7 @@ void UpdatePlayer(void)
 
 	//移動量のリセット
 	g_Player.SpeedX = 0;
-
-#ifdef ACTION
-	//アクションゲームでは使用しない
-#else//シューティング用
 	g_Player.SpeedY = 0;
-#endif
 
 	//カーソルキーの入力で上下左右に移動する
 	if (GetKeyPress(KEYNAME::KEY_W) && g_Player.PosY > SCREEN_TOP + 2)
@@ -69,71 +64,12 @@ void UpdatePlayer(void)
 	}
 	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//シールド
 	{
-#ifdef ACTION
-		if (!g_Player.Jump)
-		{
-			g_Player.SpeedY = -JUMP_POWER;
-			g_Player.Jump = true;
-		}
-#else //SHOOTING用
 		//シールド生成
 		CreateShield(g_Player.PosX, g_Player.PosY, 1.0);
-
-#endif
 	}
 
 	//座標更新
-#ifdef ACTION
-
-	//X座標の制御
-	
-	if (g_Player.Jump||g_Player.SecondJump)
-	{//ジャンプ中
-		g_Player.PosX += (-g_Player.SpeedX) * RESIST_X_AIR;//抵抗を加える
-	}
-	else
-	{//地上
-		g_Player.PosX += (-g_Player.SpeedX) * RESIST_X;//抵抗を加える
-	}
-	//ここで最終結果
-	g_Player.PosX += g_Player.SpeedX;
-
-	//Y座標の制御
-	g_Player.SpeedY += GRAVITY;//重力を加える
-
-	//ここで最終結果
 	g_Player.PosY += g_Player.SpeedY;
-
-	//地面に割り込んだ時
-	if (g_Player.PosY > SCREEN_BOTTOM)
-	{
-		g_Player.PosY = SCREEN_BOTTOM;//地面に場所を移動させる
-		g_Player.SpeedY = 0.0;//移動値のリセット
-		g_Player.Jump = false;
-		g_Player.SecondJump = false;
-	}
-#else//SHOOTING用
-	g_Player.PosX += g_Player.SpeedX;
-	g_Player.PosY += g_Player.SpeedY;
-#endif
-
-	////座標制御 場外に出ないようにする
-	//if (g_Player.PosX > SCREEN_RIGHT - 2)
-	//{
-	//	g_Player.PosX = SCREEN_RIGHT - 2;
-	//}
-	//if (g_Player.PosX <  SCREEN_LEFT + 2)
-	//{
-	//	g_Player.PosX = SCREEN_LEFT + 2;
-	//}
-	//if (g_Player.PosY > SCREEN_BOTTOM)
-	//{
-	//	g_Player.PosY = SCREEN_BOTTOM;
-	//}
-	//if (g_Player.PosY < SCREEN_TOP + 1)
-	//{
-	//	g_Player.PosY = SCREEN_TOP + 1;
-	//}
 
 	//弾発射　上下左右
 	if (GetKeyPress(KEYNAME::KEY_UP)	|| GetKeyPress(KEYNAME::KEY_DOWN) ||
@@ -183,20 +119,20 @@ void Shot(void)
 	float direct_y = 0.0;//縦方向
 	if (GetKeyPress(KEYNAME::KEY_UP))
 	{
-		direct_y += -0.5;
+		direct_y += -1.0;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_DOWN))
 	{
-		direct_y += 0.5;
+		direct_y += 1.0;
 	}
 
 	if (GetKeyPress(KEYNAME::KEY_RIGHT))
 	{
-		direct_x += 1;
+		direct_x += 2.0;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_LEFT))
 	{
-		direct_x += -1;
+		direct_x += -2.0;
 	}
 
 

@@ -105,14 +105,14 @@ void DrawField()
 							}
 						}
 					}
-					//地面の表示
-					for (int Height = 0; Height < g_Field[i].Height; Height++)
+				}
+				//地面の表示
+				for (int Height = 0; Height < g_Field[i].Height; Height++)
+				{
+					gotoxy(g_Field[i].PosX, g_Field[i].PosY + Height);
+					for (int Width = 0; Width < g_Field[i].Width / 2; Width++)
 					{
-						gotoxy(g_Field[i].PosX, g_Field[i].PosY + Height);
-						for (int Width = 0; Width < g_Field[i].Width / 2; Width++)
-						{
-							std::cout << "□";
-						}
+						std::cout << "□";
 					}
 				}
 			}
@@ -135,7 +135,7 @@ void UpdateDrawField()
 	{
 		gotoxy(SCREEN_LEFT, i);
 		std::cout << "□";
-		gotoxy(SCREEN_RIGHT - 2, i);
+		gotoxy(SCREEN_RIGHT - 1, i);
 		std::cout << "□";
 	}
 	gotoxy(SCREEN_LEFT, SCREEN_BOTTOM);
@@ -169,7 +169,7 @@ void UpdateDrawField()
 			{
 				//地面の表示
 				gotoxy(g_Field[i].PosX, g_Field[i].PosY + Height);
-				for (int Width = 0; Width < g_Field[i].Width; Width++)
+				for (int Width = 0; Width < g_Field[i].Width / 2; Width++)
 				{
 					std::cout << "□";
 				}

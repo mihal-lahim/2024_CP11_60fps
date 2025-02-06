@@ -115,10 +115,13 @@ void UpdateEnemy()
 			g_Enemy[i].Life--;
 			g_Enemy[i].Hit = false;
 
-			if (g_Enemy[i].Life <= 1)
+			if (g_Enemy[i].Life < 1)
 			{
-				g_Enemy[i].Use = false;
-				AddPoint(10);//スコア加算
+				if (g_Enemy[i].Use == true)
+				{
+					g_Enemy[i].Use = false;
+					AddPoint(10);//スコア加算
+				}
 			}
 		}
 	}

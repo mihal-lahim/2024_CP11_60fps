@@ -27,10 +27,10 @@ bool HEWCleanup();
 // *****************************************************************************
 // プロトタイプ宣言
 // *****************************************************************************
-void Initialize(void);//初期化
-void Uninit(void);//終了処理
-void Update(void);//更新
-void Draw(void);//描画　四つ　関数四天王とか言うらしい
+void Initialize(void);	//初期化
+void Uninit(void);		//終了処理
+void Update(void);		//更新
+void Draw(void);		//描画　四つ　関数四天王とか言うらしい
 
 void WindowConsoleInitialize(void);		// ウィンドウ情報の初期化
 #ifdef _DEBUG
@@ -74,6 +74,13 @@ int main(void)
 	//初期化
 	Initialize();
 
+	bool bResurt = 0;
+	bResurt = HEWStartup();
+	if (bResurt != 1) {
+		perror("HEWStartup error");
+		return 0;  // FALSE
+	}
+
 	// ここからゲームループ
 	do
 	{
@@ -115,11 +122,10 @@ int main(void)
 	// この辺で後始末処理を行う
 	// ===============================
 
-	bool bResurt = 0;
-	bResurt = HEWStartup();
+	bResurt = HEWCleanup();
 	if (bResurt != 1) {
-		perror("HEWStartup error");
-		return 0;  // FALSE
+		perror("HEWCleanup error");
+		return 0; // FALSE
 	}
 
 	// カーソル表示ＯＮ
@@ -202,7 +208,6 @@ void Uninit()
 {
 	UnInitScene();
 	UninitKey();
-
 }
 // =============================================================================
 // 更新処理
