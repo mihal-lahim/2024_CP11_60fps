@@ -67,6 +67,7 @@ void UpdateShield(void)
 			if(g_Shield[i].Hit)
 			{
 				g_Shield[i].UnBreaking --;
+				g_Shield[i].Hit = false;
 				//耐久力がなくなったら使用中フラグをfalseにする
 				if (g_Shield[i].UnBreaking < 1)
 				{
@@ -100,8 +101,13 @@ void DrawShield(void)
 				g_Shield[i].PosY >= SCREEN_TOP && g_Shield[i].PosY <= SCREEN_BOTTOM)
 			{
 				//現在の座標に描画
+				if (g_Shield[i].UnBreaking<2)
+				{
+					textcolor(RED);
+				}
 				gotoxy((int)g_Shield[i].PosX, (int)g_Shield[i].PosY);
 				printf("盾");
+				textcolor(WHITE);
 			}
 				
 		}

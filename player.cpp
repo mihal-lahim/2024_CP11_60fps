@@ -21,8 +21,8 @@ void InitPlayer(void)
 	g_Player.PosX = g_Player.OldPosX = 40;//プレイヤーのX位置
 	g_Player.PosY = g_Player.OldPosY = 23;//プレイヤーのY位置
 
-	g_Player.Direct = 0.0;//向き
-	g_Player.Hit = false;//当たってない
+	g_Player.Direct = 0.0;	//向き
+	g_Player.Hit = false;	//当たってない
 }
 
 //終了処理
@@ -65,7 +65,7 @@ void UpdatePlayer(void)
 	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//シールド
 	{
 		//シールド生成
-		CreateShield(g_Player.PosX, g_Player.PosY, 1.0);
+		CreateShield(g_Player.PosX, g_Player.PosY, 2.0);
 	}
 
 	//座標更新
