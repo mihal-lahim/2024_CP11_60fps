@@ -11,14 +11,6 @@
 #define RESIST_X       (0.4)//地上のX方向摩擦
 #define RESIST_X_AIR   (0.01)//空中のX方向摩擦
 
-enum ITEM
-{
-	ITEM_NONE,
-	ITEM_GUN,
-	ITEM_BOMB,
-	ITEM_MAX
-};
-
 //プレイヤーデータ構造体
 struct PLAYER
 {

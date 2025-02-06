@@ -8,6 +8,7 @@
 #include"collision.h"
 #include"inputkey.h"
 #include"shield.h"
+#include"item.h"
 
 ///////////////
 //グローバル変数
@@ -23,6 +24,7 @@ void InitPlayer(void)
 
 	g_Player.Direct = 0.0;	//向き
 	g_Player.Hit = false;	//当たってない
+	g_Player.Item = ITEM_NONE;//アイテムなし
 }
 
 //終了処理
