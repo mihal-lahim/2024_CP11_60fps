@@ -42,7 +42,8 @@ void UpdateBullet(void)
 		}
 
 		//現在の座標が画面外なら使用中フラグをfalseにする
-		if ((g_Bullet[i].PosX < SCREEN_LEFT) || (g_Bullet[i].PosX > SCREEN_RIGHT) || (g_Bullet[i].PosY < SCREEN_TOP) || (g_Bullet[i].PosY > SCREEN_BOTTOM))
+		if ((g_Bullet[i].PosX < SCREEN_LEFT) || (g_Bullet[i].PosX > SCREEN_RIGHT) || 
+			(g_Bullet[i].PosY < SCREEN_TOP)  || (g_Bullet[i].PosY > SCREEN_BOTTOM))
 		{
 			g_Bullet[i].Use = false;//構造体を未使用にする
 		}

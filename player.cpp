@@ -19,7 +19,7 @@ void InitPlayer(void)
 {
 	memset(&g_Player, 0, sizeof(PLAYER));
 	g_Player.PosX = g_Player.OldPosX = 40;//プレイヤーのX位置
-	g_Player.PosY = g_Player.OldPosY = 25;//プレイヤーのY位置
+	g_Player.PosY = g_Player.OldPosY = 23;//プレイヤーのY位置
 
 	g_Player.Direct = 0.0;//向き
 	g_Player.Hit = false;//当たってない
@@ -69,6 +69,7 @@ void UpdatePlayer(void)
 	}
 
 	//座標更新
+	g_Player.PosX += g_Player.SpeedX;
 	g_Player.PosY += g_Player.SpeedY;
 
 	//弾発射　上下左右

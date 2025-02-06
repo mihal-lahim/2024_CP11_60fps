@@ -5,7 +5,7 @@
 //マクロ定義
 #define SCREEN_LEFT (1)   //画面の大きさ左
 #define SCREEN_TOP  (1)    //画面の大きさ上
-#define SCREEN_BOTTOM (24.5)  //画面の大きさ下
+#define SCREEN_BOTTOM (24)  //画面の大きさ下
 #define SCREEN_RIGHT (79) //画面の大きさ右
 
 #define MOVE_SPEED_X (0.5)//X方向の移動力

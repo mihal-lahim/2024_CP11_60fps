@@ -61,6 +61,18 @@ void UpdateShield(void)
 			{
 				g_Shield[i].PosY = SCREEN_BOTTOM;
 			}
+
+			//敵との当たり判定
+			g_Shield[i].Hit = ShieldCollisionEnemy(&g_Shield[i]);
+			if(g_Shield[i].Hit)
+			{
+				g_Shield[i].UnBreaking --;
+				//耐久力がなくなったら使用中フラグをfalseにする
+				if (g_Shield[i].UnBreaking < 1)
+				{
+					g_Shield[i].Use = false;
+				}
+			}
 			
 		}
 	}

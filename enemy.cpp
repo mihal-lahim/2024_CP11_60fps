@@ -31,12 +31,12 @@ EnemyData g_EnemyTable[] =
 		{10,	10	,  0.2,	-0.2,	GREEN,		 1}, //1体目
 		{20,	 4	, -0.2,	-0.45,	MAGENTA, 	 1}, //2体目
 		{30,	13	, -0.15, 0.25,	BROWN,		 1}, //3体目
-		{40,	23	,  0.1,	-0.3,	CYAN,		 1}, //4体目
+		{40,	10	,  0.1,	-0.3,	CYAN,		 1}, //4体目
 		{27,	17	,  0.2,  0.1,	GREEN,		 1}, //5体目
 		{78,	 1	,  0.3,  0.2,	LIGHTCYAN,	 1}, //6体目
 		{59,	 6	, -0.3,  0.2,	LIGHTMAGENTA,1}, //7体目
 		{12,	13	, -0.2,  0.1,	YELLOW,		 1}, //8体目
-		{64,	 6	, -0.1,  0.0,	LIGHTBLUE,	 1}, //9体目
+		{64,	 6	, -0.1,  0.3,	LIGHTBLUE,	 1}, //9体目
 		{31,	 1.5, -0.3,  0.5,	DARKGRAY,	 1}, //10体目
 };
 //初期化
@@ -61,6 +61,9 @@ void UnInitEnemy()
 //更新処理
 void UpdateEnemy()
 {
+	//スコア取得
+	int Score = GetScore()->nPoint;
+
 	//使用中の構造体をすべて更新する
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
@@ -75,6 +78,7 @@ void UpdateEnemy()
 			//現在の座標へ移動量を加算
 			g_Enemy[i].PosX += g_Enemy[i].SpeedX;
 			g_Enemy[i].PosY += g_Enemy[i].SpeedY;
+
 
 			//壁衝突
 			//上
@@ -104,20 +108,17 @@ void UpdateEnemy()
 				g_Enemy[i].SpeedX *= -1.0;//移動量の反転
 				g_Enemy[i].PosX = SCREEN_RIGHT;
 			}
-		}
 
-		//弾との当たり判定
-		g_Enemy[i].Hit = EnemyCollisionBullet(&g_Enemy[i]);
+			//弾との当たり判定
+			g_Enemy[i].Hit = EnemyCollisionBullet(&g_Enemy[i]);
 
-		//敵に弾が当たると消える
-		if (g_Enemy[i].Hit)
-		{
-			g_Enemy[i].Life--;
-			g_Enemy[i].Hit = false;
-
-			if (g_Enemy[i].Life < 1)
+			//敵に弾が当たると消える
+			if (g_Enemy[i].Hit)
 			{
-				if (g_Enemy[i].Use == true)
+				g_Enemy[i].Life--;
+				g_Enemy[i].Hit = false;
+
+				if (g_Enemy[i].Life < 1)
 				{
 					g_Enemy[i].Use = false;
 					AddPoint(10);//スコア加算
@@ -126,6 +127,12 @@ void UpdateEnemy()
 		}
 	}
 	
+	//ゲームクリア
+	if (100 == Score)
+	{
+		//シーンをゲームクリアへ移動
+		SetScene(SCENE_RESULT);
+	}
 }
 
 //描画処理

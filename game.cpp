@@ -16,7 +16,7 @@ void InitGame(void)
 	InitEnemy();	//　敵
 	InitShield();	//　シールド
 	InitScore();	//　スコア
-	InitField();	//　フィールド
+	//InitField();	//　フィールド
 
 }
 
@@ -27,7 +27,7 @@ void UninitGame(void)
 	UnInitEnemy();
 	UnInitShield();
 	UninitScore();
-	UnInitField();
+	//UnInitField();
 }
 
 void UpdateGame(void)
@@ -37,13 +37,13 @@ void UpdateGame(void)
 	UpdateEnemy();
 	UpdateShield();
 	UpdateScore();
-	UpdateField();
+	//UpdateField();
 		
 }
 
 void DrawGame(void)//書く順番要調整 先に書きたいものを前に
 {
-	DrawField();
+	//DrawField();
 	DrawEnemy();
 	DrawBullet();
 	DrawShield();

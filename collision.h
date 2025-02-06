@@ -35,6 +35,9 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer);
 
 //シールドと敵キャラクターの当たり判定
 //シールドから呼び出す関数
-//bool ShieldCollisionEnemy(SHIELD* ptShield);
+bool ShieldCollisionEnemy(SHIELD* ptShield);
 
+//敵とシールドキャラクターの当たり判定
+//敵から呼び出す関数
+bool EnemyCollisionShield(ENEMY* ptEnemy);
 #endif
