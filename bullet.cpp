@@ -68,8 +68,8 @@ void DrawBullet(void)
 		if (g_Bullet[i].Use == true)
 		{
 			gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);//今回の場所への移動
-			textcolor(BLUE);//色変え
-			std::cout << "〇";
+			textcolor(RED);//色変え
+			std::cout << "・";
 			textcolor(WHITE);//色変え
 		}
 	}
