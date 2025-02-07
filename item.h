@@ -1,9 +1,9 @@
 #pragma once
 
 //マクロ定義
-#define ITEM_MAX (100) //アイテムの最大数
+#define ITEM_MAX (1) //アイテムの最大数
 
-enum ITEM
+enum ITEM_TYPE
 {
 	ITEM_NONE,	//通常
 	ITEM_FIRE,	//ファイア
@@ -12,3 +12,29 @@ enum ITEM
 	ITEM_NUM,	//アイテムの数
 };
 
+//アイテム構造体
+struct ITEM
+{
+	float PosX;//現在のX座標
+	float PosY;//現在のY座標
+
+	float OldPosX;//過去のX座標
+	float OldPosY;//過去のY座標
+
+	int Type;//アイテムの種類
+	int Color;//アイテムの色
+
+	bool Use;//使用中かどうか
+};
+
+//////////////////
+//プロトタイプ宣言
+//////////////////
+
+void InitItem();
+void UninitItem();
+void UpdateItem();
+void DrawItem();
+
+//アイテムの生成
+void SetItem(float x, float y, int type);
