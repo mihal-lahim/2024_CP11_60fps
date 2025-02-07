@@ -9,7 +9,7 @@ enum ITEM_TYPE
 	ITEM_FIRE,	//ファイア
 	ITEM_ICE,	//アイス
 
-	ITEM_NUM,	//アイテムの数
+	ITEM_NUM,	//アイテムの数あ
 };
 
 //アイテム構造体
