@@ -8,6 +8,7 @@
 #include"shield.h"
 #include"score.h"
 #include"field.h"
+#include"item.h"
 
 void InitGame(void)
 {
@@ -17,6 +18,7 @@ void InitGame(void)
 	InitShield();	//　シールド
 	InitScore();	//　スコア
 	//InitField();	//　フィールド
+	InitItem();	//　アイテム
 
 }
 
@@ -28,6 +30,7 @@ void UninitGame(void)
 	UnInitShield();
 	UninitScore();
 	//UnInitField();
+	UninitItem();
 }
 
 void UpdateGame(void)
@@ -38,6 +41,7 @@ void UpdateGame(void)
 	UpdateShield();
 	UpdateScore();
 	//UpdateField();
+	UpdateItem();
 		
 }
 
@@ -49,6 +53,7 @@ void DrawGame(void)//書く順番要調整 先に書きたいものを前に
 	DrawShield();
 	DrawPlayer();
 	DrawScore();
+	DrawItem();
 }
 
 

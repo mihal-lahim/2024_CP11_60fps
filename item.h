@@ -1,7 +1,7 @@
 #pragma once
 
 //マクロ定義
-#define ITEM_MAX (1) //アイテムの最大数
+#define ITEM_MAX (10) //アイテムの最大数
 
 enum ITEM_TYPE
 {
@@ -25,6 +25,8 @@ struct ITEM
 	int Color;//アイテムの色
 
 	bool Use;//使用中かどうか
+
+	bool Hit;//当たったかどうか
 };
 
 //////////////////
@@ -38,3 +40,7 @@ void DrawItem();
 
 //アイテムの生成
 void SetItem(float x, float y, int type);
+
+//アイテムの消去
+void DeleteItem(int);
+
