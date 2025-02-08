@@ -153,10 +153,10 @@ void DrawEnemy()
 			}
 			gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
 			textcolor(g_Enemy[i].Color);//F•Ï‚¦
-			std::cout << "Ÿ";
+			std::cout << "><";
 			textcolor(WHITE);//F•Ï‚¦
 		}
-		if (g_Enemy[i].Life < 1)
+		if (g_Enemy[i].Life < 1)//‘Ì—Í‚ª‚È‚­‚È‚Á‚½‚ç
 		{
 			gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
 			textcolor(g_Enemy[i].Color);//F•Ï‚¦

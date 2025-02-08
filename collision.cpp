@@ -3,6 +3,7 @@
 #include"collision.h"
 #include<iostream>
 
+
 //敵キャラクターとプレイヤー弾の当たり判定
 //敵から呼び出す関数
 //戻り値　true 当たり　false 外れ

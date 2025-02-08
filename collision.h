@@ -5,7 +5,6 @@
 #include"enemy.h"
 #include"player.h"
 #include"shield.h"
-#include "field.h"
 
 //キャラクターの当たり判定のサイズ　X:Y =2:1正方形
 //キャラクターごとにサイズが異なるのが普通だが

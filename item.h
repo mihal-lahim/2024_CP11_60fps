@@ -1,7 +1,7 @@
 #pragma once
 
 //マクロ定義
-#define ITEM_MAX (10) //アイテムの最大数
+#define ITEM_MAX (3) //アイテムの最大数
 
 enum ITEM_TYPE
 {

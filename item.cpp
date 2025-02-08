@@ -34,16 +34,37 @@ void UpdateItem()
 	//使用中の構造体をすべて更新する
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
-		int PosX = rand() % 80;
-		int PosY = rand() % 25;
+		int FirePosX = rand() % 78 + 1;
+		int FirePosY = rand() % 23 + 1;
+
+		int IcePosX  = rand() % 78 + 1;
+		int IcePosY  = rand() % 23 + 1;
+
+		int ItemType = rand() % 2 + 1;
+
+		//使用中のアイテム
+		int UseItem = 0;
+		
 		if (g_Item[i].Use == false)
 		{
-			//最後にアイテムを生成した時間から一定時間経過したらアイテムを生成
+			//最後にアイテムを生成した時間から一定時間経過したらアイテムを生成 1000ms = 1秒
 			if (timeGetTime() - lastItemSetTime > 1000)
 			{
-				SetItem(PosX, PosY, ITEM_FIRE);
+				SetItem(IcePosX, IcePosY, ItemType);
+
+				//最後にアイテムを生成した時間を更新
 				lastItemSetTime = timeGetTime();
 			}
+		}
+		else//アイテムが使用中ならば
+		{
+			UseItem++;
+		}
+
+		//すべてのアイテムが使用中ならば
+		if (UseItem == ITEM_MAX)
+		{
+			//ここから0208
 		}
 	}
 }
@@ -68,6 +89,11 @@ void DrawItem()
 			textcolor(g_Item[i].Color);//色変え
 			std::cout << "★";
 			textcolor(WHITE);//色変え
+		}
+		else
+		{
+			gotoxy(g_Item[i].PosX, g_Item[i].PosY);
+			std::cout << "  ";
 		}
 	}
 }
