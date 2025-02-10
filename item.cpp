@@ -31,42 +31,54 @@ void UninitItem()
 //更新処理
 void UpdateItem()
 {
-	//使用中の構造体をすべて更新する
+	//アイテム使用数
+	int UseCount = 0;
+
+	//消去アイテム
+	int Delete = rand() % ITEM_MAX;
+
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
-		int FirePosX = rand() % 78 + 1;
-		int FirePosY = rand() % 23 + 1;
-
-		int IcePosX  = rand() % 78 + 1;
-		int IcePosY  = rand() % 23 + 1;
-
-		int ItemType = rand() % 2 + 1;
-
-		//使用中のアイテム
-		int UseItem = 0;
-		
-		if (g_Item[i].Use == false)
+		if (g_Item[i].Use == true)
 		{
-			//最後にアイテムを生成した時間から一定時間経過したらアイテムを生成 1000ms = 1秒
-			if (timeGetTime() - lastItemSetTime > 1000)
-			{
-				SetItem(IcePosX, IcePosY, ItemType);
-
-				//最後にアイテムを生成した時間を更新
-				lastItemSetTime = timeGetTime();
-			}
-		}
-		else//アイテムが使用中ならば
-		{
-			UseItem++;
-		}
-
-		//すべてのアイテムが使用中ならば
-		if (UseItem == ITEM_MAX)
-		{
-			//ここから0208
+			//アイテム使用数の加算
+			UseCount++;
 		}
 	}
+	//全てのアイテムが生成されていたら全てのアイテムを消去する
+	if (UseCount == ITEM_MAX)
+	{
+		DeleteItem(Delete);
+	}
+	else
+	{
+		//使用中の構造体をすべて更新する
+		for (int i = 0; i < ITEM_MAX; i++)
+		{
+			//アイテムの位置を指定
+			int ItemPosX = rand() % 78 + 1;
+			int ItemPosY = rand() % 23 + 1;
+
+			//アイテムの種類を指定
+			int ItemType = rand() % 2 + 1;
+
+			//アイテム使用数
+			int Use = 0;
+
+			if (g_Item[i].Use == false)
+			{
+				//最後にアイテムを生成した時間から一定時間経過したらアイテムを生成 1000ms = 1秒
+				if (timeGetTime() - lastItemSetTime > 1000)
+				{
+					SetItem(ItemPosX, ItemPosY, ItemType);
+
+					//最後にアイテムを生成した時間を更新
+					lastItemSetTime = timeGetTime();
+				}
+			}
+		}
+	}
+	
 }
 
 //描画処理
