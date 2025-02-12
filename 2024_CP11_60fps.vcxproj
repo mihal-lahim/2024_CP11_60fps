@@ -132,6 +132,7 @@
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="field.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="hitpoint.cpp" />
     <ClCompile Include="inputkey.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="main.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="field.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="hitpoint.h" />
     <ClInclude Include="inputkey.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="player.h" />
