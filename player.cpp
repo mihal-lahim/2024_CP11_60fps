@@ -97,7 +97,7 @@ void UpdatePlayer(void)
 
 	if (g_Player.ItemHit)
 	{
-		//アイテムタイプを入れるｐ
+		//アイテムタイプを入れる
 		g_Player.Item = g_Player.ItemHit;
 	}
 }
