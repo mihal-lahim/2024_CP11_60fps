@@ -222,10 +222,10 @@ int PlayerCollisionItem(PLAYER* ptPlayer)
 	float PlayerUp = ptPlayer->PosY - CHARACTER_COLLISION_SIZEY;
 	float PlayerDown = ptPlayer->PosY + CHARACTER_COLLISION_SIZEY;
 
-	//敵キャラクターの構造体ポインタを取得
+	//アイテムの構造体ポインタを取得
 	ITEM* tItem = GetItem();
 
-	//全ての敵構造体配列とチェック
+	//全てのアイテム構造体配列とチェック
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
 		//構造体が使用中か？
@@ -255,7 +255,7 @@ int PlayerCollisionItem(PLAYER* ptPlayer)
 				continue;
 			}
 
-			//当たり アイテムの分け
+			//当たり アイテム分け
 			ptPlayer->Item = tItem[i].Type;
 
 			switch (ptPlayer->Item)
@@ -273,5 +273,34 @@ int PlayerCollisionItem(PLAYER* ptPlayer)
 	}
 	//アイテムと当たらなかったとき
 	return ITEM_NONE;
+}
+
+//アイテムとプレイヤーの当たり判定
+//アイテムから呼び出す関数
+//戻り値　true 当たり　false 外れ
+bool ItemCollisionPlayer(ITEM* ptItem)
+{
+	//アイテムの短形を作成
+	float ItemLeft = ptItem->PosX - ITEM_COLLISION_SIZEX;
+	float ItemRight = ptItem->PosX + ITEM_COLLISION_SIZEX;
+	float ItemUp = ptItem->PosY - ITEM_COLLISION_SIZEY;
+	float ItemDown = ptItem->PosY + ITEM_COLLISION_SIZEY;
+
+	//プレイヤーの構造体ポインタを取得
+	PLAYER* tPlayer = GetPlayer();
+
+	//プレイヤーの短形を作成
+	float PlayerLeft = tPlayer->PosX - CHARACTER_COLLISION_SIZEX;
+	float PlayerRight = tPlayer->PosX + CHARACTER_COLLISION_SIZEX;
+	float PlayerUp = tPlayer->PosY - CHARACTER_COLLISION_SIZEY;
+	float PlayerDown = tPlayer->PosY + CHARACTER_COLLISION_SIZEY;
+
+	//当たり判定
+	if (PlayerRight < ItemLeft || PlayerLeft > ItemRight|| 
+		PlayerUp    > ItemDown || PlayerUp   > ItemDown)
+	{
+		return false;
+	}
+	return true;
 }
 

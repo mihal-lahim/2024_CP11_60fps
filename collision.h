@@ -48,4 +48,8 @@ bool EnemyCollisionShield(ENEMY* ptEnemy);
 //プレイヤーキャラクターとアイテムの当たり判定
 //プレイヤーから呼び出す関数
 int PlayerCollisionItem(PLAYER* ptPlayer);
+
+//アイテムとプレイヤーキャラクターの当たり判定
+//アイテムから呼び出す関数
+bool ItemCollisionPlayer(ITEM* ptItem);
 #endif

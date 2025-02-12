@@ -144,6 +144,7 @@ void UpdateEnemy()
 			if (KillCount == ENEMY_MAX)
 			{
 				SetScene(SCENE_RESULT);
+
 			}
 		}
 	}

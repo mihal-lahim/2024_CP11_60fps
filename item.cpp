@@ -3,6 +3,7 @@
 #include<iostream>
 #include"item.h"
 #include"player.h"
+#include"collision.h"
 
 
 /////////////
@@ -76,9 +77,17 @@ void UpdateItem()
 					lastItemSetTime = timeGetTime();
 				}
 			}
+
+			//“–‚½‚è”»’è//////////////
+			g_Item[i].Hit = ItemCollisionPlayer(&g_Item[i]);
+
+			//ƒvƒŒƒCƒ„[‚ªæ“¾‚µ‚½‚çÁ‚¦‚é
+			if (g_Item[i].Hit)
+			{
+				g_Item[i].Use = false;
+			}
 		}
 	}
-	
 }
 
 //•`‰æˆ—
