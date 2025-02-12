@@ -6,9 +6,9 @@
 #include"collision.h"
 
 
-/////////////
-// グローバル変数
-/////////////
+//////////////////
+//グローバル変数//
+//////////////////
 
 ITEM g_Item[ITEM_MAX];//アイテム構造体配列
 DWORD lastItemSetTime;//最後にアイテムを生成した時間
@@ -46,10 +46,13 @@ void UpdateItem()
 			UseCount++;
 		}
 	}
-	//全てのアイテムが生成されていたらいずれかのアイテムを消去する
+	//全てのアイテムが生成されていたら全てのアイテムを消去する
 	if (UseCount == ITEM_MAX)
 	{
-		DeleteItem(Delete);
+		for (int i = 0; i < ITEM_MAX; i++)
+		{
+			g_Item[i].Use = false;
+		}
 	}
 	else
 	{
@@ -69,7 +72,7 @@ void UpdateItem()
 			if (g_Item[i].Use == false)
 			{
 				//最後にアイテムを生成した時間から一定時間経過したらアイテムを生成 1000ms = 1秒
-				if (timeGetTime() - lastItemSetTime > 1000)
+				if (timeGetTime() - lastItemSetTime > 1500)
 				{
 					SetItem(ItemPosX, ItemPosY, ItemType);
 

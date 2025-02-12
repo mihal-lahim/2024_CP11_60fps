@@ -10,7 +10,7 @@
 //キャラクターの当たり判定のサイズ　X:Y =2:1正方形
 //キャラクターごとにサイズが異なるのが普通だが
 //その場合は初期化で構造体へ格納しておく
-#define CHARACTER_COLLISION_SIZEX (0.5)
+#define CHARACTER_COLLISION_SIZEX (0.6)
 #define CHARACTER_COLLISION_SIZEY (0.3)
 
 //弾のサイズ
@@ -22,8 +22,8 @@
 #define ENEMY_COLLISION_SIZEY (0.3)
 
 //シールドのサイズ
-#define SHIELD_COLLISION_SIZEX (0.5)
-#define SHIELD_COLLISION_SIZEY (0.3)
+#define SHIELD_COLLISION_SIZEX (0.7)
+#define SHIELD_COLLISION_SIZEY (0.5)
 
 //アイテムのサイズ
 #define ITEM_COLLISION_SIZEX (0.5)
