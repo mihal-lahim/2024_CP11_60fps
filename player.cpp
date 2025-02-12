@@ -26,6 +26,7 @@ void InitPlayer(void)
 	g_Player.Direct = 0.0;	//向き
 	g_Player.Hit = false;	//当たってない
 	g_Player.Item = ITEM_NONE;//アイテムなし
+	g_Player.Life = 1.0;//体力１
 }
 
 //終了処理
@@ -92,7 +93,7 @@ void UpdatePlayer(void)
 		g_Player.Life--;
 		g_Player.Item = ITEM_NONE;
 
-		if (g_Player.Life < 1)
+		if (g_Player.Life = 0)
 		{
 			//シーンをタイトルへ移動させる
 			SetScene(SCENE_TITLE);
