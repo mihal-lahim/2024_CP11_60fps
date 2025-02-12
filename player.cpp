@@ -9,6 +9,7 @@
 #include"inputkey.h"
 #include"shield.h"
 #include"item.h"
+#include"score.h"
 
 ///////////////
 //グローバル変数
@@ -88,8 +89,14 @@ void UpdatePlayer(void)
 
 	if (g_Player.Hit)//プレイヤーが死んだらタイトルへ移動　現在当たったらだが、体力制御にする
 	{
-		//シーンをタイトルへ移動させる
-		SetScene(SCENE_TITLE);
+		g_Player.Life--;
+		g_Player.Item = ITEM_NONE;
+
+		if (g_Player.Life < 1)
+		{
+			//シーンをタイトルへ移動させる
+			SetScene(SCENE_TITLE);
+		}
 	}
 
 	//アイテムとの当たり判定
@@ -97,6 +104,9 @@ void UpdatePlayer(void)
 
 	if (g_Player.ItemHit)
 	{
+		g_Player.Life++;
+		AddPoint(100);
+
 		//アイテムタイプを入れる
 		g_Player.Item = g_Player.ItemHit;
 	}

@@ -63,7 +63,8 @@ void UpdateEnemy()
 {
 	//スコア取得
 	int Score = GetScore()->nPoint;
-
+	//敵を倒した数
+	int KillCount = 0;
 	//使用中の構造体をすべて更新する
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
@@ -114,7 +115,7 @@ void UpdateEnemy()
 			//シールドとの当たり判定
 			g_Enemy[i].ShieldHit = EnemyCollisionShield(&g_Enemy[i]);
 
-			//敵に弾が当たると消える
+			//敵に弾が当たると体力が減り、消える
 			if (g_Enemy[i].Hit)
 			{
 				g_Enemy[i].Life--;
@@ -135,13 +136,16 @@ void UpdateEnemy()
 				g_Enemy[i].SpeedY *= -1;
 			}
 		}
-	}
-	
-	//ゲームクリア
-	if (100 == Score)
-	{
-		//シーンをゲームクリアへ移動
-		SetScene(SCENE_RESULT);
+		else//てきがいないとき
+		{
+			KillCount++;
+
+			//ゲームクリア
+			if (KillCount == ENEMY_MAX)
+			{
+				SetScene(SCENE_RESULT);
+			}
+		}
 	}
 }
 

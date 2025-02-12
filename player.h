@@ -23,8 +23,7 @@ struct PLAYER
 	float SpeedX;//X座標の移動量
 	float SpeedY;//Y座標の移動量
 
-	bool  Jump;  //ジャンプ中かどうか
-	bool  SecondJump;  //ジャンプ中かどうか
+	int Life;//体力
 	
 	float Direct; //向き
 

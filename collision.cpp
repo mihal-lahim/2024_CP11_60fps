@@ -213,7 +213,7 @@ bool EnemyCollisionShield(ENEMY* ptEnemy)
 
 //プレイヤーとアイテムの当たり判定
 //プレイヤーから呼び出す関数
-//戻り値　true 当たり　false 外れ
+//戻り値　アイテムコード
 int PlayerCollisionItem(PLAYER* ptPlayer)
 {
 	//プレイヤーの短形を作成
@@ -274,3 +274,4 @@ int PlayerCollisionItem(PLAYER* ptPlayer)
 	//アイテムと当たらなかったとき
 	return ITEM_NONE;
 }
+
