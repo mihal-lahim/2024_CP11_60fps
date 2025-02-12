@@ -39,4 +39,5 @@ void DrawEnemy();
 void CreateEnemy(float X, float Y, float Mx, float My,int Color,int Life);
 ENEMY* GetEnemy();
 
+
 #endif

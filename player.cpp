@@ -120,6 +120,7 @@ void Shot(void)
 	//弾の速さ（加える力）の指定に使用する
 	float direct_x = 0.0;//横方向
 	float direct_y = 0.0;//縦方向
+
 	if (GetKeyPress(KEYNAME::KEY_UP))
 	{
 		direct_y += -1.0;

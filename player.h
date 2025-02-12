@@ -4,8 +4,8 @@
 //////////////
 //マクロ定義
 //////////////
-#define PLAYER_MOVE_SPEED_X (MOVE_SPEED_X * 1.0)
-#define PLAYER_MOVE_SPEED_Y (MOVE_SPEED_Y * 1.0)
+#define PLAYER_MOVE_SPEED_X (MOVE_SPEED_X * 0.5)
+#define PLAYER_MOVE_SPEED_Y (MOVE_SPEED_Y * 0.5)
 #define GRAVITY        (0.04)//重力
 #define JUMP_POWER     (0.75)//ジャンプ力
 #define RESIST_X       (0.4)//地上のX方向摩擦

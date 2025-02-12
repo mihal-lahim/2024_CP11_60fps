@@ -111,6 +111,8 @@ void UpdateEnemy()
 
 			//弾との当たり判定
 			g_Enemy[i].Hit = EnemyCollisionBullet(&g_Enemy[i]);
+			//シールドとの当たり判定
+			g_Enemy[i].ShieldHit = EnemyCollisionShield(&g_Enemy[i]);
 
 			//敵に弾が当たると消える
 			if (g_Enemy[i].Hit)
@@ -123,6 +125,14 @@ void UpdateEnemy()
 					g_Enemy[i].Use = false;
 					AddPoint(10);//スコア加算
 				}
+			}
+
+			//シールドに当たると跳ね返る
+			if (g_Enemy[i].ShieldHit)
+			{
+				//移動量の反転
+				g_Enemy[i].SpeedX *= -1;
+				g_Enemy[i].SpeedY *= -1;
 			}
 		}
 	}
