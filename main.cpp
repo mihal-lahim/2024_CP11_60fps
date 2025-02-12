@@ -8,10 +8,23 @@
 #include"scene.h"
 #include"inputkey.h"
 
+#if defined(_WIN64) || defined(_M_X64)
 #ifndef _DEBUG
-#pragma comment(lib, "./Library/Release/HEW.lib")
+#define show 0
+#pragma comment(lib, "./Library/HEW_x64_Release.lib")
 #else
-#pragma comment(lib, "./Library/Debug/HEW.lib")
+#define show 1
+#pragma comment(lib, "./Library/HEW_x64_Debug.lib")
+#endif
+
+#elif defined(_WIN32) || defined(_M_IX86)
+#ifndef _DEBUG
+#define show 0
+#pragma comment(lib, "./Library/HEW_x86_Release.lib")
+#else
+#define show 1
+#pragma comment(lib, "./Library/HEW_x86_Debug.lib")
+#endif
 #endif
 // Function prototype declarations
 bool HEWStartup();
