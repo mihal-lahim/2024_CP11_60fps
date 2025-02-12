@@ -29,6 +29,7 @@ struct PLAYER
 	float Direct; //向き
 
 	bool Hit; //ヒットフラグ
+	int ItemHit;//アイテムヒットフラグ
 
 	int Kill; //敵を倒した数
 

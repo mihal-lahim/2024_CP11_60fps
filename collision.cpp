@@ -210,3 +210,67 @@ bool EnemyCollisionShield(ENEMY* ptEnemy)
 	//すべての敵と当たらなかったとき
 	return false;
 }
+
+//プレイヤーとアイテムの当たり判定
+//プレイヤーから呼び出す関数
+//戻り値　true 当たり　false 外れ
+int PlayerCollisionItem(PLAYER* ptPlayer)
+{
+	//プレイヤーの短形を作成
+	float PlayerLeft = ptPlayer->PosX - CHARACTER_COLLISION_SIZEX;
+	float PlayerRight = ptPlayer->PosX + CHARACTER_COLLISION_SIZEX;
+	float PlayerUp = ptPlayer->PosY - CHARACTER_COLLISION_SIZEY;
+	float PlayerDown = ptPlayer->PosY + CHARACTER_COLLISION_SIZEY;
+
+	//敵キャラクターの構造体ポインタを取得
+	ITEM* tItem = GetItem();
+
+	//全ての敵構造体配列とチェック
+	for (int i = 0; i < ITEM_MAX; i++)
+	{
+		//構造体が使用中か？
+		if (tItem[i].Use == true)
+		{
+			//アイテムの短形を作成
+			float ItemLeft = tItem[i].PosX - ITEM_COLLISION_SIZEX;
+			float ItemRight = tItem[i].PosX + ITEM_COLLISION_SIZEX;
+			float ItemUp = tItem[i].PosY - ITEM_COLLISION_SIZEY;
+			float ItemDown = tItem[i].PosY + ITEM_COLLISION_SIZEY;
+
+			//当たり判定
+			if (PlayerRight < ItemLeft)
+			{
+				continue;
+			}
+			if (PlayerLeft > ItemRight)
+			{
+				continue;
+			}
+			if (PlayerUp > ItemDown)
+			{
+				continue;
+			}
+			if (PlayerDown < ItemUp)
+			{
+				continue;
+			}
+
+			//当たり アイテムの分け
+			ptPlayer->Item = tItem[i].Type;
+
+			switch (ptPlayer->Item)
+			{
+			case ITEM_FIRE:
+				return ITEM_FIRE;
+				break;
+			case ITEM_ICE:
+				return ITEM_ICE;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	//アイテムと当たらなかったとき
+	return ITEM_NONE;
+}

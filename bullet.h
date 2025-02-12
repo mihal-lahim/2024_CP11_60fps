@@ -21,6 +21,7 @@ struct BULLET
 	float SpeedX;//XÀ•W‚ÌˆÚ“®—Ê
 	float SpeedY;//YÀ•W‚ÌˆÚ“®—Ê
 
+	int Type;//’e‚Ì‘®«
 };
 
 ///////////////////////////

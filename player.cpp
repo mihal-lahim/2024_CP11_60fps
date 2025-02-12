@@ -91,6 +91,15 @@ void UpdatePlayer(void)
 		//シーンをタイトルへ移動させる
 		SetScene(SCENE_TITLE);
 	}
+
+	//アイテムとの当たり判定
+	g_Player.ItemHit = PlayerCollisionItem(&g_Player);
+
+	if (g_Player.ItemHit)
+	{
+		//アイテムタイプを入れる
+		g_Player.Item = g_Player.ItemHit;
+	}
 }
 
 //描画処理
@@ -104,7 +113,24 @@ void DrawPlayer(void)
 	}
 	//キャラクター
 	gotoxy(g_Player.PosX, g_Player.PosY);
+
+	//アイテムにより色変え
+	switch (g_Player.Item)
+	{
+	case ITEM_NONE:
+		textcolor(WHITE);
+		break;
+	case ITEM_FIRE:
+		textcolor(RED);
+		break;
+	case ITEM_ICE:
+		textcolor(LIGHTCYAN);
+		break;
+	default:
+		break;
+	}
 	std::cout << "●";
+	textcolor(WHITE);
 }
 
 //構造体情報取得

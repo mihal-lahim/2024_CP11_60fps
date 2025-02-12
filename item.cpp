@@ -45,7 +45,7 @@ void UpdateItem()
 			UseCount++;
 		}
 	}
-	//全てのアイテムが生成されていたら全てのアイテムを消去する
+	//全てのアイテムが生成されていたらいずれかのアイテムを消去する
 	if (UseCount == ITEM_MAX)
 	{
 		DeleteItem(Delete);
@@ -57,7 +57,7 @@ void UpdateItem()
 		{
 			//アイテムの位置を指定
 			int ItemPosX = rand() % 78 + 1;
-			int ItemPosY = rand() % 23 + 1;
+			int ItemPosY = rand() % 22 + 2;
 
 			//アイテムの種類を指定
 			int ItemType = rand() % 2 + 1;
@@ -150,4 +150,12 @@ void SetItem(float x, float y, int type)
 void DeleteItem(int Delete)
 {
 	g_Item[Delete].Use = false;
+}
+
+//アイテム構造体取得
+//構造体情報取得
+ITEM* GetItem()
+{
+	//弾の構造体配列の先頭のポインターを返す
+	return &g_Item[0];
 }

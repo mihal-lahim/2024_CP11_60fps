@@ -3,6 +3,8 @@
 #include<iostream>
 #include "bullet.h"
 #include "game.h"
+#include"player.h"
+#include"item.h"
 
 ////////////////
 //グローバル変数
@@ -47,6 +49,12 @@ void UpdateBullet(void)
 		{
 			g_Bullet[i].Use = false;//構造体を未使用にする
 		}
+
+		//取得しているアイテムによって弾の属性を変える
+		PLAYER* Player = GetPlayer();
+		
+		//アイテムタイプを入れる
+		g_Bullet[i].Type = Player->Item;
 	}
 }
 
@@ -67,7 +75,22 @@ void DrawBullet(void)
 		if (g_Bullet[i].Use == true)
 		{
 			gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);//今回の場所への移動
-			textcolor(RED);//色変え
+			PLAYER* Player = GetPlayer();
+			//アイテムにより色変え
+			switch (Player->Item)
+			{
+			case ITEM_NONE:
+				textcolor(WHITE);
+				break;
+			case ITEM_FIRE:
+				textcolor(RED);
+				break;
+			case ITEM_ICE:
+				textcolor(LIGHTCYAN);
+				break;
+			default:
+				break;
+			}
 			std::cout << "・";
 			textcolor(WHITE);//色変え
 		}

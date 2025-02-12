@@ -44,3 +44,6 @@ void SetItem(float x, float y, int type);
 //アイテムの消去
 void DeleteItem(int);
 
+//アイテム構造体取得
+ITEM* GetItem();
+
