@@ -28,6 +28,7 @@ struct ENEMY
 	bool PlayerHit;	//プレイヤーヒットフラグ
 
 	int	 Life;		//体力
+	int  Type;		//敵のタイプ
 };
 ////////////////////
 //プロトタイプ宣言
@@ -37,7 +38,7 @@ void UnInitEnemy();
 void UpdateEnemy();
 void DrawEnemy();
 
-void CreateEnemy(float X, float Y, float Mx, float My,int Color,int Life);
+void CreateEnemy(float X, float Y, float Mx, float My,int Color,int Life,int Type);
 ENEMY* GetEnemy();
 
 

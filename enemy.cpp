@@ -6,6 +6,7 @@
 #include"collision.h"
 #include"scene.h"
 #include"score.h"
+#include"item.h"
 
 
 ///////////////////////////////////////
@@ -21,24 +22,26 @@ struct EnemyData
 	float Mx, My;	//移動量
 	int Color;		//キャラクターカラー
 	int Life;		//敵の体力
+	int Type;		//タイプ
 };
 ///////////////////////////////////////
 //敵初期配置データテーブル
 ///////////////////////////////////////
 EnemyData g_EnemyTable[] =
 {
-	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力
-		{10,	8	,  0.0f,	 0.0f,	GREEN,		 3}, //1体目
-		{20,	4	,  0.2f,	 0.1f,	MAGENTA, 	 3}, //2体目
-		{30,	6	,  0.2f,	 0.1f,	BROWN,		 3}, //3体目
-		{40,	8	,  0.2f,	 0.1f,	CYAN,		 3}, //4体目
-		{50,	10	,  0.2f,	 0.1f,	GREEN,		 3}, //5体目
-		{60,	2	,  0.2f,	 0.1f,	LIGHTCYAN,	 3}, //6体目
-		{70,	4	,  0.2f,	 0.1f,	LIGHTMAGENTA,3}, //7体目
-		{60,	6	,  0.2f,	 0.1f,	YELLOW,		 3}, //8体目
-		{50,	8	,  0.2f,	 0.1f,	LIGHTBLUE,	 3}, //9体目
-		{40,	10	,  0.2f,	 0.1f,	DARKGRAY,	 3}, //10体目
+	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
+		{10,	8	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //1体目
+		{20,	4	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //2体目
+		{30,	6	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //3体目
+		{40,	8	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //4体目
+		{50,	10	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //5体目
+		{60,	2	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //6体目
+		{70,	4	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //7体目
+		{60,	6	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //8体目
+		{50,	8	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //9体目
+		{40,	10	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //10体目
 };
+
 //初期化
 void InitEnemy()
 {
@@ -48,7 +51,7 @@ void InitEnemy()
 	//最初にテーブルの情報を使って敵を作成しておく
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
-		CreateEnemy(g_EnemyTable[i].X, g_EnemyTable[i].Y, g_EnemyTable[i].Mx, g_EnemyTable[i].My, g_EnemyTable[i].Color,g_EnemyTable[i].Life);
+		CreateEnemy(g_EnemyTable[i].X, g_EnemyTable[i].Y, g_EnemyTable[i].Mx, g_EnemyTable[i].My, g_EnemyTable[i].Color,g_EnemyTable[i].Life, g_EnemyTable[i].Type);
 	}
 }
 
@@ -110,6 +113,8 @@ void UpdateEnemy()
 				g_Enemy[i].PosX = SCREEN_RIGHT;
 			}
 
+			/////当たり判定/////////////////
+
 			//弾との当たり判定
 			g_Enemy[i].Hit = EnemyCollisionBullet(&g_Enemy[i]);
 
@@ -122,7 +127,42 @@ void UpdateEnemy()
 			//敵に弾が当たると体力が減り、消える
 			if (g_Enemy[i].Hit)
 			{
-				g_Enemy[i].Life--;
+				BULLET* bullet = GetBullet();
+				
+				//敵のタイプと弾のタイプを比較して与えられるダメージを決定する
+				switch (bullet->Type)
+				{
+				case ITEM_NONE:
+					g_Enemy[i].Life -= 2;
+					break;
+				case ITEM_FIRE:
+					//同タイプなら与えるダメージが減る
+					if (bullet->Type == g_Enemy[i].Type)
+					{
+						g_Enemy[i].Life--;
+					}
+					//違うタイプなら与えるダメージが増える
+					else
+					{
+						g_Enemy[i].Life -= 5;
+					}
+					break;
+				case ITEM_ICE:
+					//同タイプなら与えるダメージが減る
+					if (bullet->Type == g_Enemy[i].Type)
+					{
+						g_Enemy[i].Life--;
+					}
+					//違うタイプなら与えるダメージが増える
+					else
+					{
+						g_Enemy[i].Life -= 5;
+					}
+					break;
+				default:
+					break;
+				}
+
 				g_Enemy[i].Hit = false;
 
 				if (g_Enemy[i].Life < 1)
@@ -174,6 +214,13 @@ void DrawEnemy()
 			textcolor(g_Enemy[i].Color);//色変え
 			std::cout << "><";
 			textcolor(WHITE);//色変え
+
+#ifdef _DEBUG
+			gotoxy(2, 5 + i);
+			std::cout << g_Enemy[i].Type << "  "<<g_Enemy[i].Life << "  ";
+#endif _DEBUG
+
+			
 		}
 		if (g_Enemy[i].Life < 1)//体力がなくなったら
 		{
@@ -187,7 +234,7 @@ void DrawEnemy()
 
 
 //生成処理
-void CreateEnemy(float X, float Y, float Mx, float My, int Color,int Life)
+void CreateEnemy(float X, float Y, float Mx, float My, int Color,int Life,int Type)
 {
 	//未使用の構造体を見つけて、敵のデータをセット
 	for (int i = 0; i < ENEMY_MAX; i++)
@@ -201,6 +248,7 @@ void CreateEnemy(float X, float Y, float Mx, float My, int Color,int Life)
 			g_Enemy[i].SpeedY = My;
 			g_Enemy[i].Color  = Color;
 			g_Enemy[i].Life   = Life;
+			g_Enemy[i].Type = Type;
 
 			g_Enemy[i].Use = true;//使用中にする
 

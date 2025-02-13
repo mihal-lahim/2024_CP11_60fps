@@ -56,58 +56,6 @@ bool EnemyCollisionBullet(ENEMY* ptEnemy)
 	return false;
 }
 
-//プレイヤーと敵キャラクターの当たり判定
-//プレイヤーから呼び出す関数
-//戻り値　true 当たり　false 外れ
-bool PlayerCollisionEnemy(PLAYER* ptPlayer)
-{
-	//プレイヤーの短形を作成
-	float PlayerLeft  = ptPlayer->PosX - CHARACTER_COLLISION_SIZEX;
-	float PlayerRight = ptPlayer->PosX + CHARACTER_COLLISION_SIZEX;
-	float PlayerUp    = ptPlayer->PosY - CHARACTER_COLLISION_SIZEY;
-	float PlayerDown  = ptPlayer->PosY + CHARACTER_COLLISION_SIZEY;
-
-	//敵キャラクターの構造体ポインタを取得
-	ENEMY* tEnemy = GetEnemy();
-
-	//全ての敵構造体配列とチェック
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		//構造体が使用中か？
-		if (tEnemy[i].Use == true)
-		{
-			//敵の短形を作成
-			float EnemyLeft  = tEnemy[i].PosX - ENEMY_COLLISION_SIZEX + 0.5;
-			float EnemyRight = tEnemy[i].PosX + ENEMY_COLLISION_SIZEX;
-			float EnemyUp    = tEnemy[i].PosY - ENEMY_COLLISION_SIZEY + 0.5;
-			float EnemyDown  = tEnemy[i].PosY + ENEMY_COLLISION_SIZEY;
-
-			//当たり判定
-			if (PlayerRight < EnemyLeft)
-			{
-				continue;
-			}
-			if (PlayerLeft > EnemyRight)
-			{
-				continue;
-			}
-			if (PlayerUp > EnemyDown)
-			{
-				continue;
-			}
-			if (PlayerDown < EnemyUp)
-			{
-				continue;
-			}
-
-			//当たり
-			return true;
-		}
-	}
-	//すべての敵と当たらなかったとき
-	return false;
-}
-
 //シールドと敵キャラクターの当たり判定
 //シールドから呼び出す関数
 //戻り値　true 当たり　false 外れ
@@ -320,9 +268,9 @@ bool EnemyCollisionPlayer(ENEMY* ptEnemy)
 
 	//プレイヤーの短形を作成
 	float PlayerLeft = tPlayer->PosX - CHARACTER_COLLISION_SIZEX;
-	float PlayerRight = tPlayer->PosX + CHARACTER_COLLISION_SIZEX;
+	float PlayerRight = tPlayer->PosX + CHARACTER_COLLISION_SIZEX - 0.5;
 	float PlayerUp = tPlayer->PosY - CHARACTER_COLLISION_SIZEY;
-	float PlayerDown = tPlayer->PosY + CHARACTER_COLLISION_SIZEY;
+	float PlayerDown = tPlayer->PosY + CHARACTER_COLLISION_SIZEY - 0.4;
 
 	//当たり判定
 	if (PlayerRight < EnemyLeft || PlayerLeft > EnemyRight ||
@@ -331,5 +279,57 @@ bool EnemyCollisionPlayer(ENEMY* ptEnemy)
 		return false;
 	}
 	return true;
+}
+
+//プレイヤーと敵キャラクターの当たり判定
+//プレイヤーから呼び出す関数
+//戻り値　true 当たり　false 外れ
+bool PlayerCollisionEnemy(PLAYER* ptPlayer)
+{
+	//プレイヤーの短形を作成
+	float PlayerLeft = ptPlayer->PosX - CHARACTER_COLLISION_SIZEX;
+	float PlayerRight = ptPlayer->PosX + CHARACTER_COLLISION_SIZEX - 0.5;
+	float PlayerUp = ptPlayer->PosY - CHARACTER_COLLISION_SIZEY;
+	float PlayerDown = ptPlayer->PosY + CHARACTER_COLLISION_SIZEY - 0.4;
+
+	//敵キャラクターの構造体ポインタを取得
+	ENEMY* tEnemy = GetEnemy();
+
+	//全ての敵構造体配列とチェック
+	for (int i = 0; i < ENEMY_MAX; i++)
+	{
+		//構造体が使用中か？
+		if (tEnemy[i].Use == true)
+		{
+			//敵の短形を作成
+			float EnemyLeft = tEnemy[i].PosX - ENEMY_COLLISION_SIZEX;
+			float EnemyRight = tEnemy[i].PosX + ENEMY_COLLISION_SIZEX;
+			float EnemyUp = tEnemy[i].PosY - ENEMY_COLLISION_SIZEY;
+			float EnemyDown = tEnemy[i].PosY + ENEMY_COLLISION_SIZEY;
+
+			//当たり判定
+			if (PlayerRight < EnemyLeft)
+			{
+				continue;
+			}
+			if (PlayerLeft > EnemyRight)
+			{
+				continue;
+			}
+			if (PlayerUp > EnemyDown)
+			{
+				continue;
+			}
+			if (PlayerDown < EnemyUp)
+			{
+				continue;
+			}
+
+			//当たり
+			return true;
+		}
+	}
+	//すべての敵と当たらなかったとき
+	return false;
 }
 

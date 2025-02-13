@@ -1,56 +1,56 @@
-#define CONIOEX
+ï»¿#define CONIOEX
 #include"conioex.h"
 #include"hitpoint.h"
 #include<iostream>
 #include"player.h"
 
 /////////////////
-//ƒOƒ[ƒoƒ‹•Ï”
+//ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°
 /////////////////
 
 
 
-//‰Šú‰»ˆ—
+//åˆæœŸåŒ–å‡¦ç†
 void InitHitPoint(void)
 {
 
 }
 
-//I—¹ˆ—
+//çµ‚äº†å‡¦ç†
 void UnInitHitPoint(void)
 {
 }
 
-//XVˆ—
+//æ›´æ–°å‡¦ç†
 void UpdateHitPoint(void)
 {
-	//ƒvƒŒƒCƒ„[\‘¢‘Ìæ“¾
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ§‹é€ ä½“å–å¾—
 	PLAYER* Player = GetPlayer();
 	int NowHP = 0;
 
-	//Œ»İ‚ÌHP‚ğ‘ã“ü
+	//ç¾åœ¨ã®HPã‚’ä»£å…¥
 	 NowHP = Player->Life;
 }
 
-//•`‰æˆ—
+//æç”»å‡¦ç†
 void DrawHitPoint(void)
 {
-	//ƒvƒŒƒCƒ„[\‘¢‘Ìæ“¾
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ§‹é€ ä½“å–å¾—
 	PLAYER* Player = GetPlayer();
 
 	gotoxy(4, 22);
 	std::cout << "HP";
-	textbackground(GREEN);
+	//textbackground(GREEN);
 	textcolor(GREEN);
-	for (int i = 0; i < Player->Life + 1; i++)
+	for (int i = 0; i < Player->Life; i++)
 	{
 		gotoxy(i + 6, 22);
-		std::cout << " ";
+		std::cout << "ã€‡";
 	}
 	textbackground(BLACK);
 	textcolor(WHITE);
 
-	//‚±‚±‚©‚ç¸‚Á‚½•ª‚¾‚¯Á‚·ƒvƒƒOƒ‰ƒ€‘‚­
+	//ã“ã“ã‹ã‚‰å¤±ã£ãŸåˆ†ã ã‘æ¶ˆã™ãƒ—ãƒ­ã‚°ãƒ©ãƒ æ›¸ã
 	for (int i = Player->MaxLife; i > Player->Life + 1; i--)
 	{
 		gotoxy(i + 6, 22);
