@@ -45,16 +45,7 @@ void DrawHitPoint(void)
 	for (int i = 0; i < Player->Life; i++)
 	{
 		gotoxy(i + 6, 22);
-		std::cout << "〇";
+		std::cout << "●"<<"  ";
 	}
-	textbackground(BLACK);
 	textcolor(WHITE);
-
-	//ここから失った分だけ消すプログラム書く
-	for (int i = Player->MaxLife; i > Player->Life + 1; i--)
-	{
-		gotoxy(i + 6, 22);
-		std::cout << " ";
-	}
-
 }
