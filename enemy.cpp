@@ -28,7 +28,7 @@ struct EnemyData
 EnemyData g_EnemyTable[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力
-		{10,	2	,  0.2f,	 0.1f,	GREEN,		 3}, //1体目
+		{10,	8	,  0.0f,	 0.0f,	GREEN,		 3}, //1体目
 		{20,	4	,  0.2f,	 0.1f,	MAGENTA, 	 3}, //2体目
 		{30,	6	,  0.2f,	 0.1f,	BROWN,		 3}, //3体目
 		{40,	8	,  0.2f,	 0.1f,	CYAN,		 3}, //4体目
@@ -97,10 +97,10 @@ void UpdateEnemy()
 			}
 
 			//左
-			if (g_Enemy[i].PosX < SCREEN_LEFT)
+			if (g_Enemy[i].PosX < SCREEN_LEFT + 2)
 			{
 				g_Enemy[i].SpeedX *= -1.0;//移動量の反転
-				g_Enemy[i].PosX = SCREEN_LEFT;
+				g_Enemy[i].PosX = SCREEN_LEFT + 2;
 			}
 
 			//右
@@ -112,8 +112,12 @@ void UpdateEnemy()
 
 			//弾との当たり判定
 			g_Enemy[i].Hit = EnemyCollisionBullet(&g_Enemy[i]);
+
 			//シールドとの当たり判定
 			g_Enemy[i].ShieldHit = EnemyCollisionShield(&g_Enemy[i]);
+
+			//プレイヤーとの当たり判定
+			g_Enemy[i].PlayerHit = EnemyCollisionPlayer(&g_Enemy[i]);
 
 			//敵に弾が当たると体力が減り、消える
 			if (g_Enemy[i].Hit)
@@ -129,7 +133,7 @@ void UpdateEnemy()
 			}
 
 			//シールドに当たると跳ね返る
-			if (g_Enemy[i].ShieldHit)
+			if (g_Enemy[i].ShieldHit || g_Enemy[i].PlayerHit)
 			{
 				//移動量の反転
 				g_Enemy[i].SpeedX *= -1;

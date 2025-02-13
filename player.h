@@ -24,6 +24,7 @@ struct PLAYER
 	float SpeedY;//YÀ•W‚ÌˆÚ“®—Ê
 
 	int Life;//‘Ì—Í
+	int MaxLife;//‘Ì—Í‚ÌÅ‘å’l
 	
 	float Direct; //Œü‚«
 

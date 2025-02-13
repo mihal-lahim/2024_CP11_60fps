@@ -21,12 +21,13 @@ void InitPlayer(void)
 {
 	memset(&g_Player, 0, sizeof(PLAYER));
 	g_Player.PosX = g_Player.OldPosX = 40;//プレイヤーのX位置
-	g_Player.PosY = g_Player.OldPosY = 23;//プレイヤーのY位置
+	g_Player.PosY = g_Player.OldPosY = 21;//プレイヤーのY位置
 
-	g_Player.Direct = 0.0;	//向き
-	g_Player.Hit = false;	//当たってない
-	g_Player.Item = ITEM_NONE;//アイテムなし
-	g_Player.Life = 1.0;//体力１
+	g_Player.Direct = 0.0;		//向き
+	g_Player.Hit = false;		//当たってない
+	g_Player.Item = ITEM_NONE;	//アイテムなし
+	g_Player.Life = 1;			//体力１
+	g_Player.MaxLife = 1;		//最大体力
 }
 
 //終了処理
@@ -93,7 +94,7 @@ void UpdatePlayer(void)
 		g_Player.Life--;
 		g_Player.Item = ITEM_NONE;
 
-		if (g_Player.Life = 0)
+		if (g_Player.Life == 0)
 		{
 			//シーンをタイトルへ移動させる
 			SetScene(SCENE_TITLE);
@@ -106,6 +107,7 @@ void UpdatePlayer(void)
 	if (g_Player.ItemHit)
 	{
 		g_Player.Life++;
+		g_Player.MaxLife++;
 		AddPoint(100);
 
 		//アイテムタイプを入れる
@@ -160,20 +162,20 @@ void Shot(void)
 
 	if (GetKeyPress(KEYNAME::KEY_UP))
 	{
-		direct_y += -1.0;
+		direct_y += -1;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_DOWN))
 	{
-		direct_y += 1.0;
+		direct_y += 1;
 	}
 
 	if (GetKeyPress(KEYNAME::KEY_RIGHT))
 	{
-		direct_x += 2.0;
+		direct_x += 2;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_LEFT))
 	{
-		direct_x += -2.0;
+		direct_x += -2;
 	}
 
 

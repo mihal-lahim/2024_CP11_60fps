@@ -8,32 +8,31 @@
 #include"item.h"
 
 //キャラクターの当たり判定のサイズ　X:Y =2:1正方形
-//キャラクターごとにサイズが異なるのが普通だが
-//その場合は初期化で構造体へ格納しておく
-#define CHARACTER_COLLISION_SIZEX (0.6)
-#define CHARACTER_COLLISION_SIZEY (0.3)
+
+#define CHARACTER_COLLISION_SIZEX (1)
+#define CHARACTER_COLLISION_SIZEY (0.5)
 
 //弾のサイズ
-#define BULLET_COLLISION_SIZEX (0.6)
+#define BULLET_COLLISION_SIZEX (1)
 #define BULLET_COLLISION_SIZEY (0.7)
 
 //敵のサイズ
-#define ENEMY_COLLISION_SIZEX (0.5)
-#define ENEMY_COLLISION_SIZEY (0.3)
+#define ENEMY_COLLISION_SIZEX (1)
+#define ENEMY_COLLISION_SIZEY (0.5)
 
 //シールドのサイズ
-#define SHIELD_COLLISION_SIZEX (0.7)
-#define SHIELD_COLLISION_SIZEY (0.5)
+#define SHIELD_COLLISION_SIZEX (2)
+#define SHIELD_COLLISION_SIZEY (1)
 
 //アイテムのサイズ
 #define ITEM_COLLISION_SIZEX (0.5)
-#define ITEM_COLLISION_SIZEY (0.3)
+#define ITEM_COLLISION_SIZEY (0.25)
 
 //敵キャラクターとプレイヤー弾の当たり判定
 //敵から呼び出す関数
 bool EnemyCollisionBullet(ENEMY* ptEnemy);
 
-//プレイヤーキャラクターと敵キャラクターの当たり判定
+//プレイヤーと敵の当たり判定
 //プレイヤーから呼び出す関数
 bool PlayerCollisionEnemy(PLAYER* ptPlayer);
 
@@ -52,4 +51,9 @@ int PlayerCollisionItem(PLAYER* ptPlayer);
 //アイテムとプレイヤーキャラクターの当たり判定
 //アイテムから呼び出す関数
 bool ItemCollisionPlayer(ITEM* ptItem);
+
+//敵とプレイヤーの当たり判定
+//敵から呼び出す関数
+bool EnemyCollisionPlayer(ENEMY* ptEnemy);
+
 #endif

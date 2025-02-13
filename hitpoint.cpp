@@ -42,11 +42,19 @@ void DrawHitPoint(void)
 	std::cout << "HP";
 	textbackground(GREEN);
 	textcolor(GREEN);
-	for (int i = 0; i < Player->Life; i++)
+	for (int i = 0; i < Player->Life + 1; i++)
 	{
-		std::cout << "¡";
+		gotoxy(i + 6, 22);
+		std::cout << " ";
 	}
 	textbackground(BLACK);
 	textcolor(WHITE);
+
 	//‚±‚±‚©‚çŽ¸‚Á‚½•ª‚¾‚¯Á‚·ƒvƒƒOƒ‰ƒ€‘‚­
+	for (int i = Player->MaxLife; i > Player->Life + 1; i--)
+	{
+		gotoxy(i + 6, 22);
+		std::cout << " ";
+	}
+
 }

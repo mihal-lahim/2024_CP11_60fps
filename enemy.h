@@ -25,6 +25,7 @@ struct ENEMY
 
 	bool Hit;		//ヒットフラグ
 	bool ShieldHit;	//シールドヒットフラグ
+	bool PlayerHit;	//プレイヤーヒットフラグ
 
 	int	 Life;		//体力
 };

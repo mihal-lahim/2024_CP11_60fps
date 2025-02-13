@@ -25,8 +25,8 @@ bool EnemyCollisionBullet(ENEMY* ptEnemy)
 		if (tBullet[i].Use == true)
 		{
 			//弾の判定用の四角形を作成
-			float BulletLeft  = tBullet->PosX - BULLET_COLLISION_SIZEX;
-			float BulletRight = tBullet->PosX + BULLET_COLLISION_SIZEX;
+			float BulletLeft  = tBullet->PosX - BULLET_COLLISION_SIZEX + 0.8;
+			float BulletRight = tBullet->PosX + BULLET_COLLISION_SIZEX - 0.5;
 			float BulletUp	  = tBullet->PosY - BULLET_COLLISION_SIZEY;
 			float BulletDown  = tBullet->PosY + BULLET_COLLISION_SIZEY;
 
@@ -77,9 +77,9 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 		if (tEnemy[i].Use == true)
 		{
 			//敵の短形を作成
-			float EnemyLeft  = tEnemy[i].PosX - ENEMY_COLLISION_SIZEX;
+			float EnemyLeft  = tEnemy[i].PosX - ENEMY_COLLISION_SIZEX + 0.5;
 			float EnemyRight = tEnemy[i].PosX + ENEMY_COLLISION_SIZEX;
-			float EnemyUp    = tEnemy[i].PosY - ENEMY_COLLISION_SIZEY;
+			float EnemyUp    = tEnemy[i].PosY - ENEMY_COLLISION_SIZEY + 0.5;
 			float EnemyDown  = tEnemy[i].PosY + ENEMY_COLLISION_SIZEY;
 
 			//当たり判定
@@ -297,7 +297,36 @@ bool ItemCollisionPlayer(ITEM* ptItem)
 
 	//当たり判定
 	if (PlayerRight < ItemLeft || PlayerLeft > ItemRight|| 
-		PlayerUp    > ItemDown || PlayerUp   > ItemDown)
+		PlayerUp    > ItemDown || ItemUp   > PlayerDown)
+	{
+		return false;
+	}
+	return true;
+}
+
+//敵とプレイヤーの当たり判定
+//敵から呼び出す関数
+//戻り値　true 当たり　false 外れ
+bool EnemyCollisionPlayer(ENEMY* ptEnemy)
+{
+	//敵の短形を作成
+	float EnemyLeft = ptEnemy->PosX - ENEMY_COLLISION_SIZEX;
+	float EnemyRight = ptEnemy->PosX + ENEMY_COLLISION_SIZEX;
+	float EnemyUp = ptEnemy->PosY - ENEMY_COLLISION_SIZEY;
+	float EnemyDown = ptEnemy->PosY + ENEMY_COLLISION_SIZEY;
+
+	//プレイヤーの構造体ポインタを取得
+	PLAYER* tPlayer = GetPlayer();
+
+	//プレイヤーの短形を作成
+	float PlayerLeft = tPlayer->PosX - CHARACTER_COLLISION_SIZEX;
+	float PlayerRight = tPlayer->PosX + CHARACTER_COLLISION_SIZEX;
+	float PlayerUp = tPlayer->PosY - CHARACTER_COLLISION_SIZEY;
+	float PlayerDown = tPlayer->PosY + CHARACTER_COLLISION_SIZEY;
+
+	//当たり判定
+	if (PlayerRight < EnemyLeft || PlayerLeft > EnemyRight ||
+		PlayerUp > EnemyDown || EnemyUp > PlayerDown)
 	{
 		return false;
 	}
