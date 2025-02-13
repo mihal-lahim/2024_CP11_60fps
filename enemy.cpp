@@ -13,6 +13,7 @@
 //グローバル変数
 ///////////////////////////////////////
 ENEMY g_Enemy[ENEMY_MAX];//敵構造体配列
+int g_KillCount = 0;//キル数
 ///////////////////////////////////////
 //敵キャラ初期配置情報　構造体
 ///////////////////////////////////////
@@ -40,6 +41,21 @@ EnemyData g_EnemyTable[] =
 		{60,	6	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //8体目
 		{50,	8	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //9体目
 		{40,	10	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //10体目
+};
+
+EnemyData g_EnemyTable2[] =
+{
+	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
+		{8,		20	,  1.2f,	 0.3f,	RED,1,ITEM_FIRE}, //1体目
+		{16,	20	,  1.0f,	 0.3f,	RED,1,ITEM_FIRE}, //2体目
+		{24,	20	,  0.8f,	 0.3f,	RED,1,ITEM_FIRE}, //3体目
+		{32,	20	,  0.6f,	 0.3f,	RED,1,ITEM_FIRE}, //4体目
+		{40,	20	,  0.5f,	 0.3f,	RED,1,ITEM_FIRE}, //5体目
+		{48,	20	,  0.4f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //6体目
+		{56,	20	,  0.3f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //7体目
+		{64,	20	,  0.2f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //8体目
+		{70,	20	,  0.1f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //9体目
+		{78,	20	,  0.0f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
 };
 
 //初期化
@@ -183,12 +199,23 @@ void UpdateEnemy()
 		else//てきがいないとき
 		{
 			KillCount++;
+			
 
-			//ゲームクリア
+			//全員死んだら次の敵出す
 			if (KillCount == ENEMY_MAX)
 			{
-				SetScene(SCENE_RESULT);
+				//一層目クリア
+				PLAYER* Player = GetPlayer();
 
+				Player->Stage++;
+				if (Player->Stage == STAGE_MAX)
+				{
+					SetScene(SCENE_RESULT);
+				}
+				for (int j = 0; j < ENEMY_MAX; j++)
+				{
+					CreateEnemy(g_EnemyTable2[j].X, g_EnemyTable2[j].Y, g_EnemyTable2[j].Mx, g_EnemyTable2[j].My, g_EnemyTable2[j].Color, g_EnemyTable2[j].Life, g_EnemyTable2[j].Type);
+				}
 			}
 		}
 	}

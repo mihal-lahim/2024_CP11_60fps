@@ -24,12 +24,7 @@ void UnInitHitPoint(void)
 //更新処理
 void UpdateHitPoint(void)
 {
-	//プレイヤー構造体取得
-	PLAYER* Player = GetPlayer();
-	int NowHP = 0;
-
-	//現在のHPを代入
-	 NowHP = Player->Life;
+	
 }
 
 //描画処理

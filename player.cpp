@@ -20,14 +20,15 @@ PLAYER g_Player;
 void InitPlayer(void)
 {
 	memset(&g_Player, 0, sizeof(PLAYER));
-	g_Player.PosX = g_Player.OldPosX = 40;//プレイヤーのX位置
-	g_Player.PosY = g_Player.OldPosY = 21;//プレイヤーのY位置
+	g_Player.PosX = g_Player.OldPosX = 10;//プレイヤーのX位置
+	g_Player.PosY = g_Player.OldPosY = 6;//プレイヤーのY位置
 
 	g_Player.Direct = 0.0;		//向き
 	g_Player.Hit = false;		//当たってない
 	g_Player.Item = ITEM_NONE;	//アイテムなし
 	g_Player.Life = 1;			//体力１
 	g_Player.MaxLife = 1;		//最大体力
+	g_Player.Stage = 1;			//現在のステージ
 }
 
 //終了処理
