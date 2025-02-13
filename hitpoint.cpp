@@ -40,12 +40,13 @@ void DrawHitPoint(void)
 
 	gotoxy(4, 22);
 	std::cout << "HP";
-	//textbackground(GREEN);
+
 	textcolor(GREEN);
 	for (int i = 0; i < Player->Life; i++)
 	{
 		gotoxy(i + 6, 22);
-		std::cout << "●"<<"  ";
+		std::cout << "●" << "  ";
 	}
 	textcolor(WHITE);
 }
+	
