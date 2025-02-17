@@ -142,6 +142,7 @@
     <ClCompile Include="score.cpp" />
     <ClCompile Include="shield.cpp" />
     <ClCompile Include="title.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bullet.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="score.h" />
     <ClInclude Include="shield.h" />
     <ClInclude Include="title.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

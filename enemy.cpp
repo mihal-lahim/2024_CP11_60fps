@@ -31,31 +31,31 @@ struct EnemyData
 EnemyData g_EnemyTable[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{10,	8	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //1体目
-		{20,	4	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //2体目
-		{30,	6	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //3体目
-		{40,	8	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //4体目
-		{50,	10	,  0.2f,	 0.1f,	RED,100,ITEM_FIRE}, //5体目
-		{60,	2	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //6体目
-		{70,	4	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //7体目
-		{60,	6	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //8体目
-		{50,	8	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //9体目
-		{40,	10	,  0.2f,	 0.1f,	LIGHTCYAN,100,ITEM_ICE}, //10体目
+		{10,	8	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //1体目
+		{20,	4	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //2体目
+		{30,	6	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //3体目
+		{40,	8	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //4体目
+		{50,	10	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //5体目
+		{60,	2	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //6体目
+		{70,	4	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //7体目
+		{60,	6	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //8体目
+		{50,	8	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //9体目
+		{40,	10	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //10体目
 };
 
 EnemyData g_EnemyTable2[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{8,		20	,  1.2f,	 0.3f,	RED,1,ITEM_FIRE}, //1体目
-		{16,	20	,  1.0f,	 0.3f,	RED,1,ITEM_FIRE}, //2体目
-		{24,	20	,  0.8f,	 0.3f,	RED,1,ITEM_FIRE}, //3体目
-		{32,	20	,  0.6f,	 0.3f,	RED,1,ITEM_FIRE}, //4体目
-		{40,	20	,  0.5f,	 0.3f,	RED,1,ITEM_FIRE}, //5体目
-		{48,	20	,  0.4f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //6体目
-		{56,	20	,  0.3f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //7体目
-		{64,	20	,  0.2f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //8体目
-		{70,	20	,  0.1f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //9体目
-		{78,	20	,  0.0f,	 0.3f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
+		{8,		20	,  0.6f,	 0.15f,	RED,1,ITEM_FIRE}, //1体目
+		{16,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //2体目
+		{24,	20	,  0.4f,	 0.15f,	RED,1,ITEM_FIRE}, //3体目
+		{32,	20	,  0.3f,	 0.15f,	RED,1,ITEM_FIRE}, //4体目
+		{40,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //5体目
+		{48,	20	,  0.2f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //6体目
+		{56,	20	,  0.15f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //7体目
+		{64,	20	,  0.1f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //8体目
+		{70,	20	,  0.05f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //9体目
+		{78,	20	,  0.0f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
 };
 
 //初期化
@@ -208,6 +208,7 @@ void UpdateEnemy()
 				PLAYER* Player = GetPlayer();
 
 				Player->Stage++;
+
 				if (Player->Stage == STAGE_MAX)
 				{
 					SetScene(SCENE_RESULT);
@@ -251,6 +252,7 @@ void DrawEnemy()
 		}
 		if (g_Enemy[i].Life < 1)//体力がなくなったら
 		{
+			g_Enemy[i].Life = 0;
 			gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
 			textcolor(g_Enemy[i].Color);//色変え
 			std::cout << "  ";

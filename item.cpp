@@ -1,52 +1,53 @@
-#define CONIOEX
+ï»¿#define CONIOEX
 #include"conioex.h"
 #include<iostream>
 #include"item.h"
 #include"player.h"
 #include"collision.h"
+#include"game.h"
 
 
 //////////////////
-//ƒOƒ[ƒoƒ‹•Ï”//
+//ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°//
 //////////////////
 
-ITEM g_Item[ITEM_MAX];//ƒAƒCƒeƒ€\‘¢‘Ì”z—ñ
-DWORD lastItemSetTime;//ÅŒã‚ÉƒAƒCƒeƒ€‚ğ¶¬‚µ‚½ŠÔ
+ITEM g_Item[ITEM_MAX];//ã‚¢ã‚¤ãƒ†ãƒ æ§‹é€ ä½“é…åˆ—
+DWORD lastItemSetTime;//æœ€å¾Œã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆã—ãŸæ™‚é–“
 
-//‰Šú‰»ˆ—
+//åˆæœŸåŒ–å‡¦ç†
 void InitItem()
 {
-	//\‘¢‘Ì‚Ì’†‚ğ0‚ÅƒNƒŠƒA
+	//æ§‹é€ ä½“ã®ä¸­ã‚’0ã§ã‚¯ãƒªã‚¢
 	memset(&g_Item[0], 0, sizeof(ITEM) * ITEM_MAX);
-	//ƒ‰ƒ“ƒ_ƒ€’l‚ğæ“¾
+	//ãƒ©ãƒ³ãƒ€ãƒ å€¤ã‚’å–å¾—
 	srand((unsigned int)time(NULL));
-	// ÅŒã‚ÉƒAƒCƒeƒ€‚ğ¶¬‚µ‚½ŠÔ‚ğ‰Šú‰»
+	// æœ€å¾Œã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆã—ãŸæ™‚é–“ã‚’åˆæœŸåŒ–
 	lastItemSetTime = timeGetTime();
 }
 
-//I—¹ˆ—
+//çµ‚äº†å‡¦ç†
 void UninitItem()
 {
 }
 
-//XVˆ—
+//æ›´æ–°å‡¦ç†
 void UpdateItem()
 {
-	//ƒAƒCƒeƒ€g—p”
+	//ã‚¢ã‚¤ãƒ†ãƒ ä½¿ç”¨æ•°
 	int UseCount = 0;
 
-	//Á‹ƒAƒCƒeƒ€
+	//æ¶ˆå»ã‚¢ã‚¤ãƒ†ãƒ 
 	int Delete = rand() % ITEM_MAX;
 
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
 		if (g_Item[i].Use == true)
 		{
-			//ƒAƒCƒeƒ€g—p”‚Ì‰ÁZ
+			//ã‚¢ã‚¤ãƒ†ãƒ ä½¿ç”¨æ•°ã®åŠ ç®—
 			UseCount++;
 		}
 	}
-	//‘S‚Ä‚ÌƒAƒCƒeƒ€‚ª¶¬‚³‚ê‚Ä‚¢‚½‚ç‘S‚Ä‚ÌƒAƒCƒeƒ€‚ğÁ‹‚·‚é
+	//å…¨ã¦ã®ã‚¢ã‚¤ãƒ†ãƒ ãŒç”Ÿæˆã•ã‚Œã¦ã„ãŸã‚‰å…¨ã¦ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ¶ˆå»ã™ã‚‹
 	if (UseCount == ITEM_MAX)
 	{
 		for (int i = 0; i < ITEM_MAX; i++)
@@ -56,35 +57,35 @@ void UpdateItem()
 	}
 	else
 	{
-		//g—p’†‚Ì\‘¢‘Ì‚ğ‚·‚×‚ÄXV‚·‚é
+		//ä½¿ç”¨ä¸­ã®æ§‹é€ ä½“ã‚’ã™ã¹ã¦æ›´æ–°ã™ã‚‹
 		for (int i = 0; i < ITEM_MAX; i++)
 		{
-			//ƒAƒCƒeƒ€‚ÌˆÊ’u‚ğw’è
-			int ItemPosX = rand() % 70 + 8;
-			int ItemPosY = rand() % 19 + 2;
+			//ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®ã‚’æŒ‡å®š
+			int ItemPosX = rand() % SCREEN_RIGHT + SCREEN_LEFT;
+			int ItemPosY = rand() % SCREEN_BOTTOM + SCREEN_TOP;
 
-			//ƒAƒCƒeƒ€‚Ìí—Ş‚ğw’è
+			//ã‚¢ã‚¤ãƒ†ãƒ ã®ç¨®é¡ã‚’æŒ‡å®š
 			int ItemType = rand() % 2 + 1;
 
-			//ƒAƒCƒeƒ€g—p”
+			//ã‚¢ã‚¤ãƒ†ãƒ ä½¿ç”¨æ•°
 			int Use = 0;
 
 			if (g_Item[i].Use == false)
 			{
-				//ÅŒã‚ÉƒAƒCƒeƒ€‚ğ¶¬‚µ‚½ŠÔ‚©‚çˆê’èŠÔŒo‰ß‚µ‚½‚çƒAƒCƒeƒ€‚ğ¶¬ 1000ms = 1•b
+				//æœ€å¾Œã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆã—ãŸæ™‚é–“ã‹ã‚‰ä¸€å®šæ™‚é–“çµŒéã—ãŸã‚‰ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆ 1000ms = 1ç§’
 				if (timeGetTime() - lastItemSetTime > 1500)
 				{
 					SetItem(ItemPosX, ItemPosY, ItemType);
 
-					//ÅŒã‚ÉƒAƒCƒeƒ€‚ğ¶¬‚µ‚½ŠÔ‚ğXV
+					//æœ€å¾Œã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆã—ãŸæ™‚é–“ã‚’æ›´æ–°
 					lastItemSetTime = timeGetTime();
 				}
 			}
 
-			//“–‚½‚è”»’è//////////////
+			//å½“ãŸã‚Šåˆ¤å®š//////////////
 			g_Item[i].Hit = ItemCollisionPlayer(&g_Item[i]);
 
-			//ƒvƒŒƒCƒ„[‚ªæ“¾‚µ‚½‚çÁ‚¦‚é
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå–å¾—ã—ãŸã‚‰æ¶ˆãˆã‚‹
 			if (g_Item[i].Hit)
 			{
 				g_Item[i].Use = false;
@@ -93,16 +94,16 @@ void UpdateItem()
 	}
 }
 
-//•`‰æˆ—
+//æç”»å‡¦ç†
 void DrawItem()
 {
-	//g—p’†‚Ì\‘¢‘Ì‚ğ‚·‚×‚Ä•\¦‚·‚é
+	//ä½¿ç”¨ä¸­ã®æ§‹é€ ä½“ã‚’ã™ã¹ã¦è¡¨ç¤ºã™ã‚‹
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
-		//\‘¢‘Ì‚ªg—p’†
+		//æ§‹é€ ä½“ãŒä½¿ç”¨ä¸­
 		if (g_Item[i].Use == true)
 		{
-			//‘O‰ñ‚ÌˆÊ’u‚©‚çˆÚ“®‚µ‚½‚©HYÀ•W‚Å‚àŠm”F‚ª•K—v
+			//å‰å›ã®ä½ç½®ã‹ã‚‰ç§»å‹•ã—ãŸã‹ï¼ŸYåº§æ¨™ã§ã‚‚ç¢ºèªãŒå¿…è¦
 			if (g_Item[i].OldPosX != g_Item[i].PosX ||
 				g_Item[i].OldPosY != g_Item[i].PosY)
 			{
@@ -110,9 +111,20 @@ void DrawItem()
 				std::cout << "  ";
 			}
 			gotoxy(g_Item[i].PosX, g_Item[i].PosY);
-			textcolor(g_Item[i].Color);//F•Ï‚¦
-			std::cout << "š";
-			textcolor(WHITE);//F•Ï‚¦
+			textcolor(g_Item[i].Color);//è‰²å¤‰ãˆ
+			switch (g_Item[i].Type)
+			{
+			case ITEM_FIRE:
+				std::cout << "ç‚";
+				break;
+			case ITEM_ICE:
+				std::cout << "æ°´";
+				break;
+			default:
+				break;
+			}
+			
+			textcolor(WHITE);//è‰²å¤‰ãˆ
 		}
 		else
 		{
@@ -122,10 +134,10 @@ void DrawItem()
 	}
 }
 
-//ƒAƒCƒeƒ€‚Ì¶¬
+//ã‚¢ã‚¤ãƒ†ãƒ ã®ç”Ÿæˆ
 void SetItem(float x, float y, int type)
 {
-	//–¢g—p‚Ì\‘¢‘Ì‚ğŒŸõ
+	//æœªä½¿ç”¨ã®æ§‹é€ ä½“ã‚’æ¤œç´¢
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
 		if (g_Item[i].Use == false)
@@ -137,7 +149,7 @@ void SetItem(float x, float y, int type)
 			g_Item[i].OldPosY = y;
 			g_Item[i].Type = type;
 
-			//ƒAƒCƒeƒ€ƒ^ƒCƒv‚É‚æ‚èF‚ğ•Ï‚¦‚é
+			//ã‚¢ã‚¤ãƒ†ãƒ ã‚¿ã‚¤ãƒ—ã«ã‚ˆã‚Šè‰²ã‚’å¤‰ãˆã‚‹
 			switch (type)
 			{
 			case ITEM_FIRE:
@@ -158,16 +170,16 @@ void SetItem(float x, float y, int type)
 	}
 }
 
-//ƒAƒCƒeƒ€‚ÌÁ‹
+//ã‚¢ã‚¤ãƒ†ãƒ ã®æ¶ˆå»
 void DeleteItem(int Delete)
 {
 	g_Item[Delete].Use = false;
 }
 
-//ƒAƒCƒeƒ€\‘¢‘Ìæ“¾
-//\‘¢‘Ìî•ñæ“¾
+//ã‚¢ã‚¤ãƒ†ãƒ æ§‹é€ ä½“å–å¾—
+//æ§‹é€ ä½“æƒ…å ±å–å¾—
 ITEM* GetItem()
 {
-	//’e‚Ì\‘¢‘Ì”z—ñ‚Ìæ“ª‚Ìƒ|ƒCƒ“ƒ^[‚ğ•Ô‚·
+	//å¼¾ã®æ§‹é€ ä½“é…åˆ—ã®å…ˆé ­ã®ãƒã‚¤ãƒ³ã‚¿ãƒ¼ã‚’è¿”ã™
 	return &g_Item[0];
 }

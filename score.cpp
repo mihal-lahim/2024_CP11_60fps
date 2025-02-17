@@ -32,8 +32,11 @@ void UpdateScore()
 
 void DrawScore()
 {
-	gotoxy(1, 4);
+	gotoxy(66, 15);
+	textbackground(BLUE);
+	textcolor(WHITE);
 	std::cout << "SCORE:" << g_tScore.nPoint;
+	textbackground(BLACK);
 }
 
 void ClearPoint()

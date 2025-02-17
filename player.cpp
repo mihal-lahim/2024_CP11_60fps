@@ -20,8 +20,8 @@ PLAYER g_Player;
 void InitPlayer(void)
 {
 	memset(&g_Player, 0, sizeof(PLAYER));
-	g_Player.PosX = g_Player.OldPosX = 10;//プレイヤーのX位置
-	g_Player.PosY = g_Player.OldPosY = 6;//プレイヤーのY位置
+	g_Player.PosX = g_Player.OldPosX = 40;//プレイヤーのX位置
+	g_Player.PosY = g_Player.OldPosY = 15;//プレイヤーのY位置
 
 	g_Player.Direct = 0.0;		//向き
 	g_Player.Hit = false;		//当たってない
