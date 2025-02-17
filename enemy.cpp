@@ -31,31 +31,31 @@ struct EnemyData
 EnemyData g_EnemyTable[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{10,	8	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //1体目
+		{18,	8	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //1体目
 		{20,	4	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //2体目
 		{30,	6	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //3体目
 		{40,	8	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //4体目
-		{50,	10	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //5体目
-		{60,	2	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //6体目
-		{70,	4	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //7体目
-		{60,	6	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //8体目
-		{50,	8	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //9体目
-		{40,	10	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //10体目
+		{40,	10	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //5体目
+		{30,	4	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //6体目
+		{30,	10	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //7体目
+		{40,	6	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //8体目
+		{50,	3	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //9体目
+		{40,	6	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //10体目
 };
 
 EnemyData g_EnemyTable2[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{8,		20	,  0.6f,	 0.15f,	RED,1,ITEM_FIRE}, //1体目
+		{8,		20	,  0.6f,	 0.15f,	MAGENTA,1,ITEM_FIRE}, //1体目
 		{16,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //2体目
-		{24,	20	,  0.4f,	 0.15f,	RED,1,ITEM_FIRE}, //3体目
+		{24,	20	,  0.2f,	 0.15f,	RED,1,ITEM_FIRE}, //3体目
 		{32,	20	,  0.3f,	 0.15f,	RED,1,ITEM_FIRE}, //4体目
 		{40,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //5体目
 		{48,	20	,  0.2f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //6体目
 		{56,	20	,  0.15f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //7体目
-		{64,	20	,  0.1f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //8体目
-		{70,	20	,  0.05f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //9体目
-		{78,	20	,  0.0f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
+		{29,	20	,  0.1f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //8体目
+		{57,	20	,  0.05f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //9体目
+		{24,	20	,  0.0f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
 };
 
 //初期化
@@ -108,7 +108,7 @@ void UpdateEnemy()
 				g_Enemy[i].PosY = SCREEN_TOP;
 			}
 
-			//上
+			//下
 			else if (g_Enemy[i].PosY > SCREEN_BOTTOM)
 			{
 				g_Enemy[i].SpeedY *= -1.0;//移動量の反転
@@ -116,17 +116,17 @@ void UpdateEnemy()
 			}
 
 			//左
-			if (g_Enemy[i].PosX < SCREEN_LEFT + 2)
+			if (g_Enemy[i].PosX < SCREEN_LEFT + 1)
 			{
 				g_Enemy[i].SpeedX *= -1.0;//移動量の反転
-				g_Enemy[i].PosX = SCREEN_LEFT + 2;
+				g_Enemy[i].PosX = SCREEN_LEFT + 1;
 			}
 
 			//右
-			else if (g_Enemy[i].PosX > SCREEN_RIGHT)
+			else if (g_Enemy[i].PosX > SCREEN_RIGHT - 1)
 			{
 				g_Enemy[i].SpeedX *= -1.0;//移動量の反転
-				g_Enemy[i].PosX = SCREEN_RIGHT;
+				g_Enemy[i].PosX = SCREEN_RIGHT - 1;
 			}
 
 			/////当たり判定/////////////////
@@ -200,7 +200,7 @@ void UpdateEnemy()
 		{
 			KillCount++;
 			
-
+			
 			//全員死んだら次の敵出す
 			if (KillCount == ENEMY_MAX)
 			{
@@ -245,7 +245,8 @@ void DrawEnemy()
 
 #ifdef _DEBUG
 			gotoxy(2, 5 + i);
-			std::cout << g_Enemy[i].Type << "  "<<g_Enemy[i].Life << "  ";
+			std::cout << g_Enemy[i].PosX << "  "<<g_Enemy[i].PosY << "  ";
+
 #endif _DEBUG
 
 			
@@ -254,9 +255,7 @@ void DrawEnemy()
 		{
 			g_Enemy[i].Life = 0;
 			gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
-			textcolor(g_Enemy[i].Color);//色変え
 			std::cout << "  ";
-			textcolor(WHITE);//色変え
 		}
 	}
 }

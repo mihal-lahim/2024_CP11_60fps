@@ -12,3 +12,5 @@ void InitUI(void);
 void UnInitUI(void);
 void UpdateUI(void);
 void DrawUI(void);
+
+void UIUpdate(void);

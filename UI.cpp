@@ -4,12 +4,16 @@
 #include"game.h"
 #include<iostream>
 
+/////////////////////
+//ƒOƒ[ƒoƒ‹•Ï”
+/////////////////////
 
+UI g_UI;
 
 //‰Šú‰»ˆ—
 void InitUI(void)
 {
-	
+	UIUpdate();
 }
 
 //I—¹ˆ—
@@ -27,21 +31,29 @@ void UpdateUI(void)
 //•`‰æˆ—
 void DrawUI(void)
 {
-	//”wŒi•`‰æ
-	for (int i = 1; i < 24; i++)
+	if (g_UI.UpdateFlg)
 	{
-		for (int j = 1; j < 79; j++)
+		//”wŒi•`‰æ
+		for (int i = 1; i < 24; i++)
 		{
-			if (j < SCREEN_LEFT || SCREEN_RIGHT < j)
+			for (int j = 1; j < 79; j++)
 			{
-				textbackground(BLUE);
-				gotoxy(j, i);
-				std::cout << "  ";
+				if (j < SCREEN_LEFT-2 || SCREEN_RIGHT + 2 < j)
+				{
+					textbackground(BLUE);
+					gotoxy(j, i);
+					std::cout << "  ";
+				}
 			}
 		}
+		textbackground(BLACK);
+		g_UI.UpdateFlg = false;
 	}
-	textbackground(BLACK);
-
 	//î•ñ‚Ì•`‰æ
 	
+}
+
+void UIUpdate()
+{
+	g_UI.UpdateFlg = true;
 }

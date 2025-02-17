@@ -61,7 +61,7 @@ void UpdateItem()
 		for (int i = 0; i < ITEM_MAX; i++)
 		{
 			//アイテムの位置を指定
-			int ItemPosX = rand() % SCREEN_RIGHT + SCREEN_LEFT;
+			int ItemPosX = rand() % 47 + SCREEN_LEFT;
 			int ItemPosY = rand() % SCREEN_BOTTOM + SCREEN_TOP;
 
 			//アイテムの種類を指定
