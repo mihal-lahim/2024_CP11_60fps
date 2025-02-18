@@ -64,36 +64,39 @@ void DrawBullet(void)
 	//使用中の構造体をすべて表示する
 	for (int i = 0; i < BULLET_MAX; i++)
 	{
+
 		//前回の位置から移動したか？本当はY座標でも確認が必要
 		if (g_Bullet[i].PosX != g_Bullet[i].OldPosX ||
 			g_Bullet[i].PosY != g_Bullet[i].OldPosY)
 		{
 			gotoxy(g_Bullet[i].OldPosX, g_Bullet[i].OldPosY);//前回の場所の消去
-			std::cout << "  ";
-		}
-		//構造体が使用中なら
-		if (g_Bullet[i].Use == true)
-		{
-			gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);//今回の場所への移動
-			PLAYER* Player = GetPlayer();
-			//アイテムにより色変え
-			switch (Player->Item)
+			std::cout << "　";
+
+			//構造体が使用中なら
+			if (g_Bullet[i].Use == true)
 			{
-			case ITEM_NONE:
-				textcolor(WHITE);
-				break;
-			case ITEM_FIRE:
-				textcolor(RED);
-				break;
-			case ITEM_ICE:
-				textcolor(LIGHTCYAN);
-				break;
-			default:
-				break;
+				gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);//今回の場所への移動
+				PLAYER* Player = GetPlayer();
+				//アイテムにより色変え
+				switch (Player->Item)
+				{
+				case ITEM_NONE:
+					textcolor(WHITE);
+					break;
+				case ITEM_FIRE:
+					textcolor(RED);
+					break;
+				case ITEM_ICE:
+					textcolor(LIGHTCYAN);
+					break;
+				default:
+					break;
+				}
+				std::cout << "・";
+				textcolor(WHITE);//色変え
 			}
-			std::cout << "・";
-			textcolor(WHITE);//色変え
 		}
+		
 	}
 }
 

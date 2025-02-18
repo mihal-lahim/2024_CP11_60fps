@@ -9,7 +9,6 @@
 #include"score.h"
 #include"field.h"
 #include"item.h"
-#include"hitpoint.h"
 #include"UI.h"
 
 void InitGame(void)
@@ -21,7 +20,6 @@ void InitGame(void)
 	InitScore();	//　スコア
 	//InitField();	//　フィールド
 	InitItem();		//　アイテム
-	InitHitPoint();	//  HP
 	InitUI();		//UI
 
 }
@@ -35,7 +33,6 @@ void UninitGame(void)
 	UninitScore();
 	//UnInitField();
 	UninitItem();
-	UnInitHitPoint();
 	UnInitUI();
 }
 
@@ -48,7 +45,6 @@ void UpdateGame(void)
 	UpdateScore();
 	//UpdateField();
 	UpdateItem();
-	UpdateHitPoint();
 	UpdateUI();
 		
 }
@@ -59,10 +55,9 @@ void DrawGame(void)//書く順番要調整 先に書きたいものを前に
 	DrawEnemy();
 	DrawBullet();
 	DrawShield();
-	DrawItem();
 	DrawPlayer();
+	DrawItem();
 	DrawScore();
-	DrawHitPoint();
 	DrawUI();
 }
 

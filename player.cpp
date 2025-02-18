@@ -115,6 +115,12 @@ void UpdatePlayer(void)
 		//アイテムタイプを入れる
 		g_Player.Item = g_Player.ItemHit;
 	}
+
+	//ゲームクリア
+	if (g_Player.Stage > STAGE_MAX)
+	{
+		SetScene(SCENE_RESULT);
+	}
 }
 
 //描画処理

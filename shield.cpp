@@ -91,31 +91,22 @@ void DrawShield(void)
 		{
 			//前回の座標を消去
 			gotoxy((int)g_Shield[i].OldPosX, (int)g_Shield[i].OldPosY);
-			printf("  ");
-		}
-
-		if (g_Shield[i].Use == true)
-		{
-			// ウィンドウの境界を超えないように制御
-			if (g_Shield[i].PosX >= SCREEN_LEFT && g_Shield[i].PosX <= SCREEN_RIGHT &&
-				g_Shield[i].PosY >= SCREEN_TOP && g_Shield[i].PosY <= SCREEN_BOTTOM)
+			printf("  "); if (g_Shield[i].Use == true)
 			{
-				//現在の座標に描画
-				if (g_Shield[i].UnBreaking<2)
+				// ウィンドウの境界を超えないように制御
+				if (g_Shield[i].PosX >= SCREEN_LEFT && g_Shield[i].PosX <= SCREEN_RIGHT &&
+					g_Shield[i].PosY >= SCREEN_TOP && g_Shield[i].PosY <= SCREEN_BOTTOM)
 				{
-					textcolor(RED);
+					//現在の座標に描画
+					if (g_Shield[i].UnBreaking < 2)
+					{
+						textcolor(RED);
+					}
+					gotoxy((int)g_Shield[i].PosX, (int)g_Shield[i].PosY);
+					printf("盾");
+					textcolor(WHITE);
 				}
-				gotoxy((int)g_Shield[i].PosX, (int)g_Shield[i].PosY);
-				printf("盾");
-				textcolor(WHITE);
 			}
-				
-		}
-		else
-		{
-			//現在の座標に空白を描画
-			gotoxy((int)g_Shield[i].PosX, (int)g_Shield[i].PosY);
-			printf("  ");
 		}
 	}
 }
