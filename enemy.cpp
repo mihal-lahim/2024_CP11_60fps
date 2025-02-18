@@ -14,6 +14,9 @@
 ///////////////////////////////////////
 ENEMY g_Enemy[ENEMY_MAX];//敵構造体配列
 int g_KillCount = 0;//キル数
+DWORD StageClearTime;//クリアタイム
+DWORD StageBetween;//ステージとステージの間
+
 ///////////////////////////////////////
 //敵キャラ初期配置情報　構造体
 ///////////////////////////////////////
@@ -31,22 +34,52 @@ struct EnemyData
 EnemyData g_EnemyTable[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{18,	8	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //1体目
-		{20,	4	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //2体目
-		{30,	6	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //3体目
-		{40,	8	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //4体目
-		{40,	10	,  0.2f,	 0.1f,	RED,50,ITEM_FIRE}, //5体目
-		{30,	4	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //6体目
-		{30,	10	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //7体目
-		{40,	6	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //8体目
-		{50,	3	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //9体目
-		{40,	6	,  0.2f,	 0.1f,	LIGHTCYAN,50,ITEM_ICE}, //10体目
+		{18,	8	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //1体目
+		{20,	4	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //2体目
+		{30,	6	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //3体目
+		{40,	8	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //4体目
+		{40,	10	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //5体目
+		{30,	4	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //6体目
+		{30,	10	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //7体目
+		{40,	6	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //8体目
+		{50,	3	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //9体目
+		{40,	6	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //10体目
 };
 
 EnemyData g_EnemyTable2[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{8,		20	,  0.6f,	 0.15f,	MAGENTA,1,ITEM_FIRE}, //1体目
+		{8,		20	,  0.6f,	 0.15f,	RED,1,ITEM_FIRE}, //1体目
+		{16,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //2体目
+		{24,	20	,  0.2f,	 0.15f,	RED,1,ITEM_FIRE}, //3体目
+		{32,	20	,  0.3f,	 0.15f,	RED,1,ITEM_FIRE}, //4体目
+		{40,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //5体目
+		{48,	20	,  0.2f,	 0.15f,	RED,1,ITEM_FIRE}, //6体目
+		{56,	20	,  0.15f,	 0.15f,	RED,1,ITEM_FIRE}, //7体目
+		{29,	20	,  0.1f,	 0.15f,	RED,1,ITEM_FIRE}, //8体目
+		{57,	20	,  0.05f,	 0.15f,	RED,1,ITEM_FIRE}, //9体目
+		{24,	20	,  0.0f,	 0.15f,	RED,1,ITEM_FIRE}, //10体目
+};
+
+EnemyData g_EnemyTable3[] =
+{
+	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
+		{8,		20	,  0.6f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //1体目
+		{16,	20	,  0.25f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //2体目
+		{24,	20	,  0.2f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //3体目
+		{32,	20	,  0.3f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //4体目
+		{40,	20	,  0.25f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //5体目
+		{48,	20	,  0.2f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //6体目
+		{56,	20	,  0.15f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //7体目
+		{29,	20	,  0.1f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //8体目
+		{57,	20	,  0.05f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //9体目
+		{24,	20	,  0.0f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
+};
+
+EnemyData g_EnemyTable4[] =
+{
+	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
+		{8,		20	,  0.6f,	 0.15f,	RED,1,ITEM_FIRE}, //1体目
 		{16,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //2体目
 		{24,	20	,  0.2f,	 0.15f,	RED,1,ITEM_FIRE}, //3体目
 		{32,	20	,  0.3f,	 0.15f,	RED,1,ITEM_FIRE}, //4体目
@@ -57,6 +90,8 @@ EnemyData g_EnemyTable2[] =
 		{57,	20	,  0.05f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //9体目
 		{24,	20	,  0.0f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
 };
+
+
 
 //初期化
 void InitEnemy()
@@ -69,6 +104,9 @@ void InitEnemy()
 	{
 		CreateEnemy(g_EnemyTable[i].X, g_EnemyTable[i].Y, g_EnemyTable[i].Mx, g_EnemyTable[i].My, g_EnemyTable[i].Color,g_EnemyTable[i].Life, g_EnemyTable[i].Type);
 	}
+
+	//クリアタイムの初期化
+	StageClearTime = timeGetTime();
 }
 
 //終了処理
@@ -90,7 +128,7 @@ void UpdateEnemy()
 		//構造体が使用中なら更新する
 		if (g_Enemy[i].Use == true)
 		{
-			
+
 			//現在の座標をOldへ保存
 			g_Enemy[i].OldPosX = g_Enemy[i].PosX;
 			g_Enemy[i].OldPosY = g_Enemy[i].PosY;
@@ -144,7 +182,7 @@ void UpdateEnemy()
 			if (g_Enemy[i].Hit)
 			{
 				BULLET* bullet = GetBullet();
-				
+
 				//敵のタイプと弾のタイプを比較して与えられるダメージを決定する
 				switch (bullet->Type)
 				{
@@ -199,23 +237,45 @@ void UpdateEnemy()
 		else//てきがいないとき
 		{
 			KillCount++;
-			
-			
+
 			//全員死んだら次の敵出す
 			if (KillCount == ENEMY_MAX)
 			{
-				//一層目クリア
+				//クリア
 				PLAYER* Player = GetPlayer();
-
 				Player->Stage++;
+				Player->ClearTime += timeGetTime() - StageClearTime;
 
-				if (Player->Stage == STAGE_MAX)
+				StageClearTime = timeGetTime();
+				//クリアした層により出す敵変える
+				switch (Player->Stage)
 				{
-					SetScene(SCENE_RESULT);
+				case 2:
+				//ステージ２
+				for (int j = 0; j < ENEMY_MAX; j++)
+					{
+					CreateEnemy(g_EnemyTable2[j].X, g_EnemyTable2[j].Y, g_EnemyTable2[j].Mx, g_EnemyTable2[j].My, g_EnemyTable2[j].Color, g_EnemyTable2[j].Life, g_EnemyTable2[j].Type);
 				}
+					break;
+				case 3:
+				//ステージ３
 				for (int j = 0; j < ENEMY_MAX; j++)
 				{
-					CreateEnemy(g_EnemyTable2[j].X, g_EnemyTable2[j].Y, g_EnemyTable2[j].Mx, g_EnemyTable2[j].My, g_EnemyTable2[j].Color, g_EnemyTable2[j].Life, g_EnemyTable2[j].Type);
+					CreateEnemy(g_EnemyTable3[j].X, g_EnemyTable3[j].Y, g_EnemyTable3[j].Mx, g_EnemyTable3[j].My, g_EnemyTable3[j].Color, g_EnemyTable3[j].Life, g_EnemyTable3[j].Type);
+				}
+					break;
+				case 4:
+				//ステージ４
+				for (int j = 0; j < ENEMY_MAX; j++)
+				{
+					CreateEnemy(g_EnemyTable4[j].X, g_EnemyTable4[j].Y, g_EnemyTable4[j].Mx, g_EnemyTable4[j].My, g_EnemyTable4[j].Color, g_EnemyTable4[j].Life, g_EnemyTable4[j].Type);
+				}
+					break;
+				case 5:
+				SetScene(SCENE_RESULT);
+					break;
+				default:
+					break;
 				}
 			}
 		}
@@ -239,10 +299,11 @@ void DrawEnemy()
 				std::cout << "  ";
 			}
 			gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
+
 			textcolor(g_Enemy[i].Color);//色変え
 			std::cout << "><";
 			textcolor(WHITE);//色変え
-
+			
 #ifdef _DEBUG
 			gotoxy(2, 5 + i);
 			std::cout << g_Enemy[i].PosX << "  "<<g_Enemy[i].PosY << "  ";

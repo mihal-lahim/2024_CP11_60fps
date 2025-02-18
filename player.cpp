@@ -29,6 +29,7 @@ void InitPlayer(void)
 	g_Player.Life = 1;			//体力１
 	g_Player.MaxLife = 1;		//最大体力
 	g_Player.Stage = 1;			//現在のステージ
+	g_Player.ClearTime = 0;//クリアタイム
 }
 
 //終了処理
