@@ -4,7 +4,8 @@
 struct UI
 {
 	int UpdateFlg;
-
+	int OldColor;
+	int Color;
 };
 
 //プロトタイプ宣言

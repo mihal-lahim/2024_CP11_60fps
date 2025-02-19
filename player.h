@@ -38,6 +38,8 @@ struct PLAYER
 
 	int Stage;//現在のステージ
 	float ClearTime;//クリアタイム
+
+	int ShieldCharge;//シールドの残使用数
 };
 
 //プロトタイプ宣言

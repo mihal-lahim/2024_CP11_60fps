@@ -4,7 +4,7 @@
 /////////////////
 //マクロ定義
 ////////////////
-#define ENEMY_MAX (9)//同時に出現する敵の数
+#define ENEMY_MAX (10)//同時に出現する敵の数
 #define KILL_MAX (20)//倒す敵の数
 
 /////////////////////
@@ -31,6 +31,8 @@ struct ENEMY
 	int	 Life;		//体力
 	int  Type;		//敵のタイプ
 };
+
+
 ////////////////////
 //プロトタイプ宣言
 ////////////////////
@@ -39,8 +41,6 @@ void UnInitEnemy();
 void UpdateEnemy();
 void DrawEnemy();
 
-void CreateEnemy(float X, float Y, float Mx, float My,int Color,int Life,int Type);
+void CreateEnemy(float X, float Y, float Mx, float My,int Life,int Type);
 ENEMY* GetEnemy();
-
-
 #endif

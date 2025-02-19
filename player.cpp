@@ -29,7 +29,8 @@ void InitPlayer(void)
 	g_Player.Life = 1;			//体力１
 	g_Player.MaxLife = 1;		//最大体力
 	g_Player.Stage = 1;			//現在のステージ
-	g_Player.ClearTime = 0;//クリアタイム
+	g_Player.ClearTime = 0;		//クリアタイム
+	g_Player.ShieldCharge = 2;	//シールド利用可能数
 }
 
 //終了処理
@@ -71,8 +72,27 @@ void UpdatePlayer(void)
 	}
 	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//シールド
 	{
-		//シールド生成
-		CreateShield(g_Player.PosX, g_Player.PosY, 2.0);
+		int CountShield = 0;
+
+		//シールド構造体取得
+		SHIELD* shield = GetShield();
+
+		for (int i = 0; i < SHIELD_MAX; i++)
+		{
+			//使ってるシールドを数える
+			if (shield[i].Use)
+			{
+				CountShield++;
+			}
+		}
+
+		//シールドがついていなければシールドはれる またシールドの残りがあれば
+		if (CountShield == 0 && g_Player.ShieldCharge > 0)
+		{
+			g_Player.ShieldCharge--;
+			//シールド生成
+			CreateShield(g_Player.PosX, g_Player.PosY, 2.0);
+		}
 	}
 
 	//座標更新
@@ -131,27 +151,28 @@ void DrawPlayer(void)
 	{
 		gotoxy(g_Player.OldPosX, g_Player.OldPosY);
 		std::cout << "  ";
-	}
-	//キャラクター
-	gotoxy(g_Player.PosX, g_Player.PosY);
 
-	//アイテムにより色変え
-	switch (g_Player.Item)
-	{
-	case ITEM_NONE:
+		//キャラクター
+		gotoxy(g_Player.PosX, g_Player.PosY);
+
+		//アイテムにより色変え
+		switch (g_Player.Item)
+		{
+		case ITEM_NONE:
+			textcolor(WHITE);
+			break;
+		case ITEM_FIRE:
+			textcolor(RED);
+			break;
+		case ITEM_ICE:
+			textcolor(LIGHTCYAN);
+			break;
+		default:
+			break;
+		}
+		std::cout << "●";
 		textcolor(WHITE);
-		break;
-	case ITEM_FIRE:
-		textcolor(RED);
-		break;
-	case ITEM_ICE:
-		textcolor(LIGHTCYAN);
-		break;
-	default:
-		break;
 	}
-	std::cout << "●";
-	textcolor(WHITE);
 }
 
 //構造体情報取得

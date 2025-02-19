@@ -57,7 +57,7 @@ void DrawGame(void)//‘‚­‡”Ô—v’²® æ‚É‘‚«‚½‚¢‚à‚Ì‚ğ‘O‚É
 	DrawShield();
 	DrawPlayer();
 	DrawItem();
-	DrawScore();
+	//DrawScore();
 	DrawUI();
 }
 

@@ -24,7 +24,6 @@ struct EnemyData
 {
 	float X, Y;		//座標情報
 	float Mx, My;	//移動量
-	int Color;		//キャラクターカラー
 	int Life;		//敵の体力
 	int Type;		//タイプ
 };
@@ -34,16 +33,16 @@ struct EnemyData
 EnemyData g_EnemyTable[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{18,	8	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //1体目
-		{20,	4	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //2体目
-		{30,	6	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //3体目
-		{40,	8	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //4体目
-		{40,	10	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //5体目
-		{30,	4	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //6体目
-		{30,	10	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //7体目
-		{40,	6	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //8体目
-		{50,	3	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //9体目
-		{40,	6	,  0.2f,	 0.1f,	WHITE,2,ITEM_ICE}, //10体目
+		{18,	8	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //1体目
+		{20,	4	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //2体目
+		{30,	6	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //3体目
+		{40,	8	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //4体目
+		{40,	10	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //5体目
+		{30,	4	,  0.2f,	 0.1f,	2,ITEM_ICE}, //6体目
+		{30,	10	,  0.2f,	 0.1f,	2,ITEM_ICE}, //7体目
+		{40,	6	,  0.2f,	 0.1f,	2,ITEM_ICE}, //8体目
+		{50,	3	,  0.2f,	 0.1f,	2,ITEM_ICE}, //9体目
+		{40,	6	,  0.2f,	 0.1f,	2,ITEM_ICE}, //10体目
 };
 
 
@@ -65,81 +64,78 @@ EnemyData g_EnemyTable[] =
 EnemyData g_EnemyTable2[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{19,	20	,  0.6f,	 0.15f,	RED,1,ITEM_FIRE}, //1体目
-		{16,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //2体目
-		{24,	20	,  0.2f,	 0.15f,	RED,1,ITEM_FIRE}, //3体目
-		{32,	20	,  0.3f,	 0.15f,	RED,1,ITEM_FIRE}, //4体目
-		{40,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //5体目
-		{48,	20	,  0.2f,	 0.15f,	RED,1,ITEM_FIRE}, //6体目
-		{56,	20	,  0.15f,	 0.15f,	RED,1,ITEM_FIRE}, //7体目
-		{29,	20	,  0.1f,	 0.15f,	RED,1,ITEM_FIRE}, //8体目
-		{57,	20	,  0.05f,	 0.15f,	RED,1,ITEM_FIRE}, //9体目
-		{24,	20	,  0.0f,	 0.15f,	RED,1,ITEM_FIRE}, //10体目
+		{19,	20	,  0.6f,	 0.15f,1,ITEM_FIRE}, //1体目
+		{16,	20	,  0.25f,	 0.15f,1,ITEM_FIRE}, //2体目
+		{24,	20	,  0.2f,	 0.15f,1,ITEM_FIRE}, //3体目
+		{32,	20	,  0.3f,	 0.15f,1,ITEM_FIRE}, //4体目
+		{40,	20	,  0.25f,	 0.15f,1,ITEM_FIRE}, //5体目
+		{48,	20	,  0.2f,	 0.15f,1,ITEM_FIRE}, //6体目
+		{56,	20	,  0.15f,	 0.15f,1,ITEM_FIRE}, //7体目
+		{29,	20	,  0.1f,	 0.15f,1,ITEM_FIRE}, //8体目
+		{57,	20	,  0.05f,	 0.15f,1,ITEM_FIRE}, //9体目
+		{24,	20	,  0.0f,	 0.15f,1,ITEM_FIRE}, //10体目
 };
 
 EnemyData g_EnemyTable3[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{19,	20	,  0.6f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //1体目
-		{16,	20	,  0.25f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //2体目
-		{24,	20	,  0.2f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //3体目
-		{32,	20	,  0.3f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //4体目
-		{40,	20	,  0.25f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //5体目
-		{48,	20	,  0.2f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //6体目
-		{56,	20	,  0.15f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //7体目
-		{29,	20	,  0.1f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //8体目
-		{57,	20	,  0.05f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //9体目
-		{24,	20	,  0.0f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
+		{19,	20	,  0.6f,	 0.15f,1,ITEM_ICE}, //1体目
+		{16,	20	,  0.25f,	 0.15f,1,ITEM_ICE}, //2体目
+		{24,	20	,  0.2f,	 0.15f,1,ITEM_ICE}, //3体目
+		{32,	20	,  0.3f,	 0.15f,1,ITEM_ICE}, //4体目
+		{40,	20	,  0.25f,	 0.15f,1,ITEM_ICE}, //5体目
+		{48,	20	,  0.2f,	 0.15f,1,ITEM_ICE}, //6体目
+		{56,	20	,  0.15f,	 0.15f,1,ITEM_ICE}, //7体目
+		{29,	20	,  0.1f,	 0.15f,1,ITEM_ICE}, //8体目
+		{57,	20	,  0.05f,	 0.15f,1,ITEM_ICE}, //9体目
+		{24,	20	,  0.0f,	 0.15f,1,ITEM_ICE}, //10体目
 };
 
 EnemyData g_EnemyTable4[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{19,	20	,  0.6f,	 0.15f,	RED,1,ITEM_FIRE}, //1体目
-		{16,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //2体目
-		{24,	20	,  0.2f,	 0.15f,	RED,1,ITEM_FIRE}, //3体目
-		{32,	20	,  0.3f,	 0.15f,	RED,1,ITEM_FIRE}, //4体目
-		{40,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //5体目
-		{48,	20	,  0.2f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //6体目
-		{56,	20	,  0.15f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //7体目
-		{29,	20	,  0.1f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //8体目
-		{57,	20	,  0.05f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //9体目
-		{24,	20	,  0.0f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
+		{19,	20	,  0.6f,	 0.15f,ITEM_FIRE}, //1体目
+		{16,	20	,  0.25f,	 0.15f,ITEM_FIRE}, //2体目
+		{24,	20	,  0.2f,	 0.15f,ITEM_FIRE}, //3体目
+		{32,	20	,  0.3f,	 0.15f,ITEM_FIRE}, //4体目
+		{40,	20	,  0.25f,	 0.15f,ITEM_FIRE}, //5体目
+		{48,	20	,  0.2f,	 0.15f,1,ITEM_ICE}, //6体目
+		{56,	20	,  0.15f,	 0.15f,1,ITEM_ICE}, //7体目
+		{29,	20	,  0.1f,	 0.15f,1,ITEM_ICE}, //8体目
+		{57,	20	,  0.05f,	 0.15f,1,ITEM_ICE}, //9体目
+		{24,	20	,  0.0f,	 0.15f,1,ITEM_ICE}, //10体目
 };
 
 EnemyData g_EnemyTable5[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{19,	20	,  0.6f,	 0.15f,	RED,1,ITEM_FIRE}, //1体目
-		{16,	20	,  0.25f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //2体目
-		{24,	20	,  0.2f,	 0.15f,	RED,1,ITEM_FIRE}, //3体目
-		{32,	20	,  0.3f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //4体目
-		{40,	20	,  0.25f,	 0.15f,	RED,1,ITEM_FIRE}, //5体目
-		{48,	20	,  0.2f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //6体目
-		{56,	20	,  0.15f,	 0.15f,	RED,1,ITEM_FIRE}, //7体目
-		{29,	20	,  0.1f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //8体目
-		{57,	20	,  0.05f,	 0.15f,	RED,1,ITEM_FIRE}, //9体目
-		{24,	20	,  0.0f,	 0.15f,	LIGHTCYAN,1,ITEM_ICE}, //10体目
+		{19,	20	,  0.6f,	 0.15f,	1,ITEM_FIRE}, //1体目
+		{16,	20	,  0.25f,	 0.15f,	1,ITEM_ICE}, //2体目
+		{24,	20	,  0.2f,	 0.15f,	1,ITEM_FIRE}, //3体目
+		{32,	20	,  0.3f,	 0.15f,	1,ITEM_ICE}, //4体目
+		{40,	20	,  0.25f,	 0.15f,	1,ITEM_FIRE}, //5体目
+		{48,	20	,  0.2f,	 0.15f,	1,ITEM_ICE}, //6体目
+		{56,	20	,  0.15f,	 0.15f,	1,ITEM_FIRE}, //7体目
+		{29,	20	,  0.1f,	 0.15f,	1,ITEM_ICE}, //8体目
+		{57,	20	,  0.05f,	 0.15f,	1,ITEM_FIRE}, //9体目
+		{24,	20	,  0.0f,	 0.15f,	1,ITEM_ICE}, //10体目
 };
 
 
 
 //初期化
-void InitEnemy()
-{
-	//構造体の中を0でクリア
+void InitEnemy() {
+	// 構造体の中を0でクリア
 	memset(&g_Enemy[0], 0, sizeof(ENEMY) * ENEMY_MAX);
 
-	//最初にテーブルの情報を使って敵を作成しておく
-	for (int i = 0; i < ENEMY_MAX; i++)
-	{
-		CreateEnemy(g_EnemyTable[i].X, g_EnemyTable[i].Y, g_EnemyTable[i].Mx, g_EnemyTable[i].My, g_EnemyTable[i].Color,g_EnemyTable[i].Life, g_EnemyTable[i].Type);
+	// 最初にランダムな情報を使って敵を作成しておく
+	for (int i = 0; i < ENEMY_MAX; i++) {
+		
+		CreateEnemy(g_EnemyTable[i].X, g_EnemyTable[i].Y, g_EnemyTable[i].Mx, g_EnemyTable[i].My, g_EnemyTable[i].Life, g_EnemyTable[i].Type);
 	}
 
-	//クリアタイム/ステージ間の初期化
+	// クリアタイム/ステージ間の初期化
 	StageClearTime = timeGetTime();
-
-	//間の初期化
 	StageBetween = 0;
 }
 
@@ -279,11 +275,15 @@ void UpdateEnemy()
 				{
 					StageBetween = timeGetTime();
 				}
+				//５秒ディレイ
 				else if (timeGetTime() - StageBetween > 5000)
 				{
 					//クリア
 					PLAYER* Player = GetPlayer();
 					Player->Stage++;
+
+					//２個復活させる
+					Player->ShieldCharge = 2;
 
 					//クリアタイムの加算
 					Player->ClearTime += timeGetTime() - StageClearTime;
@@ -299,7 +299,7 @@ void UpdateEnemy()
 							//ステージ３
 							for (int j = 0; j < ENEMY_MAX; j++)
 							{
-								CreateEnemy(g_EnemyTable2[j].X, g_EnemyTable2[j].Y, g_EnemyTable2[j].Mx, g_EnemyTable2[j].My, g_EnemyTable2[j].Color, g_EnemyTable2[j].Life, g_EnemyTable2[j].Type);
+								CreateEnemy(g_EnemyTable2[j].X, g_EnemyTable2[j].Y, g_EnemyTable2[j].Mx, g_EnemyTable2[j].My, g_EnemyTable2[j].Life, g_EnemyTable2[j].Type);
 							}
 							StageBetween = 0;
 						}
@@ -311,7 +311,7 @@ void UpdateEnemy()
 							//ステージ３
 							for (int j = 0; j < ENEMY_MAX; j++)
 							{
-								CreateEnemy(g_EnemyTable3[j].X, g_EnemyTable3[j].Y, g_EnemyTable3[j].Mx, g_EnemyTable3[j].My, g_EnemyTable3[j].Color, g_EnemyTable3[j].Life, g_EnemyTable3[j].Type);
+								CreateEnemy(g_EnemyTable3[j].X, g_EnemyTable3[j].Y, g_EnemyTable3[j].Mx, g_EnemyTable3[j].My, g_EnemyTable3[j].Life, g_EnemyTable3[j].Type);
 							}
 							StageBetween = 0;
 						}
@@ -323,7 +323,7 @@ void UpdateEnemy()
 							//ステージ４
 							for (int j = 0; j < ENEMY_MAX; j++)
 							{
-								CreateEnemy(g_EnemyTable4[j].X, g_EnemyTable4[j].Y, g_EnemyTable4[j].Mx, g_EnemyTable4[j].My, g_EnemyTable4[j].Color, g_EnemyTable4[j].Life, g_EnemyTable4[j].Type);
+								CreateEnemy(g_EnemyTable4[j].X, g_EnemyTable4[j].Y, g_EnemyTable4[j].Mx, g_EnemyTable4[j].My, g_EnemyTable4[j].Life, g_EnemyTable4[j].Type);
 							}
 							StageBetween = 0;
 						}
@@ -335,7 +335,7 @@ void UpdateEnemy()
 							//ステージ４
 							for (int j = 0; j < ENEMY_MAX; j++)
 							{
-								CreateEnemy(g_EnemyTable5[j].X, g_EnemyTable5[j].Y, g_EnemyTable5[j].Mx, g_EnemyTable5[j].My, g_EnemyTable5[j].Color, g_EnemyTable5[j].Life, g_EnemyTable5[j].Type);
+								CreateEnemy(g_EnemyTable5[j].X, g_EnemyTable5[j].Y, g_EnemyTable5[j].Mx, g_EnemyTable5[j].My, g_EnemyTable5[j].Life, g_EnemyTable5[j].Type);
 							}
 							StageBetween = 5000;
 						}
@@ -391,7 +391,7 @@ void DrawEnemy()
 
 
 //生成処理
-void CreateEnemy(float X, float Y, float Mx, float My, int Color,int Life,int Type)
+void CreateEnemy(float X, float Y, float Mx, float My,int Life,int Type)
 {
 	//未使用の構造体を見つけて、敵のデータをセット
 	for (int i = 0; i < ENEMY_MAX; i++)
@@ -403,9 +403,22 @@ void CreateEnemy(float X, float Y, float Mx, float My, int Color,int Life,int Ty
 			g_Enemy[i].PosY = g_Enemy[i].OldPosY = Y;
 			g_Enemy[i].SpeedX = Mx;
 			g_Enemy[i].SpeedY = My;
-			g_Enemy[i].Color  = Color;
-			g_Enemy[i].Life   = Life;
+
 			g_Enemy[i].Type = Type;
+			//タイプによりカラー指定
+			switch (g_Enemy[i].Type)
+			{
+			case ITEM_FIRE:
+				g_Enemy[i].Color = RED;
+				break;
+			case ITEM_ICE:
+				g_Enemy[i].Color = LIGHTCYAN;
+				break;
+			default:
+				break;
+			}
+			
+			g_Enemy[i].Life   = Life;
 
 			g_Enemy[i].Use = true;//使用中にする
 

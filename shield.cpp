@@ -74,7 +74,6 @@ void UpdateShield(void)
 					g_Shield[i].Use = false;
 				}
 			}
-			
 		}
 	}
 }
@@ -91,7 +90,8 @@ void DrawShield(void)
 		{
 			//前回の座標を消去
 			gotoxy((int)g_Shield[i].OldPosX, (int)g_Shield[i].OldPosY);
-			printf("  "); if (g_Shield[i].Use == true)
+			std::cout << "  ";
+			if (g_Shield[i].Use == true)
 			{
 				// ウィンドウの境界を超えないように制御
 				if (g_Shield[i].PosX >= SCREEN_LEFT && g_Shield[i].PosX <= SCREEN_RIGHT &&
@@ -102,8 +102,8 @@ void DrawShield(void)
 					{
 						textcolor(RED);
 					}
-					gotoxy((int)g_Shield[i].PosX, (int)g_Shield[i].PosY);
-					printf("盾");
+					gotoxy(g_Shield[i].PosX,g_Shield[i].PosY);
+					std::cout << "盾";
 					textcolor(WHITE);
 				}
 			}
