@@ -68,7 +68,7 @@ void DrawUI(void)
 		{
 			for (int j = 1; j < 79; j++)
 			{
-				if (j < SCREEN_LEFT - 2 || SCREEN_RIGHT + 2 < j)
+				if (j < SCREEN_LEFT || SCREEN_RIGHT + 2 < j)
 				{
 					gotoxy(j, i);
 					textbackground(g_UI.Color);
@@ -78,7 +78,21 @@ void DrawUI(void)
 		}
 		g_UI.UpdateFlg = false;
 	}
-
+	//色変更
+	switch (Player->Item)
+	{
+	case ITEM_NONE:
+		textbackground(WHITE);
+		break;
+	case ITEM_FIRE:
+		textbackground(RED);
+		break;
+	case ITEM_ICE:
+		textbackground(LIGHTCYAN);
+		break;
+	default:
+		break;
+	}
 	//情報の描画
 	//現在のステージ
 	gotoxy(70, 3);
@@ -105,16 +119,19 @@ void DrawUI(void)
 		std::cout << "NONE";
 		break;
 	case ITEM_FIRE:
-		
+		textbackground(BLACK);
+		textcolor(RED);
 		std::cout << "FIRE";
 		break;
 	case ITEM_ICE:
-	
+		textbackground(WHITE);
+		textcolor(LIGHTCYAN);
 		std::cout << "AQUA";
 		break;
 	default:
 		break;
 	}
+	textcolor(WHITE);
 
 	//スコア表示
 	DrawScore();
@@ -126,4 +143,9 @@ void DrawUI(void)
 void UIUpdate()
 {
 	g_UI.UpdateFlg = true;
+}
+
+UI* GetUI()
+{
+	return	&g_UI;
 }

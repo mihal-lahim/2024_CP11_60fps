@@ -72,8 +72,8 @@ void UpdateShield(void)
 				if (g_Shield[i].UnBreaking < 1)
 				{
 					g_Shield[i].Use = false;
-					gotoxy(g_Shield[i].PosX, g_Shield[i].PosY);
-					std::cout << " ";
+					gotoxy(g_Shield[i].PosX - 1, g_Shield[i].PosY);
+					std::cout << "   ";
 				}
 			}
 		}

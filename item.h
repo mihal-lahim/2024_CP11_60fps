@@ -8,6 +8,7 @@ enum ITEM_TYPE
 	ITEM_NONE,	//通常
 	ITEM_FIRE,	//ファイア
 	ITEM_ICE,	//アイス
+	ITEM_LIFE,	//ヒール
 
 	ITEM_NUM,	//アイテムの数
 };

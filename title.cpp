@@ -29,7 +29,7 @@ void UpdateTitle(void)
 void DrawTitle(void)
 {
 	gotoxy(35, 10);
-	std::cout << "‚½‚¢‚Æ‚é`";
+	std::cout << "‚½‚¢‚Æ‚è";
 	gotoxy(35, 14);
-	std::cout << "Enter ‚¨‚·";
+	std::cout << "Enter ‚¨‚¹";
 }

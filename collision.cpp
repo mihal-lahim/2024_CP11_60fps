@@ -204,15 +204,17 @@ int PlayerCollisionItem(PLAYER* ptPlayer)
 			}
 
 			//当たり アイテム分け
-			ptPlayer->Item = tItem[i].Type;
+			//ptPlayer->Item = tItem[i].Type;
 
-			switch (ptPlayer->Item)
+			switch (tItem[i].Type)
 			{
 			case ITEM_FIRE:
 				return ITEM_FIRE;
 				break;
 			case ITEM_ICE:
 				return ITEM_ICE;
+			case ITEM_LIFE:
+				return ITEM_LIFE;
 				break;
 			default:
 				break;
@@ -332,4 +334,56 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 	//すべての敵と当たらなかったとき
 	return false;
 }
+
+
+//弾と敵の当たり判定
+//弾から呼び出す関数
+bool BulletCollisionEnemy(BULLET* ptBullet)
+{
+	//弾の配列のポインター取得
+	ENEMY* tEnemy = GetEnemy();
+
+	//弾の判定用の四角形を作成
+	float BulletLeft = ptBullet->PosX - BULLET_COLLISION_SIZEX;
+	float BulletRight = ptBullet->PosX + BULLET_COLLISION_SIZEX;
+	float BulletUp = ptBullet->PosY - BULLET_COLLISION_SIZEY;
+	float BulletDown = ptBullet->PosY + BULLET_COLLISION_SIZEY;
+	//全ての弾とのチェック
+	for (int i = 0; i < BULLET_MAX; i++)
+	{
+		//構造体が使用中か？
+		if (tEnemy[i].Use == true)
+		{
+			//敵の判定用の四角形を作成
+			float EnemyLeft = tEnemy->PosX - ENEMY_COLLISION_SIZEX;
+			float EnemyRight = tEnemy->PosX + ENEMY_COLLISION_SIZEX;
+			float EnemyUp = tEnemy->PosY - ENEMY_COLLISION_SIZEY;
+			float EnemyDown = tEnemy->PosY + ENEMY_COLLISION_SIZEY;
+
+			//当たり判定
+			if (EnemyRight < BulletLeft)
+			{
+				continue;
+			}
+			if (EnemyLeft > BulletRight)
+			{
+				continue;
+			}
+			if (EnemyUp > BulletDown)
+			{
+				continue;
+			}	
+			if (EnemyDown < BulletUp)
+			{
+				continue;
+			}
+
+			//敵と弾が当たった
+			return true;
+		}
+	}
+	//どの弾とも当たっていない
+	return false;
+}
+
 

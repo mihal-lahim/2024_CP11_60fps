@@ -252,6 +252,8 @@ void UpdateEnemy()
 				if (g_Enemy[i].Life < 1)
 				{
 					g_Enemy[i].Use = false;
+					gotoxy(g_Enemy[i].PosX - 2, g_Enemy[i].PosY);
+					std::cout << "     ";
 					AddPoint(10);//ƒXƒRƒA‰ÁŽZ
 				}
 			}

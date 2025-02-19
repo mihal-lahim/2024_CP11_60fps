@@ -5,6 +5,7 @@
 #include "game.h"
 #include"player.h"
 #include"item.h"
+#include"collision.h"
 
 ////////////////
 //グローバル変数
@@ -55,6 +56,20 @@ void UpdateBullet(void)
 		
 		//アイテムタイプを入れる
 		g_Bullet[i].Type = Player->Item;
+
+		//当たり判定////////////////
+
+		g_Bullet[i].Hit = BulletCollisionEnemy(&g_Bullet[i]);
+
+		//当たったら
+		if (g_Bullet[i].Hit == true)
+		{
+			g_Bullet[i].Use = false;
+			g_Bullet[i].Hit = false;
+			gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);
+			std::cout << "  ";
+
+		}
 	}
 }
 
@@ -70,7 +85,7 @@ void DrawBullet(void)
 			g_Bullet[i].PosY != g_Bullet[i].OldPosY)
 		{
 			gotoxy(g_Bullet[i].OldPosX, g_Bullet[i].OldPosY);//前回の場所の消去
-			std::cout << " ";
+			std::cout << "  ";
 
 			//構造体が使用中なら
 			if (g_Bullet[i].Use == true)
@@ -92,7 +107,7 @@ void DrawBullet(void)
 				default:
 					break;
 				}
-				std::cout << ".";
+				std::cout << "・";
 				textcolor(WHITE);//色変え
 			}
 		}

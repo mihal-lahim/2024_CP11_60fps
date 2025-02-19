@@ -29,7 +29,6 @@ void InitPlayer(void)
 	g_Player.Hit = false;		//当たってない
 	g_Player.Item = ITEM_NONE;	//アイテムなし
 	g_Player.Life = 1;			//体力１
-	g_Player.MaxLife = 1;		//最大体力
 	g_Player.Stage = 1;			//現在のステージ
 	g_Player.ClearTime = 0;		//クリアタイム
 	g_Player.ShieldCharge = 2;	//シールド利用可能数
@@ -134,14 +133,25 @@ void UpdatePlayer(void)
 
 	if (g_Player.ItemHit)
 	{
-		g_Player.Life++;
-		g_Player.MaxLife++;
 		AddPoint(100);
-
+	}
+	//当たったアイテムにより処理を変える
+	switch (g_Player.ItemHit)
+	{
+	case ITEM_FIRE:
+	case ITEM_ICE:
 		//アイテムタイプを入れる
 		g_Player.Item = g_Player.ItemHit;
+		
+		break;
+	case ITEM_LIFE:
+		g_Player.Life += 3;
+	
+		break;
+	default:
+		break;
 	}
-
+	
 	//ゲームクリア
 	if (g_Player.Stage > STAGE_MAX)
 	{

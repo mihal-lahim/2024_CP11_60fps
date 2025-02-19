@@ -15,3 +15,5 @@ void UpdateUI(void);
 void DrawUI(void);
 
 void UIUpdate(void);
+
+UI* GetUI();

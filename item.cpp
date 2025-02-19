@@ -54,7 +54,7 @@ void UpdateItem()
 		{
 			g_Item[i].Use = false;
 			gotoxy(g_Item[i].PosX, g_Item[i].PosY);
-			std::cout << " ";
+			std::cout << "    ";
 		}
 	}
 	else
@@ -63,7 +63,7 @@ void UpdateItem()
 		for (int i = 0; i < ITEM_MAX; i++)
 		{
 			//アイテムの位置を指定
-			int ItemPosX = rand() % (SCREEN_RIGHT - SCREEN_LEFT) + SCREEN_LEFT;
+			int ItemPosX = rand() % (SCREEN_RIGHT - SCREEN_LEFT - 1) + SCREEN_LEFT + 1;
 			//強制偶数
 			if (ItemPosX % 2 == 1)
 			{
@@ -71,7 +71,7 @@ void UpdateItem()
 			}
 			int ItemPosY = rand() % (SCREEN_BOTTOM - SCREEN_TOP - 1) + SCREEN_TOP + 1;
 			//アイテムの種類を指定
-			int ItemType = rand() % 2 + 1;
+			int ItemType = rand() % ITEM_NUM + 1;
 
 			//アイテム使用数
 			int Use = 0;
@@ -96,7 +96,7 @@ void UpdateItem()
 			{
 				g_Item[i].Use = false;
 				gotoxy(g_Item[i].PosX, g_Item[i].PosY);
-				std::cout << " ";
+				std::cout << "   ";
 			}
 		}
 	}
@@ -115,23 +115,26 @@ void DrawItem()
 			if (g_Item[i].OldPosX != g_Item[i].PosX ||
 				g_Item[i].OldPosY != g_Item[i].PosY)
 			{
-				gotoxy(g_Item[i].OldPosX, g_Item[i].OldPosY);
-				std::cout << " ";
+				gotoxy(g_Item[i].OldPosX + 1, g_Item[i].OldPosY);
+				std::cout << "    ";
 			}
 			gotoxy(g_Item[i].PosX, g_Item[i].PosY);
 			textcolor(g_Item[i].Color);//色変え
 			switch (g_Item[i].Type)
 			{
 			case ITEM_FIRE:
-				std::cout << "F";
+				std::cout << "Д";
 				break;
 			case ITEM_ICE:
-				std::cout << "A";
+				std::cout << "Ω";
+				break;
+			case ITEM_LIFE:
+				std::cout << "〇";
 				break;
 			default:
 				break;
 			}
-			
+
 			textcolor(WHITE);//色変え
 		}
 		else
@@ -170,9 +173,15 @@ void SetItem(float x, float y, int type)
 				g_Item[i].Color = LIGHTCYAN;
 				break;
 			}
+			case ITEM_LIFE:
+			{
+				g_Item[i].Color = LIGHTMAGENTA;
+				break;
+			}
 			default:
 				break;
 			}
+
 			break;
 		}
 	}

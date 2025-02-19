@@ -14,7 +14,9 @@
 #include "conioex.h"
 #include "score.h"
 #include <iostream>
-
+#include"player.h"
+#include"item.h"
+#include"UI.h"
 SCORE g_tScore;
 
 void InitScore()
@@ -32,10 +34,25 @@ void UpdateScore()
 
 void DrawScore()
 {
-	gotoxy(66, 15);
-	textcolor(WHITE);
-	std::cout << "SCORE:" << g_tScore.nPoint;
+	int Shift = 1;
+	int NowScore = g_tScore.nPoint;
+	PLAYER* Player = GetPlayer();
+	UI* UI = GetUI();
+	//Œ…”ƒJƒEƒ“ƒg
+	while (NowScore != 0)
+	{
+		NowScore /= 10;
+		Shift++;
+	}
+	textbackground(UI->Color);
+	gotoxy(70, 15);
+	std::cout << "SCORE";
+
+	gotoxy(75 - Shift, 17);
+	std::cout << g_tScore.nPoint<<" ";
+	
 	textbackground(BLACK);
+
 }
 
 void ClearPoint()

@@ -13,8 +13,8 @@
 #define CHARACTER_COLLISION_SIZEY (0.5)
 
 //弾のサイズ
-#define BULLET_COLLISION_SIZEX (1)
-#define BULLET_COLLISION_SIZEY (0.7)
+#define BULLET_COLLISION_SIZEX (0.5)
+#define BULLET_COLLISION_SIZEY (0.25)
 
 //敵のサイズ
 #define ENEMY_COLLISION_SIZEX (1)
@@ -25,8 +25,8 @@
 #define SHIELD_COLLISION_SIZEY (1)
 
 //アイテムのサイズ
-#define ITEM_COLLISION_SIZEX (0.5)
-#define ITEM_COLLISION_SIZEY (0.25)
+#define ITEM_COLLISION_SIZEX (1)
+#define ITEM_COLLISION_SIZEY (0.5)
 
 //敵キャラクターとプレイヤー弾の当たり判定
 //敵から呼び出す関数
@@ -55,5 +55,9 @@ bool ItemCollisionPlayer(ITEM* ptItem);
 //敵とプレイヤーの当たり判定
 //敵から呼び出す関数
 bool EnemyCollisionPlayer(ENEMY* ptEnemy);
+
+//敵キャラクターとプレイヤー弾の当たり判定
+//弾から呼び出す関数
+bool BulletCollisionEnemy(BULLET* ptBullet);
 
 #endif
