@@ -1,4 +1,4 @@
-#define CONIOEX
+ï»¿#define CONIOEX
 #include"conioex.h"
 #include"game.h"
 #include"player.h"
@@ -12,118 +12,124 @@
 #include"score.h"
 
 ///////////////
-//ƒOƒ[ƒoƒ‹•Ï”
+//ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°
 ///////////////
 PLAYER g_Player;
 
-//‰Šú‰»ˆ—
+//åˆæœŸåŒ–å‡¦ç†
 void InitPlayer(void)
 {
 	memset(&g_Player, 0, sizeof(PLAYER));
-	g_Player.PosX = g_Player.OldPosX = 40;//ƒvƒŒƒCƒ„[‚ÌXˆÊ’u
-	g_Player.PosY = g_Player.OldPosY = 15;//ƒvƒŒƒCƒ„[‚ÌYˆÊ’u
+	g_Player.PosX =  40;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Xä½ç½®
+	g_Player.PosY =  15;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Yä½ç½®
+	g_Player.OldPosX = 0;
+	g_Player.OldPosY = 0;
 
-	g_Player.Direct = 0.0;		//Œü‚«
-	g_Player.Hit = false;		//“–‚½‚Á‚Ä‚È‚¢
-	g_Player.Item = ITEM_NONE;	//ƒAƒCƒeƒ€‚È‚µ
-	g_Player.Life = 1;			//‘Ì—Í‚P
-	g_Player.MaxLife = 1;		//Å‘å‘Ì—Í
-	g_Player.Stage = 1;			//Œ»İ‚ÌƒXƒe[ƒW
-	g_Player.ClearTime = 0;		//ƒNƒŠƒAƒ^ƒCƒ€
-	g_Player.ShieldCharge = 2;	//ƒV[ƒ‹ƒh—˜—p‰Â”\”
+	g_Player.Direct = 0.0;		//å‘ã
+	g_Player.Hit = false;		//å½“ãŸã£ã¦ãªã„
+	g_Player.Item = ITEM_NONE;	//ã‚¢ã‚¤ãƒ†ãƒ ãªã—
+	g_Player.Life = 1;			//ä½“åŠ›ï¼‘
+	g_Player.MaxLife = 1;		//æœ€å¤§ä½“åŠ›
+	g_Player.Stage = 1;			//ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¸
+	g_Player.ClearTime = 0;		//ã‚¯ãƒªã‚¢ã‚¿ã‚¤ãƒ 
+	g_Player.ShieldCharge = 2;	//ã‚·ãƒ¼ãƒ«ãƒ‰åˆ©ç”¨å¯èƒ½æ•°
 }
 
-//I—¹ˆ—
+//çµ‚äº†å‡¦ç†
 void UnInitPlayer(void)
 {
 }
 
-//XVˆ—
+//æ›´æ–°å‡¦ç†
 void UpdatePlayer(void)
 {
-	//Œ»İ‚ÌˆÊ’u•Û‘¶
-	g_Player.OldPosX = g_Player.PosX;
-	g_Player.OldPosY = g_Player.PosY;
+	
 
-	//ˆÚ“®—Ê‚ÌƒŠƒZƒbƒg
+	//ç§»å‹•é‡ã®ãƒªã‚»ãƒƒãƒˆ
 	g_Player.SpeedX = 0;
 	g_Player.SpeedY = 0;
 
-	//ƒJ[ƒ\ƒ‹ƒL[‚Ì“ü—Í‚Åã‰º¶‰E‚ÉˆÚ“®‚·‚é
+	//ã‚«ãƒ¼ã‚½ãƒ«ã‚­ãƒ¼ã®å…¥åŠ›ã§ä¸Šä¸‹å·¦å³ã«ç§»å‹•ã™ã‚‹
 	if (GetKeyPress(KEYNAME::KEY_W) && g_Player.PosY > SCREEN_TOP + 2)
 	{
 		g_Player.SpeedY = -PLAYER_MOVE_SPEED_Y;
-		g_Player.Direct = 90; //ãŒü‚«
+		g_Player.Direct = 90; //ä¸Šå‘ã
 	}
 	if (GetKeyPress(KEYNAME::KEY_A) && g_Player.PosX > SCREEN_LEFT + 2)
 	{
 		g_Player.SpeedX = -PLAYER_MOVE_SPEED_X;
-		g_Player.Direct = 0; //¶Œü‚«
+		g_Player.Direct = 0; //å·¦å‘ã
 	}
 	if (GetKeyPress(KEYNAME::KEY_S) && g_Player.PosY < SCREEN_BOTTOM - 1)
 	{
 		g_Player.SpeedY = PLAYER_MOVE_SPEED_Y;
-		g_Player.Direct = 270; //‰ºŒü‚«
+		g_Player.Direct = 270; //ä¸‹å‘ã
 	}
 	if (GetKeyPress(KEYNAME::KEY_D) && g_Player.PosX < SCREEN_RIGHT - 2)
 	{
 		g_Player.SpeedX = PLAYER_MOVE_SPEED_X;
-		g_Player.Direct = 180; //‰EŒü‚«
+		g_Player.Direct = 180; //å³å‘ã
 	}
-	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//ƒV[ƒ‹ƒh
+	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//ã‚·ãƒ¼ãƒ«ãƒ‰
 	{
 		int CountShield = 0;
 
-		//ƒV[ƒ‹ƒh\‘¢‘Ìæ“¾
+		//ã‚·ãƒ¼ãƒ«ãƒ‰æ§‹é€ ä½“å–å¾—
 		SHIELD* shield = GetShield();
 
 		for (int i = 0; i < SHIELD_MAX; i++)
 		{
-			//g‚Á‚Ä‚éƒV[ƒ‹ƒh‚ğ”‚¦‚é
+			//ä½¿ã£ã¦ã‚‹ã‚·ãƒ¼ãƒ«ãƒ‰ã‚’æ•°ãˆã‚‹
 			if (shield[i].Use)
 			{
 				CountShield++;
 			}
 		}
 
-		//ƒV[ƒ‹ƒh‚ª‚Â‚¢‚Ä‚¢‚È‚¯‚ê‚ÎƒV[ƒ‹ƒh‚Í‚ê‚é ‚Ü‚½ƒV[ƒ‹ƒh‚Ìc‚è‚ª‚ ‚ê‚Î
+		//ã‚·ãƒ¼ãƒ«ãƒ‰ãŒã¤ã„ã¦ã„ãªã‘ã‚Œã°ã‚·ãƒ¼ãƒ«ãƒ‰ã¯ã‚Œã‚‹ ã¾ãŸã‚·ãƒ¼ãƒ«ãƒ‰ã®æ®‹ã‚ŠãŒã‚ã‚Œã°
 		if (CountShield == 0 && g_Player.ShieldCharge > 0)
 		{
 			g_Player.ShieldCharge--;
-			//ƒV[ƒ‹ƒh¶¬
+			//ã‚·ãƒ¼ãƒ«ãƒ‰ç”Ÿæˆ
 			CreateShield(g_Player.PosX, g_Player.PosY, 2.0);
 		}
 	}
 
-	//À•WXV
+	//ç¾åœ¨ã®ä½ç½®ä¿å­˜
+	g_Player.OldPosX = g_Player.PosX;
+	g_Player.OldPosY = g_Player.PosY;
+
+	//åº§æ¨™æ›´æ–°
 	g_Player.PosX += g_Player.SpeedX;
 	g_Player.PosY += g_Player.SpeedY;
 
-	//’e”­Ë@ã‰º¶‰E
+	
+
+	//å¼¾ç™ºå°„ã€€ä¸Šä¸‹å·¦å³
 	if (GetKeyPress(KEYNAME::KEY_UP)	|| GetKeyPress(KEYNAME::KEY_DOWN) ||
 		GetKeyPress(KEYNAME::KEY_RIGHT) || GetKeyPress(KEYNAME::KEY_LEFT))
 	{
 		Shot();
 	}
 	
-	//“–‚½‚è”»’è///////////////////
+	//å½“ãŸã‚Šåˆ¤å®š///////////////////
 	
-	//“GƒLƒƒƒ‰ƒNƒ^[‚Æ‚Ì“–‚½‚è”»’è
+	//æ•µã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¨ã®å½“ãŸã‚Šåˆ¤å®š
 	g_Player.Hit = PlayerCollisionEnemy(&g_Player);
 
-	if (g_Player.Hit)//ƒvƒŒƒCƒ„[‚ª€‚ñ‚¾‚çƒ^ƒCƒgƒ‹‚ÖˆÚ“®@Œ»İ“–‚½‚Á‚½‚ç‚¾‚ªA‘Ì—Í§Œä‚É‚·‚é
+	if (g_Player.Hit)//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæ­»ã‚“ã ã‚‰ã‚¿ã‚¤ãƒˆãƒ«ã¸ç§»å‹•ã€€ç¾åœ¨å½“ãŸã£ãŸã‚‰ã ãŒã€ä½“åŠ›åˆ¶å¾¡ã«ã™ã‚‹
 	{
 		g_Player.Life--;
 		g_Player.Item = ITEM_NONE;
 
 		if (g_Player.Life == 0)
 		{
-			//ƒV[ƒ“‚ğƒ^ƒCƒgƒ‹‚ÖˆÚ“®‚³‚¹‚é
+			//ã‚·ãƒ¼ãƒ³ã‚’ã‚¿ã‚¤ãƒˆãƒ«ã¸ç§»å‹•ã•ã›ã‚‹
 			SetScene(SCENE_TITLE);
 		}
 	}
 
-	//ƒAƒCƒeƒ€‚Æ‚Ì“–‚½‚è”»’è
+	//ã‚¢ã‚¤ãƒ†ãƒ ã¨ã®å½“ãŸã‚Šåˆ¤å®š
 	g_Player.ItemHit = PlayerCollisionItem(&g_Player);
 
 	if (g_Player.ItemHit)
@@ -132,62 +138,61 @@ void UpdatePlayer(void)
 		g_Player.MaxLife++;
 		AddPoint(100);
 
-		//ƒAƒCƒeƒ€ƒ^ƒCƒv‚ğ“ü‚ê‚é
+		//ã‚¢ã‚¤ãƒ†ãƒ ã‚¿ã‚¤ãƒ—ã‚’å…¥ã‚Œã‚‹
 		g_Player.Item = g_Player.ItemHit;
 	}
 
-	//ƒQ[ƒ€ƒNƒŠƒA
+	//ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢
 	if (g_Player.Stage > STAGE_MAX)
 	{
 		SetScene(SCENE_RESULT);
 	}
 }
 
-//•`‰æˆ—
+//æç”»å‡¦ç†
 void DrawPlayer(void)
 {
-	//À•W‚ª•Ï‰»‚µ‚Ä‚¢‚½ê‡A‰ß‹‚ÌÀ•W‚ğÁ‹‚·‚é
+	//åº§æ¨™ãŒå¤‰åŒ–ã—ã¦ã„ãŸå ´åˆã€éå»ã®åº§æ¨™ã‚’æ¶ˆå»ã™ã‚‹
 	if ((g_Player.PosX != g_Player.OldPosX) || (g_Player.PosY != g_Player.OldPosY))
 	{
 		gotoxy(g_Player.OldPosX, g_Player.OldPosY);
 		std::cout << "  ";
-
-		//ƒLƒƒƒ‰ƒNƒ^[
-		gotoxy(g_Player.PosX, g_Player.PosY);
-
-		//ƒAƒCƒeƒ€‚É‚æ‚èF•Ï‚¦
-		switch (g_Player.Item)
-		{
-		case ITEM_NONE:
-			textcolor(WHITE);
-			break;
-		case ITEM_FIRE:
-			textcolor(RED);
-			break;
-		case ITEM_ICE:
-			textcolor(LIGHTCYAN);
-			break;
-		default:
-			break;
-		}
-		std::cout << "œ";
-		textcolor(WHITE);
 	}
+
+	//ã‚¢ã‚¤ãƒ†ãƒ ã«ã‚ˆã‚Šè‰²å¤‰ãˆ
+	switch (g_Player.Item)
+	{
+	case ITEM_NONE:
+		textcolor(WHITE);
+		break;
+	case ITEM_FIRE:
+		textcolor(RED);
+		break;
+	case ITEM_ICE:
+		textcolor(LIGHTCYAN);
+		break;
+	default:
+		break;
+	}
+	//ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼
+	gotoxy(g_Player.PosX, g_Player.PosY);
+	std::cout << "â—";
+	textcolor(WHITE);
 }
 
-//\‘¢‘Ìî•ñæ“¾
+//æ§‹é€ ä½“æƒ…å ±å–å¾—
 PLAYER* GetPlayer()
 {
-	//\‘¢‘Ì‚Ìƒ|ƒCƒ“ƒ^[‚ğ•Ô‚·
+	//æ§‹é€ ä½“ã®ãƒã‚¤ãƒ³ã‚¿ãƒ¼ã‚’è¿”ã™
 	return &g_Player;
 }
 
-//‹Ê”­ËŠÖ”
+//ç‰ç™ºå°„é–¢æ•°
 void Shot(void)
 {
-	//’e‚Ì‘¬‚³i‰Á‚¦‚é—Íj‚Ìw’è‚Ég—p‚·‚é
-	float direct_x = 0.0;//‰¡•ûŒü
-	float direct_y = 0.0;//c•ûŒü
+	//å¼¾ã®é€Ÿã•ï¼ˆåŠ ãˆã‚‹åŠ›ï¼‰ã®æŒ‡å®šã«ä½¿ç”¨ã™ã‚‹
+	float direct_x = 0.0;//æ¨ªæ–¹å‘
+	float direct_y = 0.0;//ç¸¦æ–¹å‘
 
 	if (GetKeyPress(KEYNAME::KEY_UP))
 	{
@@ -208,6 +213,6 @@ void Shot(void)
 	}
 
 
-	//’e¶¬
+	//å¼¾ç”Ÿæˆ
 	CreateBullet(g_Player.PosX, g_Player.PosY, direct_x, direct_y);
 }

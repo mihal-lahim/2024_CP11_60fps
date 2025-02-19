@@ -72,7 +72,7 @@ void DrawUI(void)
 				{
 					gotoxy(j, i);
 					textbackground(g_UI.Color);
-					std::cout << "  ";
+					std::cout << " ";
 				}
 			}
 		}

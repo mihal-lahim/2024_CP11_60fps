@@ -70,7 +70,7 @@ void DrawBullet(void)
 			g_Bullet[i].PosY != g_Bullet[i].OldPosY)
 		{
 			gotoxy(g_Bullet[i].OldPosX, g_Bullet[i].OldPosY);//前回の場所の消去
-			std::cout << "　";
+			std::cout << " ";
 
 			//構造体が使用中なら
 			if (g_Bullet[i].Use == true)
@@ -92,11 +92,10 @@ void DrawBullet(void)
 				default:
 					break;
 				}
-				std::cout << "・";
+				std::cout << ".";
 				textcolor(WHITE);//色変え
 			}
 		}
-		
 	}
 }
 

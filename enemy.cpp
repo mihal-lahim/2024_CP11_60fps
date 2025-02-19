@@ -363,7 +363,7 @@ void DrawEnemy()
 				g_Enemy[i].OldPosY != g_Enemy[i].PosY)
 			{
 				gotoxy(g_Enemy[i].OldPosX, g_Enemy[i].OldPosY);
-				std::cout << "@";
+				std::cout << "  ";
 
 				gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
 
@@ -383,7 +383,7 @@ void DrawEnemy()
 			{
 				g_Enemy[i].Life = 0;
 				gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
-				std::cout << "@";
+				std::cout << "  ";
 			}
 		}
 	}

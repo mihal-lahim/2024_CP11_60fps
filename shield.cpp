@@ -72,6 +72,8 @@ void UpdateShield(void)
 				if (g_Shield[i].UnBreaking < 1)
 				{
 					g_Shield[i].Use = false;
+					gotoxy(g_Shield[i].PosX, g_Shield[i].PosY);
+					std::cout << " ";
 				}
 			}
 		}
@@ -84,29 +86,24 @@ void DrawShield(void)
 	//使用中の構造体をすべて表示する
 	for (int i = 0; i < SHIELD_MAX; i++)
 	{
-		//前回の位置から移動したか？本当はY座標でも確認が必要
-		if (g_Shield[i].PosX != g_Shield[i].OldPosX ||
-			g_Shield[i].PosY != g_Shield[i].OldPosY)
+		if (g_Shield[i].Use == true)
 		{
-			//前回の座標を消去
-			gotoxy((int)g_Shield[i].OldPosX, (int)g_Shield[i].OldPosY);
-			std::cout << "  ";
-			if (g_Shield[i].Use == true)
+			//前回の位置から移動したか？本当はY座標でも確認が必要
+			if (g_Shield[i].PosX != g_Shield[i].OldPosX ||
+				g_Shield[i].PosY != g_Shield[i].OldPosY)
 			{
-				// ウィンドウの境界を超えないように制御
-				if (g_Shield[i].PosX >= SCREEN_LEFT && g_Shield[i].PosX <= SCREEN_RIGHT &&
-					g_Shield[i].PosY >= SCREEN_TOP && g_Shield[i].PosY <= SCREEN_BOTTOM)
-				{
-					//現在の座標に描画
-					if (g_Shield[i].UnBreaking < 2)
-					{
-						textcolor(RED);
-					}
-					gotoxy(g_Shield[i].PosX,g_Shield[i].PosY);
-					std::cout << "盾";
-					textcolor(WHITE);
-				}
+				//前回の座標を消去
+				gotoxy((int)g_Shield[i].OldPosX, (int)g_Shield[i].OldPosY);
+				std::cout << "  ";
 			}
+			//現在の座標に描画
+			if (g_Shield[i].UnBreaking < 2)
+			{
+				textcolor(RED);
+			}
+			gotoxy(g_Shield[i].PosX, g_Shield[i].PosY);
+			std::cout << "[]";
+			textcolor(WHITE);
 		}
 	}
 }
