@@ -68,7 +68,7 @@ void DrawUI(void)
 		{
 			for (int j = 1; j < 79; j++)
 			{
-				if (j < SCREEN_LEFT || SCREEN_RIGHT + 2 < j)
+				if (j < SCREEN_LEFT || SCREEN_RIGHT + 1 < j)
 				{
 					gotoxy(j, i);
 					textbackground(g_UI.Color);
@@ -124,7 +124,7 @@ void DrawUI(void)
 		std::cout << "FIRE";
 		break;
 	case ITEM_ICE:
-		textbackground(WHITE);
+		textbackground(LIGHTBLUE);
 		textcolor(LIGHTCYAN);
 		std::cout << "AQUA";
 		break;

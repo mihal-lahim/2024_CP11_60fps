@@ -34,22 +34,23 @@ void UpdateScore()
 
 void DrawScore()
 {
-	int Shift = 1;
+	int Shift = 0;
 	int NowScore = g_tScore.nPoint;
 	PLAYER* Player = GetPlayer();
 	UI* UI = GetUI();
 	//Œ…”ƒJƒEƒ“ƒg
-	while (NowScore != 0)
+	do
 	{
 		NowScore /= 10;
 		Shift++;
-	}
+	} while (NowScore != 0);
+
 	textbackground(UI->Color);
 	gotoxy(70, 15);
 	std::cout << "SCORE";
 
 	gotoxy(75 - Shift, 17);
-	std::cout << g_tScore.nPoint<<" ";
+	std::cout << g_tScore.nPoint << " ";
 	
 	textbackground(BLACK);
 
