@@ -46,7 +46,6 @@ void UpdateGame(void)
 	//UpdateField();
 	UpdateItem();
 	UpdateUI();
-		
 }
 
 void DrawGame(void)//書く順番要調整 先に書きたいものを前に
@@ -56,8 +55,6 @@ void DrawGame(void)//書く順番要調整 先に書きたいものを前に
 	DrawBullet();
 	DrawShield();
 	DrawPlayer();
-
-	
 	DrawUI();
 	DrawItem();
 }

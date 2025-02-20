@@ -119,7 +119,7 @@ void CreateShield(float PlayerPosX, float PlayerPosY, float UnBraking)
 			//使用中フラグを立てる
 			g_Shield[i].Use = true;
 
-			//座標をセット　８方向に生成したいからswitch文で作成するが、もっと言いわけかたあるかも
+			//座標をセット　８方向に生成したいからswitch文で作成するが、もっと言い分け方あるかも
 			switch (i)
 			{
 			case 0://左上

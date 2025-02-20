@@ -9,6 +9,7 @@
 #include"item.h"
 
 
+
 ///////////////////////////////////////
 //グローバル変数
 ///////////////////////////////////////
@@ -16,6 +17,8 @@ ENEMY g_Enemy[ENEMY_MAX];//敵構造体配列
 int g_KillCount = 0;//キル数
 DWORD StageClearTime;//クリアタイム
 DWORD StageBetween;//ステージとステージの間
+
+int NowTime = 0;//現在時刻
 
 ///////////////////////////////////////
 //敵キャラ初期配置情報　構造体
@@ -114,7 +117,7 @@ void InitEnemy() {
 
 	// 最初にランダムな情報を使って敵を作成しておく
 	for (int i = 0; i < ENEMY_MAX; i++) {
-		
+
 		CreateEnemy(g_EnemyTable[i].X, g_EnemyTable[i].Y, g_EnemyTable[i].Mx, g_EnemyTable[i].My, g_EnemyTable[i].Life, g_EnemyTable[i].Type);
 	}
 
@@ -265,6 +268,8 @@ void UpdateEnemy()
 			//全員死んだら次の敵出す
 			if (KillCount == ENEMY_MAX)
 			{
+
+				//現在時間
 				if (StageBetween == 0)
 				{
 					StageBetween = timeGetTime();
@@ -272,11 +277,12 @@ void UpdateEnemy()
 				//５秒ディレイ
 				else if (timeGetTime() - StageBetween > 5000)
 				{
+
 					//クリア
 					PLAYER* Player = GetPlayer();
 					Player->Stage++;
 
-					//２個復活させる
+					//２個に復活させる
 					Player->ShieldCharge = 2;
 
 					//クリアタイムの加算
@@ -287,52 +293,40 @@ void UpdateEnemy()
 					switch (Player->Stage)
 					{
 					case 2:
-						//５秒ディレイ
-						if (timeGetTime() - StageBetween > 5000)
+						//ステージ３
+						for (int j = 0; j < ENEMY_MAX; j++)
 						{
-							//ステージ３
-							for (int j = 0; j < ENEMY_MAX; j++)
-							{
-								CreateEnemy(g_EnemyTable2[j].X, g_EnemyTable2[j].Y, g_EnemyTable2[j].Mx, g_EnemyTable2[j].My, g_EnemyTable2[j].Life, g_EnemyTable2[j].Type);
-							}
-							StageBetween = 0;
+							CreateEnemy(g_EnemyTable2[j].X, g_EnemyTable2[j].Y, g_EnemyTable2[j].Mx, g_EnemyTable2[j].My, g_EnemyTable2[j].Life, g_EnemyTable2[j].Type);
 						}
+						StageBetween = 0;
+			
 						break;
 					case 3:
-						//５秒ディレイ
-						if (timeGetTime() - StageBetween > 5000)
+
+						//ステージ３
+						for (int j = 0; j < ENEMY_MAX; j++)
 						{
-							//ステージ３
-							for (int j = 0; j < ENEMY_MAX; j++)
-							{
-								CreateEnemy(g_EnemyTable3[j].X, g_EnemyTable3[j].Y, g_EnemyTable3[j].Mx, g_EnemyTable3[j].My, g_EnemyTable3[j].Life, g_EnemyTable3[j].Type);
-							}
-							StageBetween = 0;
+							CreateEnemy(g_EnemyTable3[j].X, g_EnemyTable3[j].Y, g_EnemyTable3[j].Mx, g_EnemyTable3[j].My, g_EnemyTable3[j].Life, g_EnemyTable3[j].Type);
 						}
+						StageBetween = 0;
 						break;
 					case 4:
-						//５秒ディレイ
-						if (timeGetTime() - StageBetween > 5000)
+
+						//ステージ４
+						for (int j = 0; j < ENEMY_MAX; j++)
 						{
-							//ステージ４
-							for (int j = 0; j < ENEMY_MAX; j++)
-							{
-								CreateEnemy(g_EnemyTable4[j].X, g_EnemyTable4[j].Y, g_EnemyTable4[j].Mx, g_EnemyTable4[j].My, g_EnemyTable4[j].Life, g_EnemyTable4[j].Type);
-							}
-							StageBetween = 0;
+							CreateEnemy(g_EnemyTable4[j].X, g_EnemyTable4[j].Y, g_EnemyTable4[j].Mx, g_EnemyTable4[j].My, g_EnemyTable4[j].Life, g_EnemyTable4[j].Type);
 						}
+						StageBetween = 0;
 						break;
 					case 5:
-						//５秒ディレイ
-						if (timeGetTime() - StageBetween > 5000)
+
+						//ステージ４
+						for (int j = 0; j < ENEMY_MAX; j++)
 						{
-							//ステージ４
-							for (int j = 0; j < ENEMY_MAX; j++)
-							{
-								CreateEnemy(g_EnemyTable5[j].X, g_EnemyTable5[j].Y, g_EnemyTable5[j].Mx, g_EnemyTable5[j].My, g_EnemyTable5[j].Life, g_EnemyTable5[j].Type);
-							}
-							StageBetween = 5000;
+							CreateEnemy(g_EnemyTable5[j].X, g_EnemyTable5[j].Y, g_EnemyTable5[j].Mx, g_EnemyTable5[j].My, g_EnemyTable5[j].Life, g_EnemyTable5[j].Type);
 						}
+						StageBetween = 5000;
 						break;
 					default:
 						break;
@@ -365,8 +359,8 @@ void DrawEnemy()
 				std::cout << "><";
 				textcolor(WHITE);//色変え
 			}
-			
-			
+
+
 #ifdef _DEBUG
 			/*gotoxy(2, 5 + i);
 			std::cout << g_Enemy[i].PosX << "  "<<g_Enemy[i].PosY << "  ";*/
@@ -385,7 +379,7 @@ void DrawEnemy()
 
 
 //生成処理
-void CreateEnemy(float X, float Y, float Mx, float My,int Life,int Type)
+void CreateEnemy(float X, float Y, float Mx, float My, int Life, int Type)
 {
 	//未使用の構造体を見つけて、敵のデータをセット
 	for (int i = 0; i < ENEMY_MAX; i++)
@@ -411,8 +405,8 @@ void CreateEnemy(float X, float Y, float Mx, float My,int Life,int Type)
 			default:
 				break;
 			}
-			
-			g_Enemy[i].Life   = Life;
+
+			g_Enemy[i].Life = Life;
 
 			g_Enemy[i].Use = true;//使用中にする
 
