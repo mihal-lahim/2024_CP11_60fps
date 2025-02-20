@@ -42,24 +42,8 @@ EnemyData g_EnemyTable[] =
 		{30,	10	,  0.2f,	 0.1f,	2,ITEM_ICE}, //7体目
 		{40,	6	,  0.2f,	 0.1f,	2,ITEM_ICE}, //8体目
 		{50,	3	,  0.2f,	 0.1f,	2,ITEM_ICE}, //9体目
-		{40,	6	,  0.2f,	 0.1f,	2,ITEM_ICE}, //10体目
+		{40,	12	,  0.2f,	 0.1f,	2,ITEM_ICE}, //10体目
 };
-
-
-//EnemyData g_EnemyTable[] =
-//{
-//	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-//		{18,	8	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //1体目
-//		{20,	4	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //2体目
-//		{30,	6	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //3体目
-//		{40,	8	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //4体目
-//		{40,	10	,  0.2f,	 0.1f,	RED,2,ITEM_FIRE}, //5体目
-//		{30,	4	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //6体目
-//		{30,	10	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //7体目
-//		{40,	6	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //8体目
-//		{50,	3	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //9体目
-//		{40,	6	,  0.2f,	 0.1f,	LIGHTCYAN,2,ITEM_ICE}, //10体目
-//};
 
 EnemyData g_EnemyTable2[] =
 {
@@ -211,50 +195,58 @@ void UpdateEnemy()
 			//敵に弾が当たると体力が減り、消える
 			if (g_Enemy[i].Hit)
 			{
-				BULLET* bullet = GetBullet();
-
-				//敵のタイプと弾のタイプを比較して与えられるダメージを決定する
-				switch (bullet->Type)
+				//使用中のみ当たり判定あり
+				if (g_Enemy[i].Use)
 				{
-				case ITEM_NONE:
-					g_Enemy[i].Life -= 2;
-					break;
-				case ITEM_FIRE:
-					//同タイプなら与えるダメージが減る
-					if (bullet->Type == g_Enemy[i].Type)
-					{
-						g_Enemy[i].Life--;
-					}
-					//違うタイプなら与えるダメージが増える
-					else
-					{
-						g_Enemy[i].Life -= 5;
-					}
-					break;
-				case ITEM_ICE:
-					//同タイプなら与えるダメージが減る
-					if (bullet->Type == g_Enemy[i].Type)
-					{
-						g_Enemy[i].Life--;
-					}
-					//違うタイプなら与えるダメージが増える
-					else
-					{
-						g_Enemy[i].Life -= 5;
-					}
-					break;
-				default:
-					break;
-				}
+					BULLET* bullet = GetBullet();
 
-				g_Enemy[i].Hit = false;
+					//敵のタイプと弾のタイプを比較して与えられるダメージを決定する
+					switch (bullet->Type)
+					{
+					case ITEM_NONE:
+						g_Enemy[i].Life -= 2;
+						break;
+					case ITEM_FIRE:
+						//同タイプなら与えるダメージが減る
+						if (bullet->Type == g_Enemy[i].Type)
+						{
+							g_Enemy[i].Life--;
+						}
+						//違うタイプなら与えるダメージが増える
+						else
+						{
+							g_Enemy[i].Life -= 5;
+						}
+						break;
+					case ITEM_ICE:
+						//同タイプなら与えるダメージが減る
+						if (bullet->Type == g_Enemy[i].Type)
+						{
+							g_Enemy[i].Life--;
+						}
+						//違うタイプなら与えるダメージが増える
+						else
+						{
+							g_Enemy[i].Life -= 5;
+						}
+						break;
+					default:
+						break;
+					}
 
-				if (g_Enemy[i].Life < 1)
-				{
-					g_Enemy[i].Use = false;
-					gotoxy(g_Enemy[i].PosX - 2, g_Enemy[i].PosY);
-					std::cout << "     ";
-					AddPoint(10);//スコア加算
+					g_Enemy[i].Hit = false;
+
+					if (g_Enemy[i].Life < 1)
+					{
+						g_Enemy[i].Use = false;
+						gotoxy(g_Enemy[i].PosX - 2, g_Enemy[i].PosY);
+						std::cout << "     ";
+						AddPoint(100);//スコア加算
+					}
+					//プレイヤー情報取得
+					PLAYER* Player = GetPlayer();
+					//当たった情報を飛ばす
+					Player->HitCount++;
 				}
 			}
 

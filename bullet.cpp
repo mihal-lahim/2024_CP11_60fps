@@ -64,11 +64,15 @@ void UpdateBullet(void)
 		//当たったら
 		if (g_Bullet[i].Hit == true)
 		{
-			g_Bullet[i].Use = false;
-			g_Bullet[i].Hit = false;
-			gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);
-			std::cout << "  ";
-
+			//使用中のみ当たり判定あり
+			if (g_Bullet[i].Use)
+			{
+				//Hitふぉるす
+				g_Bullet[i].Use = false;
+				g_Bullet[i].Hit = false;
+				gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);
+				std::cout << "  ";
+			}
 		}
 	}
 }
@@ -117,6 +121,8 @@ void DrawBullet(void)
 //生成処理
 void CreateBullet(float X,float Y,float Mx,float My)
 {
+	
+
 	//未使用の構造体を見つけて、弾のデータをセット
 	for (int i = 0; i < BULLET_MAX; i++)
 	{
@@ -129,6 +135,10 @@ void CreateBullet(float X,float Y,float Mx,float My)
 			g_Bullet[i].SpeedY = My;
 			g_Bullet[i].Use = true;
 
+			//プレイヤーーーーーーーーーーーーー情報取得
+			PLAYER* Player = GetPlayer();
+
+			Player->ShotCount++;
 			break;//弾を一つ作成したら終了
 		}
 	}

@@ -131,10 +131,7 @@ void UpdatePlayer(void)
 	//アイテムとの当たり判定
 	g_Player.ItemHit = PlayerCollisionItem(&g_Player);
 
-	if (g_Player.ItemHit)
-	{
-		AddPoint(100);
-	}
+	
 	//当たったアイテムにより処理を変える
 	switch (g_Player.ItemHit)
 	{
@@ -142,16 +139,20 @@ void UpdatePlayer(void)
 	case ITEM_ICE:
 		//アイテムタイプを入れる
 		g_Player.Item = g_Player.ItemHit;
-		
+		AddPoint(10);
 		break;
 	case ITEM_LIFE:
 		g_Player.Life += 3;
-	
+		AddPoint(1);
 		break;
 	default:
 		break;
 	}
 	
+	//ヒット率計算
+	g_Player.HitPercent = g_Player.HitCount / g_Player.ShotCount * 100;
+
+
 	//ゲームクリア
 	if (g_Player.Stage > STAGE_MAX)
 	{
@@ -188,6 +189,19 @@ void DrawPlayer(void)
 	gotoxy(g_Player.PosX, g_Player.PosY);
 	std::cout << "●";
 	textcolor(WHITE);
+
+#ifdef _DEBUG
+	gotoxy(10, 6);
+	std::cout << g_Player.ShotCount;
+	gotoxy(10, 7);
+	std::cout << g_Player.HitCount;
+	gotoxy(5, 8);
+	std::cout << g_Player.HitPercent;
+	gotoxy(10, 9);
+	std::cout << g_Player.ItemGetCount;
+
+
+#endif  _DEBUG
 }
 
 //構造体情報取得

@@ -94,9 +94,18 @@ void UpdateItem()
 			//プレイヤーが取得したら消える
 			if (g_Item[i].Hit)
 			{
-				g_Item[i].Use = false;
-				gotoxy(g_Item[i].PosX, g_Item[i].PosY);
-				std::cout << "   ";
+				//使用中のみ当たり判定あり
+				if (g_Item[i].Use)
+				{
+					g_Item[i].Use = false;
+					gotoxy(g_Item[i].PosX, g_Item[i].PosY);
+					std::cout << "   ";
+
+					PLAYER* Player = GetPlayer();
+
+					//アイテム取得カウント
+					Player->ItemGetCount++;
+				}
 			}
 		}
 	}
@@ -136,11 +145,6 @@ void DrawItem()
 			}
 
 			textcolor(WHITE);//色変え
-		}
-		else
-		{
-			//gotoxy(g_Item[i].PosX, g_Item[i].PosY);
-			//std::cout << "　";
 		}
 	}
 }

@@ -39,6 +39,14 @@ struct PLAYER
 	float ClearTime;//クリアタイム
 
 	int ShieldCharge;//シールドの残使用数
+
+	////スコア計算用//////
+	
+	float HitPercent;//弾のヒット率
+	float ShotCount;//弾を撃った回数
+	float HitCount;//弾が当たった回数
+
+	int ItemGetCount;//アイテムとった回数
 };
 
 //プロトタイプ宣言

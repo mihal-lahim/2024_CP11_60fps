@@ -25,8 +25,8 @@ bool EnemyCollisionBullet(ENEMY* ptEnemy)
 		if (tBullet[i].Use == true)
 		{
 			//’e‚Ì”»’è—p‚ÌŽlŠpŒ`‚ðì¬
-			float BulletLeft  = tBullet->PosX - BULLET_COLLISION_SIZEX + 0.8;
-			float BulletRight = tBullet->PosX + BULLET_COLLISION_SIZEX - 0.5;
+			float BulletLeft  = tBullet->PosX - BULLET_COLLISION_SIZEX;
+			float BulletRight = tBullet->PosX + BULLET_COLLISION_SIZEX;
 			float BulletUp	  = tBullet->PosY - BULLET_COLLISION_SIZEY;
 			float BulletDown  = tBullet->PosY + BULLET_COLLISION_SIZEY;
 
