@@ -10,6 +10,7 @@
 #include"shield.h"
 #include"item.h"
 #include"score.h"
+#include"result.h"
 
 ///////////////
 //グローバル変数
@@ -32,6 +33,8 @@ void InitPlayer(void)
 	g_Player.Stage = 1;			//現在のステージ
 	g_Player.ClearTime = 0;		//クリアタイム
 	g_Player.ShieldCharge = 2;	//シールド利用可能数
+	RESULT* Result = GetResult();
+	Result->TimeBonus = 10000;
 }
 
 //終了処理
@@ -150,7 +153,13 @@ void UpdatePlayer(void)
 	}
 	
 	//ヒット率計算
-	g_Player.HitPercent = g_Player.HitCount / g_Player.ShotCount * 100;
+	g_Player.HitPercent = g_Player.HitCount / g_Player.ShotCount;
+
+	RESULT* Result = GetResult();
+	if (g_Player.Stage < STAGE_MAX)
+	{
+		Result->TimeBonus--;
+	}
 
 
 	//ゲームクリア
