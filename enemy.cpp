@@ -370,8 +370,8 @@ void DrawEnemy()
 			if (g_Enemy[i].Life < 1)
 			{
 				g_Enemy[i].Life = 0;
-				gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
-				std::cout << "  ";
+				gotoxy(g_Enemy[i].PosX - 2, g_Enemy[i].PosY);
+				std::cout << "    ";
 			}
 		}
 	}

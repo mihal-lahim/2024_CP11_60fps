@@ -15,7 +15,7 @@ struct SCORE	//ÉXÉRÉA
 };
 
 void InitScore();
-void UninitScore();
+void UnInitScore();
 void UpdateScore();
 void DrawScore();
 

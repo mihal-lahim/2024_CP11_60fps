@@ -45,7 +45,7 @@ void UnInitScene(void)
 		break;
 	case SCENE_GAME:
 		//ゲーム本編の終了処理
-		UninitGame();
+		UnInitGame();
 		break;
 	case SCENE_RESULT:
 		//リザルト画面の終了処理

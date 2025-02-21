@@ -24,7 +24,7 @@ void InitScore()
 	memset(&g_tScore, 0, sizeof(SCORE));
 }
 
-void UninitScore()
+void UnInitScore()
 {
 }
 

@@ -26,7 +26,7 @@ void InitItem()
 }
 
 //終了処理
-void UninitItem()
+void UnInitItem()
 {
 }
 

@@ -35,7 +35,7 @@ struct ITEM
 //////////////////
 
 void InitItem();
-void UninitItem();
+void UnInitItem();
 void UpdateItem();
 void DrawItem();
 

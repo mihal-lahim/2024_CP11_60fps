@@ -24,15 +24,15 @@ void InitGame(void)
 
 }
 
-void UninitGame(void)
+void UnInitGame(void)
 {
 	UnInitPlayer();
 	UnInitBullet();
 	UnInitEnemy();
 	UnInitShield();
-	UninitScore();
+	UnInitScore();
 	//UnInitField();
-	UninitItem();
+	UnInitItem();
 	UnInitUI();
 }
 
