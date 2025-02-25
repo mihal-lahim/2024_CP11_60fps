@@ -31,6 +31,12 @@ void UpdateResult(void)
 	g_Result.TotalScore = GetScore()->nPoint * Player->ItemGetCount;
 	g_Result.TotalScore *= Player->HitPercent;
 	
+	//タイムボーナス負の数になるの防止
+	if (g_Result.TimeBonus < 0)
+	{
+		g_Result.TimeBonus = 1;
+	}
+
 	g_Result.TotalScore *= g_Result.TimeBonus;
 
 }
@@ -45,7 +51,7 @@ void DrawResult(void)
 	gotoxy(32, 9);
 	std::cout << "CLEARTIME  :" << Player->ClearTime / 1000 << " sec";
 	gotoxy(32, 11);
-	std::cout << "HIT LATE   :" << Player->HitPercent * 100 << " %";
+	std::cout << "HIT LATE   :" << round(Player->HitPercent * 1000) / 10 << " %";
 	gotoxy(32, 13);
 	std::cout << "GET ITEMS  :" << Player->ItemGetCount;
 	gotoxy(32, 15);

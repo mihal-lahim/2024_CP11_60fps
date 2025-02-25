@@ -4,12 +4,12 @@
 //////////////
 //マクロ定義
 //////////////
-#define PLAYER_MOVE_SPEED_X (MOVE_SPEED_X * 0.5)
-#define PLAYER_MOVE_SPEED_Y (MOVE_SPEED_Y * 0.5)
-#define GRAVITY        (0.04)//重力
-#define JUMP_POWER     (0.75)//ジャンプ力
-#define RESIST_X       (0.4)//地上のX方向摩擦
-#define RESIST_X_AIR   (0.01)//空中のX方向摩擦
+#define PLAYER_MOVE_SPEED_X (0.25)
+#define PLAYER_MOVE_SPEED_Y (0.1)
+//#define GRAVITY        (0.04)//重力
+//#define JUMP_POWER     (0.75)//ジャンプ力
+//#define RESIST_X       (0.4)//地上のX方向摩擦
+//#define RESIST_X_AIR   (0.01)//空中のX方向摩擦
 #define STAGE_MAX       (5)
 
 //プレイヤーデータ構造体
@@ -39,6 +39,9 @@ struct PLAYER
 	float ClearTime;//クリアタイム
 
 	int ShieldCharge;//シールドの残使用数
+
+	float Heat;//プレイヤーの温度
+	float HeatSpeed;//温度による速度変更の値
 
 	////スコア計算用//////
 	

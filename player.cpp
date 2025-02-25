@@ -33,8 +33,10 @@ void InitPlayer(void)
 	g_Player.Stage = 1;			//現在のステージ
 	g_Player.ClearTime = 0;		//クリアタイム
 	g_Player.ShieldCharge = 2;	//シールド利用可能数
+	g_Player.Heat = 36.0;		//温度
+	g_Player.HeatSpeed = 1;		//速度乗算値
 	RESULT* Result = GetResult();
-	Result->TimeBonus = 10000;
+	Result->TimeBonus = 10000;	//タイムボーナス
 }
 
 //終了処理
@@ -45,32 +47,37 @@ void UnInitPlayer(void)
 //更新処理
 void UpdatePlayer(void)
 {
-	
-
 	//移動量のリセット
 	g_Player.SpeedX = 0;
 	g_Player.SpeedY = 0;
+
+	//速度値のリセット
+	g_Player.HeatSpeed = 1;
 
 	//カーソルキーの入力で上下左右に移動する
 	if (GetKeyPress(KEYNAME::KEY_W) && g_Player.PosY > SCREEN_TOP + 2)
 	{
 		g_Player.SpeedY = -PLAYER_MOVE_SPEED_Y;
-		g_Player.Direct = 90; //上向き
+	
+		//g_Player.Direct = 90; //上向き
 	}
 	if (GetKeyPress(KEYNAME::KEY_A) && g_Player.PosX > SCREEN_LEFT + 2)
 	{
 		g_Player.SpeedX = -PLAYER_MOVE_SPEED_X;
-		g_Player.Direct = 0; //左向き
+	
+		//g_Player.Direct = 0; //左向き
 	}
 	if (GetKeyPress(KEYNAME::KEY_S) && g_Player.PosY < SCREEN_BOTTOM - 1)
 	{
 		g_Player.SpeedY = PLAYER_MOVE_SPEED_Y;
-		g_Player.Direct = 270; //下向き
+		
+		//g_Player.Direct = 270; //下向き
 	}
 	if (GetKeyPress(KEYNAME::KEY_D) && g_Player.PosX < SCREEN_RIGHT - 2)
 	{
 		g_Player.SpeedX = PLAYER_MOVE_SPEED_X;
-		g_Player.Direct = 180; //右向き
+	
+		//g_Player.Direct = 180; //右向き
 	}
 	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//シールド
 	{
@@ -96,6 +103,42 @@ void UpdatePlayer(void)
 			CreateShield(g_Player.PosX, g_Player.PosY, 2.0);
 		}
 	}
+
+	//熱量を移動力に変換  -を扱うときおかしい
+	g_Player.HeatSpeed += g_Player.Heat - 36;
+	g_Player.SpeedX *= g_Player.HeatSpeed;
+	g_Player.SpeedY *= g_Player.HeatSpeed;
+
+	//反転防止
+	if (GetKeyPress(KEYNAME::KEY_A))
+	{
+		if (g_Player.SpeedX > 0)//A(←)押して正の値になってしまったら負の限りなく小さい数に
+		{
+			g_Player.SpeedX = -0.1;
+		}
+	}
+	if (GetKeyPress(KEYNAME::KEY_D))
+	{
+		if (g_Player.SpeedX < 0)//D(→)押して負の値になってしまったら正の限りなく小さい数に
+		{
+			g_Player.SpeedX = 0.1;
+		}
+	}
+	if (GetKeyPress(KEYNAME::KEY_W))
+	{
+		if (g_Player.SpeedY > 0)//W(↑)押して正の値になってしまったら負の限りなく小さい数に
+		{
+			g_Player.SpeedY = -0.1;
+		}
+	}
+	if (GetKeyPress(KEYNAME::KEY_S))
+	{
+		if (g_Player.SpeedY < 0)//S(↓)押して負の値になってしまったら正の限りなく小さい数に
+		{
+			g_Player.SpeedY = 0.1;
+		}
+	}
+	
 
 	//現在の位置保存
 	g_Player.OldPosX = g_Player.PosX;
@@ -155,12 +198,26 @@ void UpdatePlayer(void)
 	//ヒット率計算
 	g_Player.HitPercent = g_Player.HitCount / g_Player.ShotCount;
 
+	//タイムボーナス減算
 	RESULT* Result = GetResult();
 	if (g_Player.Stage < STAGE_MAX)
 	{
 		Result->TimeBonus--;
 	}
 
+
+	//現在温度計算
+	switch (g_Player.Item)
+	{
+	case ITEM_FIRE:
+		g_Player.Heat += 0.002;
+		break;
+	case ITEM_ICE:
+		g_Player.Heat -= 0.002;
+		break;
+	default:
+		break;
+	}
 
 	//ゲームクリア
 	if (g_Player.Stage > STAGE_MAX)
@@ -208,8 +265,8 @@ void DrawPlayer(void)
 	std::cout << g_Player.HitPercent;
 	gotoxy(10, 9);
 	std::cout << g_Player.ItemGetCount;
-
-
+	gotoxy(10, 11);
+	std::cout << g_Player.Heat << "℃";
 #endif  _DEBUG
 }
 
