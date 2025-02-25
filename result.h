@@ -1,5 +1,8 @@
 #pragma once
 
+//////////////
+//結果構造体//
+//////////////
 struct RESULT
 {
 	int TotalScore;//総合スコア

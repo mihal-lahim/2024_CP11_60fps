@@ -48,12 +48,9 @@ void DrawScore()
 	textbackground(UI->Color);
 	gotoxy(70, 15);
 	std::cout << "SCORE";
-
 	gotoxy(75 - Shift, 17);
 	std::cout << g_tScore.nPoint << " ";
-	
 	textbackground(BLACK);
-
 }
 
 void ClearPoint()

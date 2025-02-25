@@ -6,11 +6,9 @@
 #include"player.h"
 #include"item.h"
 #include"collision.h"
-
-////////////////
-//グローバル変数
-////////////////
-
+//////////////////
+//グローバル変数//
+//////////////////
 BULLET g_Bullet[BULLET_MAX];//弾構造体配列
 
 //初期化処理
@@ -22,8 +20,7 @@ void InitBullet(void)
 
 //終了処理
 void UnInitBullet(void)
-{
-	
+{	
 }
 
 //更新処理
@@ -43,24 +40,19 @@ void UpdateBullet(void)
 			g_Bullet[i].PosX += g_Bullet[i].SpeedX;
 			g_Bullet[i].PosY += g_Bullet[i].SpeedY;
 		}
-
 		//現在の座標が画面外なら使用中フラグをfalseにする
 		if ((g_Bullet[i].PosX < SCREEN_LEFT) || (g_Bullet[i].PosX > SCREEN_RIGHT) || 
 			(g_Bullet[i].PosY < SCREEN_TOP)  || (g_Bullet[i].PosY > SCREEN_BOTTOM))
 		{
 			g_Bullet[i].Use = false;//構造体を未使用にする
 		}
-
 		//取得しているアイテムによって弾の属性を変える
 		PLAYER* Player = GetPlayer();
-		
 		//アイテムタイプを入れる
 		g_Bullet[i].Type = Player->Item;
 
 		//当たり判定////////////////
-
 		g_Bullet[i].Hit = BulletCollisionEnemy(&g_Bullet[i]);
-
 		//当たったら
 		if (g_Bullet[i].Hit == true)
 		{
@@ -83,14 +75,12 @@ void DrawBullet(void)
 	//使用中の構造体をすべて表示する
 	for (int i = 0; i < BULLET_MAX; i++)
 	{
-
 		//前回の位置から移動したか？本当はY座標でも確認が必要
 		if (g_Bullet[i].PosX != g_Bullet[i].OldPosX ||
 			g_Bullet[i].PosY != g_Bullet[i].OldPosY)
 		{
 			gotoxy(g_Bullet[i].OldPosX, g_Bullet[i].OldPosY);//前回の場所の消去
 			std::cout << "  ";
-
 			//構造体が使用中なら
 			if (g_Bullet[i].Use == true)
 			{
@@ -121,8 +111,6 @@ void DrawBullet(void)
 //生成処理
 void CreateBullet(float X,float Y,float Mx,float My)
 {
-	
-
 	//未使用の構造体を見つけて、弾のデータをセット
 	for (int i = 0; i < BULLET_MAX; i++)
 	{
@@ -134,10 +122,8 @@ void CreateBullet(float X,float Y,float Mx,float My)
 			g_Bullet[i].SpeedX = Mx;
 			g_Bullet[i].SpeedY = My;
 			g_Bullet[i].Use = true;
-
-			//プレイヤーーーーーーーーーーーーー情報取得
+			//プレイヤー情報取得
 			PLAYER* Player = GetPlayer();
-
 			Player->ShotCount++;
 			break;//弾を一つ作成したら終了
 		}

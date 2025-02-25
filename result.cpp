@@ -7,17 +7,22 @@
 #include"score.h"
 #include"Player.h"
 
+//////////////////
+//グローバル変数//
+//////////////////
 RESULT g_Result;
 
-
+//初期化処理
 void InitResult(void)
 {
 }
 
+//終了処理
 void UninitResult(void)
 {
 }
 
+//更新処理
 void UpdateResult(void)
 {
 	if (GetKeyTrigger(KEYNAME::KEY_ENTER))
@@ -26,19 +31,15 @@ void UpdateResult(void)
 		SetScene(SCENE_TITLE);
 	}
 	PLAYER* Player = GetPlayer();
-
 	//スコア計算
 	g_Result.TotalScore = GetScore()->nPoint * Player->ItemGetCount;
 	g_Result.TotalScore *= Player->HitPercent;
-	
 	//タイムボーナス負の数になるの防止
 	if (g_Result.TimeBonus < 0)
 	{
 		g_Result.TimeBonus = 1;
 	}
-
 	g_Result.TotalScore *= g_Result.TimeBonus;
-
 }
 
 void DrawResult(void)
@@ -58,7 +59,6 @@ void DrawResult(void)
 	std::cout << "TIME BONUS :" << g_Result.TimeBonus;
 	gotoxy(32, 17);
 	std::cout << "TOTAL SCORE:" << g_Result.TotalScore;
-
 	gotoxy(30, 21);
 	std::cout << "ENTER　でタイトルに戻る";
 }

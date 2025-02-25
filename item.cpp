@@ -6,11 +6,9 @@
 #include"collision.h"
 #include"game.h"
 
-
 //////////////////
 //グローバル変数//
 //////////////////
-
 ITEM g_Item[ITEM_MAX];//アイテム構造体配列
 DWORD lastItemSetTime;//最後にアイテムを生成した時間
 
@@ -35,10 +33,8 @@ void UpdateItem()
 {
 	//アイテム使用数
 	int UseCount = 0;
-
 	//消去アイテム
 	int Delete = rand() % ITEM_MAX;
-
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
 		if (g_Item[i].Use == true)
@@ -90,7 +86,6 @@ void UpdateItem()
 
 			//当たり判定//////////////
 			g_Item[i].Hit = ItemCollisionPlayer(&g_Item[i]);
-
 			//プレイヤーが取得したら消える
 			if (g_Item[i].Hit)
 			{
@@ -100,9 +95,7 @@ void UpdateItem()
 					g_Item[i].Use = false;
 					gotoxy(g_Item[i].PosX, g_Item[i].PosY);
 					std::cout << "   ";
-
 					PLAYER* Player = GetPlayer();
-
 					//アイテム取得カウント
 					Player->ItemGetCount++;
 				}
@@ -143,7 +136,6 @@ void DrawItem()
 			default:
 				break;
 			}
-
 			textcolor(WHITE);//色変え
 		}
 	}
@@ -163,7 +155,6 @@ void SetItem(float x, float y, int type)
 			g_Item[i].OldPosX = x;
 			g_Item[i].OldPosY = y;
 			g_Item[i].Type = type;
-
 			//アイテムタイプにより色を変える
 			switch (type)
 			{
@@ -185,7 +176,6 @@ void SetItem(float x, float y, int type)
 			default:
 				break;
 			}
-
 			break;
 		}
 	}

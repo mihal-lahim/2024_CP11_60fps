@@ -45,7 +45,6 @@ void InitKey()
 {
 	//キー情報を０クリアする
 	memset(&tKeyData[0], 0, sizeof(tKeyData));
-
 }
 
 //=============================================================================
@@ -53,7 +52,6 @@ void InitKey()
 //=============================================================================
 void UninitKey()
 {
-
 }
 
 //=============================================================================
@@ -66,22 +64,17 @@ void UpdateKey()
 	{
 		// 前回のキー情報を保存
 		tKeyData[nKey[nCnt].nName].nPressOld = tKeyData[nKey[nCnt].nName].nPress;
-
 		// 現在のキー情報を取得
 		tKeyData[nKey[nCnt].nName].nPress = inport(nKey[nCnt].nCode);
-
 		// トリガー情報
 		tKeyData[nKey[nCnt].nName].nTrigger =
 			(tKeyData[nKey[nCnt].nName].nPressOld ^ tKeyData[nKey[nCnt].nName].nPress) & // 状態変化発生
 			tKeyData[nKey[nCnt].nName].nPress;                                           // キー押下
-
 		// リリース情報
 		tKeyData[nKey[nCnt].nName].nRelease =
 			(tKeyData[nKey[nCnt].nName].nPressOld ^ tKeyData[nKey[nCnt].nName].nPress) & // 状態変化発生
 			(~tKeyData[nKey[nCnt].nName].nPress);                                        // キー解放
-
 	}
-
 }
 
 //=============================================================================
@@ -110,7 +103,6 @@ void DrawKey()
 	PrintButton(tKeyData[KEYNAME::KEY_RIGHT]);
 	std::cout << "   ";
 	PrintButton(tKeyData[KEYNAME::KEY_ENTER]);
-
 #endif
 }
 

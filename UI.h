@@ -1,6 +1,8 @@
 #pragma once
 
-
+////////////
+//UIç\ë¢ëÃ//
+////////////
 struct UI
 {
 	int UpdateFlg;

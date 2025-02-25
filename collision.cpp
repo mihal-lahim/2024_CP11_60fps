@@ -3,7 +3,6 @@
 #include"collision.h"
 #include<iostream>
 
-
 //敵キャラクターとプレイヤー弾の当たり判定
 //敵から呼び出す関数
 //戻り値　true 当たり　false 外れ
@@ -11,13 +10,11 @@ bool EnemyCollisionBullet(ENEMY* ptEnemy)
 {
 	//弾の配列のポインター取得
 	BULLET* tBullet = GetBullet();
-
 	//敵の判定用の四角形を作成
 	float EnemyLeft	 = ptEnemy->PosX - ENEMY_COLLISION_SIZEX;
 	float EnemyRight = ptEnemy->PosX + ENEMY_COLLISION_SIZEX;
 	float EnemyUp	 = ptEnemy->PosY - ENEMY_COLLISION_SIZEY;
 	float EnemyDown  = ptEnemy->PosY + ENEMY_COLLISION_SIZEY;
-
 	//全ての弾とのチェック
 	for (int i = 0; i < BULLET_MAX; i++)
 	{
@@ -29,7 +26,6 @@ bool EnemyCollisionBullet(ENEMY* ptEnemy)
 			float BulletRight = tBullet->PosX + BULLET_COLLISION_SIZEX;
 			float BulletUp	  = tBullet->PosY - BULLET_COLLISION_SIZEY;
 			float BulletDown  = tBullet->PosY + BULLET_COLLISION_SIZEY;
-
 			//当たり判定
 			if (EnemyRight < BulletLeft)
 			{
@@ -47,7 +43,6 @@ bool EnemyCollisionBullet(ENEMY* ptEnemy)
 			{
 				continue;
 			}
-
 			//敵と弾が当たった
 			return true;
 		}
@@ -66,10 +61,8 @@ bool ShieldCollisionEnemy(SHIELD* ptShield)
 	float ShieldRight = ptShield->PosX + SHIELD_COLLISION_SIZEX;
 	float ShieldUp = ptShield->PosY - SHIELD_COLLISION_SIZEY;
 	float ShieldDown = ptShield->PosY + SHIELD_COLLISION_SIZEY;
-
 	//敵キャラクターの構造体ポインタを取得
 	ENEMY* tEnemy = GetEnemy();
-
 	//全ての敵構造体配列とチェック
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
@@ -81,7 +74,6 @@ bool ShieldCollisionEnemy(SHIELD* ptShield)
 			float EnemyRight = tEnemy[i].PosX + ENEMY_COLLISION_SIZEX;
 			float EnemyUp = tEnemy[i].PosY - ENEMY_COLLISION_SIZEY;
 			float EnemyDown = tEnemy[i].PosY + ENEMY_COLLISION_SIZEY;
-
 			//当たり判定
 			if (ShieldRight < EnemyLeft)
 			{
@@ -99,7 +91,6 @@ bool ShieldCollisionEnemy(SHIELD* ptShield)
 			{
 				continue;
 			}
-
 			//当たり
 			return true;
 		}
@@ -118,10 +109,8 @@ bool EnemyCollisionShield(ENEMY* ptEnemy)
 	float EnemyRight = ptEnemy->PosX + ENEMY_COLLISION_SIZEX;
 	float EnemyUp = ptEnemy->PosY - ENEMY_COLLISION_SIZEY;
 	float EnemyDown = ptEnemy->PosY + ENEMY_COLLISION_SIZEY;
-
 	//シールドの構造体ポインタを取得
 	SHIELD* tShield = GetShield();
-
 	//全てのシールド構造体配列とチェック
 	for (int i = 0; i < SHIELD_MAX; i++)
 	{
@@ -133,7 +122,6 @@ bool EnemyCollisionShield(ENEMY* ptEnemy)
 			float ShieldRight = tShield[i].PosX + SHIELD_COLLISION_SIZEX;
 			float ShieldUp = tShield[i].PosY - SHIELD_COLLISION_SIZEY;
 			float ShieldDown = tShield[i].PosY + SHIELD_COLLISION_SIZEY;
-
 			//当たり判定
 			if (ShieldRight < EnemyLeft)
 			{
@@ -169,10 +157,8 @@ int PlayerCollisionItem(PLAYER* ptPlayer)
 	float PlayerRight = ptPlayer->PosX + CHARACTER_COLLISION_SIZEX;
 	float PlayerUp = ptPlayer->PosY - CHARACTER_COLLISION_SIZEY;
 	float PlayerDown = ptPlayer->PosY + CHARACTER_COLLISION_SIZEY;
-
 	//アイテムの構造体ポインタを取得
 	ITEM* tItem = GetItem();
-
 	//全てのアイテム構造体配列とチェック
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
@@ -184,7 +170,6 @@ int PlayerCollisionItem(PLAYER* ptPlayer)
 			float ItemRight = tItem[i].PosX + ITEM_COLLISION_SIZEX;
 			float ItemUp = tItem[i].PosY - ITEM_COLLISION_SIZEY;
 			float ItemDown = tItem[i].PosY + ITEM_COLLISION_SIZEY;
-
 			//当たり判定
 			if (PlayerRight < ItemLeft)
 			{
@@ -202,10 +187,7 @@ int PlayerCollisionItem(PLAYER* ptPlayer)
 			{
 				continue;
 			}
-
-			//当たり アイテム分け
-			//ptPlayer->Item = tItem[i].Type;
-
+			//アイテムタイプで返り値を指定
 			switch (tItem[i].Type)
 			{
 			case ITEM_FIRE:
@@ -235,16 +217,13 @@ bool ItemCollisionPlayer(ITEM* ptItem)
 	float ItemRight = ptItem->PosX + ITEM_COLLISION_SIZEX;
 	float ItemUp = ptItem->PosY - ITEM_COLLISION_SIZEY;
 	float ItemDown = ptItem->PosY + ITEM_COLLISION_SIZEY;
-
 	//プレイヤーの構造体ポインタを取得
 	PLAYER* tPlayer = GetPlayer();
-
 	//プレイヤーの短形を作成
 	float PlayerLeft = tPlayer->PosX - CHARACTER_COLLISION_SIZEX;
 	float PlayerRight = tPlayer->PosX + CHARACTER_COLLISION_SIZEX;
 	float PlayerUp = tPlayer->PosY - CHARACTER_COLLISION_SIZEY;
 	float PlayerDown = tPlayer->PosY + CHARACTER_COLLISION_SIZEY;
-
 	//当たり判定
 	if (PlayerRight < ItemLeft || PlayerLeft > ItemRight|| 
 		PlayerUp    > ItemDown || ItemUp   > PlayerDown)
@@ -264,16 +243,13 @@ bool EnemyCollisionPlayer(ENEMY* ptEnemy)
 	float EnemyRight = ptEnemy->PosX + ENEMY_COLLISION_SIZEX;
 	float EnemyUp = ptEnemy->PosY - ENEMY_COLLISION_SIZEY;
 	float EnemyDown = ptEnemy->PosY + ENEMY_COLLISION_SIZEY;
-
 	//プレイヤーの構造体ポインタを取得
 	PLAYER* tPlayer = GetPlayer();
-
 	//プレイヤーの短形を作成
 	float PlayerLeft = tPlayer->PosX - CHARACTER_COLLISION_SIZEX;
 	float PlayerRight = tPlayer->PosX + CHARACTER_COLLISION_SIZEX - 0.5;
 	float PlayerUp = tPlayer->PosY - CHARACTER_COLLISION_SIZEY;
 	float PlayerDown = tPlayer->PosY + CHARACTER_COLLISION_SIZEY - 0.4;
-
 	//当たり判定
 	if (PlayerRight < EnemyLeft || PlayerLeft > EnemyRight ||
 		PlayerUp > EnemyDown || EnemyUp > PlayerDown)
@@ -293,10 +269,8 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 	float PlayerRight = ptPlayer->PosX + CHARACTER_COLLISION_SIZEX - 0.5;
 	float PlayerUp = ptPlayer->PosY - CHARACTER_COLLISION_SIZEY;
 	float PlayerDown = ptPlayer->PosY + CHARACTER_COLLISION_SIZEY - 0.4;
-
 	//敵キャラクターの構造体ポインタを取得
 	ENEMY* tEnemy = GetEnemy();
-
 	//全ての敵構造体配列とチェック
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
@@ -308,7 +282,6 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 			float EnemyRight = tEnemy[i].PosX + ENEMY_COLLISION_SIZEX;
 			float EnemyUp = tEnemy[i].PosY - ENEMY_COLLISION_SIZEY;
 			float EnemyDown = tEnemy[i].PosY + ENEMY_COLLISION_SIZEY;
-
 			//当たり判定
 			if (PlayerRight < EnemyLeft)
 			{
@@ -326,7 +299,6 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 			{
 				continue;
 			}
-
 			//当たり
 			return true;
 		}
@@ -335,14 +307,12 @@ bool PlayerCollisionEnemy(PLAYER* ptPlayer)
 	return false;
 }
 
-
 //弾と敵の当たり判定
 //弾から呼び出す関数
 bool BulletCollisionEnemy(BULLET* ptBullet)
 {
 	//弾の配列のポインター取得
 	ENEMY* tEnemy = GetEnemy();
-
 	//弾の判定用の四角形を作成
 	float BulletLeft = ptBullet->PosX - BULLET_COLLISION_SIZEX;
 	float BulletRight = ptBullet->PosX + BULLET_COLLISION_SIZEX;
@@ -359,7 +329,6 @@ bool BulletCollisionEnemy(BULLET* ptBullet)
 			float EnemyRight = tEnemy->PosX + ENEMY_COLLISION_SIZEX;
 			float EnemyUp = tEnemy->PosY - ENEMY_COLLISION_SIZEY;
 			float EnemyDown = tEnemy->PosY + ENEMY_COLLISION_SIZEY;
-
 			//当たり判定
 			if (EnemyRight < BulletLeft)
 			{
@@ -377,7 +346,6 @@ bool BulletCollisionEnemy(BULLET* ptBullet)
 			{
 				continue;
 			}
-
 			//敵と弾が当たった
 			return true;
 		}
@@ -385,5 +353,3 @@ bool BulletCollisionEnemy(BULLET* ptBullet)
 	//どの弾とも当たっていない
 	return false;
 }
-
-

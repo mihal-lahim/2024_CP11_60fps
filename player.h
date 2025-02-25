@@ -17,29 +17,19 @@ struct PLAYER
 {
 	float PosX;//現在のX座標
 	float PosY;//現在のY座標
-
 	float OldPosX;//過去のX座標
 	float OldPosY;//過去のY座標
-
 	float SpeedX;//X座標の移動量
 	float SpeedY;//Y座標の移動量
-
 	int Life;//体力
-	
 	float Direct; //向き
-
 	bool Hit; //ヒットフラグ
 	int ItemHit;//アイテムヒットフラグ
-
 	int Kill; //敵を倒した数
-
 	int Item; //取得したアイテムコード
-
 	int Stage;//現在のステージ
 	float ClearTime;//クリアタイム
-
 	int ShieldCharge;//シールドの残使用数
-
 	float Heat;//プレイヤーの温度
 	float HeatSpeed;//温度による速度変更の値
 
@@ -48,7 +38,6 @@ struct PLAYER
 	float HitPercent;//弾のヒット率
 	float ShotCount;//弾を撃った回数
 	float HitCount;//弾が当たった回数
-
 	int ItemGetCount;//アイテムとった回数
 };
 

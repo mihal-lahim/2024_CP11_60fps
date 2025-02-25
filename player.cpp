@@ -25,7 +25,6 @@ void InitPlayer(void)
 	g_Player.PosY =  15;//プレイヤーのY位置
 	g_Player.OldPosX = 0;
 	g_Player.OldPosY = 0;
-
 	g_Player.Direct = 0.0;		//向き
 	g_Player.Hit = false;		//当たってない
 	g_Player.Item = ITEM_NONE;	//アイテムなし
@@ -50,42 +49,34 @@ void UpdatePlayer(void)
 	//移動量のリセット
 	g_Player.SpeedX = 0;
 	g_Player.SpeedY = 0;
-
 	//速度値のリセット
 	g_Player.HeatSpeed = 1;
-
 	//カーソルキーの入力で上下左右に移動する
 	if (GetKeyPress(KEYNAME::KEY_W) && g_Player.PosY > SCREEN_TOP + 2)
 	{
 		g_Player.SpeedY = -PLAYER_MOVE_SPEED_Y;
-	
 		//g_Player.Direct = 90; //上向き
 	}
 	if (GetKeyPress(KEYNAME::KEY_A) && g_Player.PosX > SCREEN_LEFT + 2)
 	{
 		g_Player.SpeedX = -PLAYER_MOVE_SPEED_X;
-	
 		//g_Player.Direct = 0; //左向き
 	}
 	if (GetKeyPress(KEYNAME::KEY_S) && g_Player.PosY < SCREEN_BOTTOM - 1)
 	{
 		g_Player.SpeedY = PLAYER_MOVE_SPEED_Y;
-		
 		//g_Player.Direct = 270; //下向き
 	}
 	if (GetKeyPress(KEYNAME::KEY_D) && g_Player.PosX < SCREEN_RIGHT - 2)
 	{
 		g_Player.SpeedX = PLAYER_MOVE_SPEED_X;
-	
 		//g_Player.Direct = 180; //右向き
 	}
 	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//シールド
 	{
 		int CountShield = 0;
-
 		//シールド構造体取得
 		SHIELD* shield = GetShield();
-
 		for (int i = 0; i < SHIELD_MAX; i++)
 		{
 			//使ってるシールドを数える
@@ -94,8 +85,7 @@ void UpdatePlayer(void)
 				CountShield++;
 			}
 		}
-
-		//シールドがついていなければシールドはれる またシールドの残りがあれば
+		//シールドがプレイヤーについていない、かつシールドの残量があればシールドを張れる
 		if (CountShield == 0 && g_Player.ShieldCharge > 0)
 		{
 			g_Player.ShieldCharge--;
@@ -103,12 +93,10 @@ void UpdatePlayer(void)
 			CreateShield(g_Player.PosX, g_Player.PosY, 2.0);
 		}
 	}
-
-	//熱量を移動力に変換  -を扱うときおかしい
+	//熱量を移動力に変換
 	g_Player.HeatSpeed += g_Player.Heat - 36;
 	g_Player.SpeedX *= g_Player.HeatSpeed;
 	g_Player.SpeedY *= g_Player.HeatSpeed;
-
 	//反転防止
 	if (GetKeyPress(KEYNAME::KEY_A))
 	{
@@ -138,18 +126,12 @@ void UpdatePlayer(void)
 			g_Player.SpeedY = 0.1;
 		}
 	}
-	
-
 	//現在の位置保存
 	g_Player.OldPosX = g_Player.PosX;
 	g_Player.OldPosY = g_Player.PosY;
-
 	//座標更新
 	g_Player.PosX += g_Player.SpeedX;
 	g_Player.PosY += g_Player.SpeedY;
-
-	
-
 	//弾発射　上下左右
 	if (GetKeyPress(KEYNAME::KEY_UP)	|| GetKeyPress(KEYNAME::KEY_DOWN) ||
 		GetKeyPress(KEYNAME::KEY_RIGHT) || GetKeyPress(KEYNAME::KEY_LEFT))
@@ -157,27 +139,21 @@ void UpdatePlayer(void)
 		Shot();
 	}
 	
-	//当たり判定///////////////////
-	
+	//当たり判定//////////////////
 	//敵キャラクターとの当たり判定
 	g_Player.Hit = PlayerCollisionEnemy(&g_Player);
-
 	if (g_Player.Hit)//プレイヤーが死んだらタイトルへ移動　現在当たったらだが、体力制御にする
 	{
 		g_Player.Life--;
 		g_Player.Item = ITEM_NONE;
-
 		if (g_Player.Life == 0)
 		{
 			//シーンをタイトルへ移動させる
 			SetScene(SCENE_TITLE);
 		}
 	}
-
 	//アイテムとの当たり判定
 	g_Player.ItemHit = PlayerCollisionItem(&g_Player);
-
-	
 	//当たったアイテムにより処理を変える
 	switch (g_Player.ItemHit)
 	{
@@ -194,18 +170,14 @@ void UpdatePlayer(void)
 	default:
 		break;
 	}
-	
 	//ヒット率計算
 	g_Player.HitPercent = g_Player.HitCount / g_Player.ShotCount;
-
 	//タイムボーナス減算
 	RESULT* Result = GetResult();
 	if (g_Player.Stage < STAGE_MAX)
 	{
 		Result->TimeBonus--;
 	}
-
-
 	//現在温度計算
 	switch (g_Player.Item)
 	{
@@ -218,7 +190,6 @@ void UpdatePlayer(void)
 	default:
 		break;
 	}
-
 	//ゲームクリア
 	if (g_Player.Stage > STAGE_MAX)
 	{
@@ -235,7 +206,6 @@ void DrawPlayer(void)
 		gotoxy(g_Player.OldPosX, g_Player.OldPosY);
 		std::cout << "  ";
 	}
-
 	//アイテムにより色変え
 	switch (g_Player.Item)
 	{
@@ -255,7 +225,6 @@ void DrawPlayer(void)
 	gotoxy(g_Player.PosX, g_Player.PosY);
 	std::cout << "●";
 	textcolor(WHITE);
-
 #ifdef _DEBUG
 	gotoxy(10, 6);
 	std::cout << g_Player.ShotCount;
@@ -283,7 +252,6 @@ void Shot(void)
 	//弾の速さ（加える力）の指定に使用する
 	float direct_x = 0.0;//横方向
 	float direct_y = 0.0;//縦方向
-
 	if (GetKeyPress(KEYNAME::KEY_UP))
 	{
 		direct_y += -1;
@@ -301,8 +269,6 @@ void Shot(void)
 	{
 		direct_x += -2;
 	}
-
-
 	//弾生成
 	CreateBullet(g_Player.PosX, g_Player.PosY, direct_x, direct_y);
 }

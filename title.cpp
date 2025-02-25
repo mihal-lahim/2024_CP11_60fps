@@ -6,21 +6,23 @@
 #include"inputkey.h"
 #include"score.h"
 
+//初期化処理
 void InitTitle(void)
 {
 }
 
+//終了処理
 void UninitTitle(void)
 {
 }
 
+//更新処理
 void UpdateTitle(void)
 {
 	if (GetKeyTrigger(KEYNAME::KEY_ENTER))
 	{
 		//シーンをゲーム本編へ移動させる
 		SetScene(SCENE_GAME);
-
 		//スコアのリセット
 		ClearPoint();
 	}

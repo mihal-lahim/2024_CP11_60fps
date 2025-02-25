@@ -8,21 +8,17 @@
 #include"score.h"
 #include"item.h"
 
-
-
-///////////////////////////////////////
-//グローバル変数
-///////////////////////////////////////
+//////////////////
+//グローバル変数//
+//////////////////
 ENEMY g_Enemy[ENEMY_MAX];//敵構造体配列
 int g_KillCount = 0;//キル数
 DWORD StageClearTime;//クリアタイム
 DWORD StageBetween;//ステージとステージの間
 
-int NowTime = 0;//現在時刻
-
-///////////////////////////////////////
-//敵キャラ初期配置情報　構造体
-///////////////////////////////////////
+////////////////////////////////
+//敵キャラ初期配置情報　構造体//
+////////////////////////////////
 struct EnemyData
 {
 	float X, Y;		//座標情報
@@ -30,9 +26,10 @@ struct EnemyData
 	int Life;		//敵の体力
 	int Type;		//タイプ
 };
-///////////////////////////////////////
-//敵初期配置データテーブル
-///////////////////////////////////////
+
+////////////////////////////
+//敵初期配置データテーブル//
+////////////////////////////
 EnemyData g_EnemyTable[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
@@ -108,19 +105,16 @@ EnemyData g_EnemyTable5[] =
 		{24,	20	,  0.0f,	 0.15f,	1,ITEM_ICE}, //10体目
 };
 
-
-
-//初期化
+//初期化処理
 void InitEnemy() {
 	// 構造体の中を0でクリア
 	memset(&g_Enemy[0], 0, sizeof(ENEMY) * ENEMY_MAX);
 
-	// 最初にランダムな情報を使って敵を作成しておく
+	// 最初に敵を作成しておく
 	for (int i = 0; i < ENEMY_MAX; i++) {
 
 		CreateEnemy(g_EnemyTable[i].X, g_EnemyTable[i].Y, g_EnemyTable[i].Mx, g_EnemyTable[i].My, g_EnemyTable[i].Life, g_EnemyTable[i].Type);
 	}
-
 	// クリアタイム/ステージ間の初期化
 	StageClearTime = timeGetTime();
 	StageBetween = 0;
@@ -129,7 +123,6 @@ void InitEnemy() {
 //終了処理
 void UnInitEnemy()
 {
-
 }
 
 //更新処理
@@ -145,16 +138,12 @@ void UpdateEnemy()
 		//構造体が使用中なら更新する
 		if (g_Enemy[i].Use == true)
 		{
-
 			//現在の座標をOldへ保存
 			g_Enemy[i].OldPosX = g_Enemy[i].PosX;
 			g_Enemy[i].OldPosY = g_Enemy[i].PosY;
-
 			//現在の座標へ移動量を加算
 			g_Enemy[i].PosX += g_Enemy[i].SpeedX;
 			g_Enemy[i].PosY += g_Enemy[i].SpeedY;
-
-
 			//壁衝突
 			//上
 			if (g_Enemy[i].PosY < SCREEN_TOP)
@@ -162,21 +151,18 @@ void UpdateEnemy()
 				g_Enemy[i].SpeedY *= -1.0;//移動量の反転
 				g_Enemy[i].PosY = SCREEN_TOP;
 			}
-
 			//下
 			else if (g_Enemy[i].PosY > SCREEN_BOTTOM)
 			{
 				g_Enemy[i].SpeedY *= -1.0;//移動量の反転
 				g_Enemy[i].PosY = SCREEN_BOTTOM;
 			}
-
 			//左
 			if (g_Enemy[i].PosX < SCREEN_LEFT + 1)
 			{
 				g_Enemy[i].SpeedX *= -1.0;//移動量の反転
 				g_Enemy[i].PosX = SCREEN_LEFT + 1;
 			}
-
 			//右
 			else if (g_Enemy[i].PosX > SCREEN_RIGHT - 1)
 			{
@@ -185,24 +171,19 @@ void UpdateEnemy()
 			}
 
 			/////当たり判定/////////////////
-
 			//弾との当たり判定
 			g_Enemy[i].Hit = EnemyCollisionBullet(&g_Enemy[i]);
-
 			//シールドとの当たり判定
 			g_Enemy[i].ShieldHit = EnemyCollisionShield(&g_Enemy[i]);
-
 			//プレイヤーとの当たり判定
 			g_Enemy[i].PlayerHit = EnemyCollisionPlayer(&g_Enemy[i]);
-
-			//敵に弾が当たると体力が減り、消える
+			//敵に弾が当たると体力が減り、体力が０になると消える
 			if (g_Enemy[i].Hit)
 			{
 				//使用中のみ当たり判定あり
 				if (g_Enemy[i].Use)
 				{
 					BULLET* bullet = GetBullet();
-
 					//敵のタイプと弾のタイプを比較して与えられるダメージを決定する
 					switch (bullet->Type)
 					{
@@ -236,9 +217,8 @@ void UpdateEnemy()
 					default:
 						break;
 					}
-
+					//ヒットフラグをfalseにする
 					g_Enemy[i].Hit = false;
-
 					if (g_Enemy[i].Life < 1)
 					{
 						g_Enemy[i].Use = false;
@@ -252,7 +232,6 @@ void UpdateEnemy()
 					Player->HitCount++;
 				}
 			}
-
 			//シールドに当たると跳ね返る
 			if (g_Enemy[i].ShieldHit || g_Enemy[i].PlayerHit)
 			{
@@ -264,11 +243,9 @@ void UpdateEnemy()
 		else//てきがいないとき
 		{
 			KillCount++;
-
 			//全員死んだら次の敵出す
 			if (KillCount == ENEMY_MAX)
 			{
-
 				//現在時間
 				if (StageBetween == 0)
 				{
@@ -277,18 +254,14 @@ void UpdateEnemy()
 				//５秒ディレイ
 				else if (timeGetTime() - StageBetween > 5000)
 				{
-
 					//クリア
 					PLAYER* Player = GetPlayer();
 					Player->Stage++;
-
 					//２個に復活させる
 					Player->ShieldCharge = 2;
-
 					//クリアタイムの加算
 					Player->ClearTime += timeGetTime() - StageClearTime;
 					StageClearTime = timeGetTime();
-
 					//クリアした層により出す敵変える
 					switch (Player->Stage)
 					{
@@ -299,10 +272,8 @@ void UpdateEnemy()
 							CreateEnemy(g_EnemyTable2[j].X, g_EnemyTable2[j].Y, g_EnemyTable2[j].Mx, g_EnemyTable2[j].My, g_EnemyTable2[j].Life, g_EnemyTable2[j].Type);
 						}
 						StageBetween = 0;
-			
 						break;
 					case 3:
-
 						//ステージ３
 						for (int j = 0; j < ENEMY_MAX; j++)
 						{
@@ -311,7 +282,6 @@ void UpdateEnemy()
 						StageBetween = 0;
 						break;
 					case 4:
-
 						//ステージ４
 						for (int j = 0; j < ENEMY_MAX; j++)
 						{
@@ -320,7 +290,6 @@ void UpdateEnemy()
 						StageBetween = 0;
 						break;
 					case 5:
-
 						//ステージ４
 						for (int j = 0; j < ENEMY_MAX; j++)
 						{
@@ -352,20 +321,11 @@ void DrawEnemy()
 			{
 				gotoxy(g_Enemy[i].OldPosX, g_Enemy[i].OldPosY);
 				std::cout << "  ";
-
 				gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
-
 				textcolor(g_Enemy[i].Color);//色変え
 				std::cout << "><";
 				textcolor(WHITE);//色変え
 			}
-
-
-#ifdef _DEBUG
-			/*gotoxy(2, 5 + i);
-			std::cout << g_Enemy[i].PosX << "  "<<g_Enemy[i].PosY << "  ";*/
-#endif _DEBUG
-
 			//体力がなくなったら
 			if (g_Enemy[i].Life < 1)
 			{
@@ -376,7 +336,6 @@ void DrawEnemy()
 		}
 	}
 }
-
 
 //生成処理
 void CreateEnemy(float X, float Y, float Mx, float My, int Life, int Type)
@@ -391,7 +350,6 @@ void CreateEnemy(float X, float Y, float Mx, float My, int Life, int Type)
 			g_Enemy[i].PosY = g_Enemy[i].OldPosY = Y;
 			g_Enemy[i].SpeedX = Mx;
 			g_Enemy[i].SpeedY = My;
-
 			g_Enemy[i].Type = Type;
 			//タイプによりカラー指定
 			switch (g_Enemy[i].Type)
@@ -405,11 +363,8 @@ void CreateEnemy(float X, float Y, float Mx, float My, int Life, int Type)
 			default:
 				break;
 			}
-
 			g_Enemy[i].Life = Life;
-
 			g_Enemy[i].Use = true;//使用中にする
-
 			break;//敵一つ生成したら終了
 		}
 	}

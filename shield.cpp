@@ -29,7 +29,6 @@ void UpdateShield(void)
 {
 	//プレイヤーの情報を取得
 	PLAYER* tPlayer = GetPlayer();
-
 	//使用中の構造体をすべて更新する
 	for (int i = 0; i < SHIELD_MAX; i++)
 	{
@@ -42,7 +41,6 @@ void UpdateShield(void)
 			//現在の座標へ移動量を加算
 			g_Shield[i].PosX += tPlayer->SpeedX;
 			g_Shield[i].PosY += tPlayer->SpeedY;
-
 			// ウィンドウの境界を超えないように制御
 			if (g_Shield[i].PosX < SCREEN_LEFT)
 			{
@@ -61,7 +59,6 @@ void UpdateShield(void)
 			{
 				g_Shield[i].PosY = SCREEN_BOTTOM;
 			}
-
 			//敵との当たり判定
 			g_Shield[i].Hit = ShieldCollisionEnemy(&g_Shield[i]);
 			if(g_Shield[i].Hit)
@@ -118,7 +115,6 @@ void CreateShield(float PlayerPosX, float PlayerPosY, float UnBraking)
 		{
 			//使用中フラグを立てる
 			g_Shield[i].Use = true;
-
 			//座標をセット　８方向に生成したいからswitch文で作成するが、もっと言い分け方あるかも
 			switch (i)
 			{
@@ -157,11 +153,9 @@ void CreateShield(float PlayerPosX, float PlayerPosY, float UnBraking)
 			default:
 				break;
 			}
-			
 			//移動量をセット
 			g_Shield[i].SpeedX = 0;
 			g_Shield[i].SpeedY = 0;
-
 			//耐久力をセット
 			g_Shield[i].UnBreaking = UnBraking;
 		}

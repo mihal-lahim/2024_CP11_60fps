@@ -4,6 +4,7 @@
 #include"title.h"
 #include"game.h"
 #include"result.h"
+
 //****************************************
 //グローバル変数
 //****************************************
@@ -30,7 +31,6 @@ void InitScene(void)
 		InitResult();
 		break;
 	}
-
 	return;
 }
 
@@ -52,7 +52,6 @@ void UnInitScene(void)
 		UninitResult();
 		break;
 	}
-
 	return;
 }
 
@@ -74,7 +73,6 @@ void UpdateScene(void)
 		UpdateResult();
 		break;
 	}
-
 	return;
 }
 
@@ -96,7 +94,6 @@ void DrawScene(void)
 		DrawResult();
 		break;
 	}
-
 	return;
 }
 
@@ -114,16 +111,12 @@ void CheckScene(void)
 	{
 		//現在動作中のシーンを終了させる
 		UnInitScene();
-
 		//現在動作中のシーンを移行先シーンで更新する　ここで入れ替えてるのが大事
 		g_Scene = g_SceneNext;
-
 		//更新したシーンの初期化を行う
 		InitScene();
-
 		//画面のクリア
 		clrscr();
 	}
-
 	return;
 }
