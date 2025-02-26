@@ -61,11 +61,11 @@ void DrawUI(void)
 	if (g_UI.UpdateFlg)
 	{
 		//”wŒi•`‰æ
-		for (int i = 1; i < 24; i++)
+		for (int i = 1; i < 25; i++)
 		{
-			for (int j = 1; j < 79; j++)
+			for (int j = 1; j < 81; j++)
 			{
-				if (j < SCREEN_LEFT || SCREEN_RIGHT + 1 < j)
+				if (j < SCREEN_LEFT || SCREEN_RIGHT < j)
 				{
 					gotoxy(j, i);
 					textbackground(g_UI.Color);

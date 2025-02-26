@@ -67,7 +67,7 @@ void DrawResult(void)
 	gotoxy(32, 17);
 	std::cout << "TOTAL SCORE:" << g_Result.TotalScore;
 	gotoxy(30, 21);
-	std::cout << "ENTER　でタイトルに戻る";
+	std::cout << "ENTER　で次へ進む";
 }
 
 //構造体情報取得

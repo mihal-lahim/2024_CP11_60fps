@@ -57,17 +57,19 @@ void UpdatePlayer(void)
 		g_Player.SpeedY = -PLAYER_MOVE_SPEED_Y;
 		//g_Player.Direct = 90; //上向き
 	}
+	else if (GetKeyPress(KEYNAME::KEY_S) && g_Player.PosY < SCREEN_BOTTOM - 1)
+	{
+		g_Player.SpeedY = PLAYER_MOVE_SPEED_Y;
+		//g_Player.Direct = 270; //下向き
+	}
+
 	if (GetKeyPress(KEYNAME::KEY_A) && g_Player.PosX > SCREEN_LEFT + 2)
 	{
 		g_Player.SpeedX = -PLAYER_MOVE_SPEED_X;
 		//g_Player.Direct = 0; //左向き
 	}
-	if (GetKeyPress(KEYNAME::KEY_S) && g_Player.PosY < SCREEN_BOTTOM - 1)
-	{
-		g_Player.SpeedY = PLAYER_MOVE_SPEED_Y;
-		//g_Player.Direct = 270; //下向き
-	}
-	if (GetKeyPress(KEYNAME::KEY_D) && g_Player.PosX < SCREEN_RIGHT - 2)
+	
+	else if (GetKeyPress(KEYNAME::KEY_D) && g_Player.PosX < SCREEN_RIGHT - 3)
 	{
 		g_Player.SpeedX = PLAYER_MOVE_SPEED_X;
 		//g_Player.Direct = 180; //右向き

@@ -41,10 +41,8 @@ void UpdateRanking(void)
 			char Temp[256];
 			gotoxy(40, 20);
 			std::cout << "名前を入力してください  ";
-			gotoxy(40, 21);
 			setcursortype(SOLIDCURSOR);
 			std::cin >> Temp;
-			std::cout << "                              ";
 			setcursortype(NOCURSOR);
 			//更新
 			system("cls");
@@ -57,7 +55,7 @@ void UpdateRanking(void)
 
 	if (GetKeyTrigger(KEYNAME::KEY_ENTER))
 	{
-		//シーンをランキングへ移動させる
+		//シーンをタイトルへ移動させる
 		SetScene(SCENE_TITLE);
 	}
 }
@@ -89,4 +87,7 @@ void DrawRanking(void)
 		}
 		std::cout << "  " << std::setw(16) << std::right << g_ranking[i].Name << "  " << g_ranking[i].Score << "\n\n";
 	}
+	gotoxy(30, 20);
+	std::cout << "ENTER でタイトルに戻る";
+
 }
