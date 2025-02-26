@@ -1,8 +1,11 @@
 #pragma once
 
+#include"ranking.h"
+#include"file.h"
 //////////////
 //結果構造体//
 //////////////
+
 struct RESULT
 {
 	int TotalScore;//総合スコア
@@ -17,4 +20,6 @@ void UpdateResult(void);
 void DrawResult(void);
 
 RESULT* GetResult();
+RANKING* GetTempRanking();
+
 

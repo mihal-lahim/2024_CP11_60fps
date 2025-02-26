@@ -7,6 +7,7 @@ enum SCENE
 	SCENE_TITLE,//タイトル画面
 	SCENE_GAME,//ゲーム本編
 	SCENE_RESULT,//ゲーム結果表示画面
+	SCENE_RANKING,//ランキング表示画面
 
 	SCENE_NUM,//終端コード
 };

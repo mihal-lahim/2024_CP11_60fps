@@ -10,6 +10,7 @@
 #include"field.h"
 #include"item.h"
 #include"UI.h"
+#include"ranking.h"
 
 void InitGame(void)
 {
@@ -21,7 +22,6 @@ void InitGame(void)
 	//InitField();	//　フィールド
 	InitItem();		//　アイテム
 	InitUI();		//UI
-
 }
 
 void UnInitGame(void)

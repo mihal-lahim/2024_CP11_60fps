@@ -6,11 +6,15 @@
 #include<iostream>
 #include"score.h"
 #include"Player.h"
+#include"file.h"
+#include"ranking.h"
 
 //////////////////
 //グローバル変数//
 //////////////////
 RESULT g_Result;
+RANKING g_tempRanking;
+
 
 //初期化処理
 void InitResult(void)
@@ -27,8 +31,8 @@ void UpdateResult(void)
 {
 	if (GetKeyTrigger(KEYNAME::KEY_ENTER))
 	{
-		//シーンをゲームタイトルへ移動させる
-		SetScene(SCENE_TITLE);
+		//シーンをランキングへ移動させる
+		SetScene(SCENE_RANKING);
 	}
 	PLAYER* Player = GetPlayer();
 	//スコア計算
@@ -40,6 +44,9 @@ void UpdateResult(void)
 		g_Result.TimeBonus = 1;
 	}
 	g_Result.TotalScore *= g_Result.TimeBonus;
+
+	//ランキング用に入れる
+	g_tempRanking.Score = g_Result.TotalScore;
 }
 
 void DrawResult(void)
@@ -68,4 +75,11 @@ RESULT* GetResult()
 {
 	//構造体のポインターを返す
 	return &g_Result;
+}
+
+//構造体情報取得
+RANKING* GetTempRanking()
+{
+	//構造体のポインターを返す
+	return &g_tempRanking;
 }
