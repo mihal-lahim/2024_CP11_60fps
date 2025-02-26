@@ -33,16 +33,17 @@ struct EnemyData
 EnemyData g_EnemyTable[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{18,	8	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //1体目
-		{20,	4	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //2体目
-		{30,	6	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //3体目
-		{40,	8	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //4体目
-		{40,	10	,  0.2f,	 0.1f,	2,ITEM_FIRE}, //5体目
-		{30,	4	,  0.2f,	 0.1f,	2,ITEM_ICE}, //6体目
-		{30,	10	,  0.2f,	 0.1f,	2,ITEM_ICE}, //7体目
-		{40,	6	,  0.2f,	 0.1f,	2,ITEM_ICE}, //8体目
-		{50,	3	,  0.2f,	 0.1f,	2,ITEM_ICE}, //9体目
-		{40,	12	,  0.2f,	 0.1f,	2,ITEM_ICE}, //10体目
+		{17,	14	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //1体目
+		{19,	12	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //2体目
+		{21,	10	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //3体目
+		{23,	8	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //4体目
+		{25,	6	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //5体目
+
+		{54,	6	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //6体目
+		{56,	8	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //7体目
+		{58,	10	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //8体目
+		{60,	12	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //9体目
+		{62,	14	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //10体目
 };
 
 EnemyData g_EnemyTable2[] =

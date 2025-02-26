@@ -22,7 +22,7 @@ void InitPlayer(void)
 {
 	memset(&g_Player, 0, sizeof(PLAYER));
 	g_Player.PosX =  40;//プレイヤーのX位置
-	g_Player.PosY =  15;//プレイヤーのY位置
+	g_Player.PosY =  22;//プレイヤーのY位置
 	g_Player.OldPosX = 0;
 	g_Player.OldPosY = 0;
 	g_Player.Direct = 0.0;		//向き
@@ -94,7 +94,7 @@ void UpdatePlayer(void)
 		}
 	}
 	//熱量を移動力に変換
-	g_Player.HeatSpeed += g_Player.Heat - 36;
+	g_Player.HeatSpeed += (g_Player.Heat - 36) / 2;
 	g_Player.SpeedX *= g_Player.HeatSpeed;
 	g_Player.SpeedY *= g_Player.HeatSpeed;
 	//反転防止

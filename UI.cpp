@@ -102,6 +102,11 @@ void DrawUI(void)
 	//残りのシールド表示
 	gotoxy(69, 8);
 	std::cout << "Shield:" << Player->ShieldCharge;
+	//プレイヤーの体温表示
+	gotoxy(3, 15);
+	std::cout << "Temperature";
+	gotoxy(5, 16);
+	std::cout << round(Player->Heat * 10) / 10 << "℃  ";
 	//プレイヤーのタイプ表示
 	gotoxy(69, 10);
 	std::cout << "You Type";
@@ -125,6 +130,8 @@ void DrawUI(void)
 	default:
 		break;
 	}
+	
+	
 	//色変え
 	textcolor(WHITE);
 	//スコア表示
