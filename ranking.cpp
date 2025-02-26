@@ -63,13 +63,30 @@ void UpdateRanking(void)
 }
 void DrawRanking(void)
 {
-	gotoxy(25, 2);
-	std::cout << "RANKING";
+	gotoxy(30, 2);
+	std::cout << "RANKING\n\n\n";
 	
 	//ƒ‰ƒ“ƒLƒ“ƒO•\Ž¦
 	for (int i = 0; i < RANKING_MAX; i++)
 	{
-		gotoxy(25, i + 4);
-		std::cout << std::setw(16) << std::right << g_ranking[i].Name << "  " << g_ranking[i].Score;
+		
+		std::cout << "                        " << i + 1;
+
+		switch (i)
+		{
+		case 0:
+			std::cout << "st";
+			break;
+		case 1:
+			std::cout << "nd";
+			break;
+		case 2:
+			std::cout << "rd";
+			break;
+		default:
+			std::cout << "th";
+			break;
+		}
+		std::cout << "  " << std::setw(16) << std::right << g_ranking[i].Name << "  " << g_ranking[i].Score << "\n\n";
 	}
 }
