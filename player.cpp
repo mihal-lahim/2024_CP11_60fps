@@ -64,9 +64,14 @@ void UpdatePlayer(void)
 		//熱量を移動力に変換
 		g_Player.HeatSpeed += (g_Player.Heat - 36) / 2;
 		g_Player.SpeedY *= g_Player.HeatSpeed;
-		if (g_Player.SpeedY > -0.15)//W(↑)押して正の値になってしまったら負の限りなく小さい数に
+		//速度上限値
+		if (g_Player.SpeedY < -0.3)
 		{
-			g_Player.SpeedY = -0.15;
+			g_Player.SpeedY = -0.3;
+		}
+		if (g_Player.SpeedY > -0.12)//W(↑)押して正の値になってしまったら負の限りなく小さい数に
+		{
+			g_Player.SpeedY = -0.12;
 		}
 	}
 	if (GetKeyPress(KEYNAME::KEY_S) && g_Player.PosY < SCREEN_BOTTOM - 2)
@@ -76,23 +81,34 @@ void UpdatePlayer(void)
 		//熱量を移動力に変換
 		g_Player.HeatSpeed += (g_Player.Heat - 36) / 2;
 		g_Player.SpeedY *= g_Player.HeatSpeed;
-		if (g_Player.SpeedY < 0.15)//S(↓)押して負の値になってしまったら正の限りなく小さい数に
+		//速度上限値
+		if (g_Player.SpeedY > 0.3)
 		{
-			g_Player.SpeedY = 0.15;
+			g_Player.SpeedY = 0.3;
+		}
+		if (g_Player.SpeedY < 0.12)//S(↓)押して負の値になってしまったら正の限りなく小さい数に
+		{
+			g_Player.SpeedY = 0.12;
 		}
 	}
 
-	if (GetKeyPress(KEYNAME::KEY_A) && g_Player.PosX > SCREEN_LEFT + 1)
+	if (GetKeyPress(KEYNAME::KEY_A) && g_Player.PosX > SCREEN_LEFT + 2)
 	{
 		g_Player.SpeedX = -PLAYER_MOVE_SPEED_X;
 		//g_Player.Direct = 0; //左向き
 		//熱量を移動力に変換
 		g_Player.HeatSpeed += (g_Player.Heat - 36) / 2;
 		g_Player.SpeedX *= g_Player.HeatSpeed;
+		//速度上限値
+		if (g_Player.SpeedX > -0.55)
+		{
+			g_Player.SpeedX = -0.55;
+		}
 		if (g_Player.SpeedX > -0.3)//A(←)押して正の値になってしまったら負の限りなく小さい数に
 		{
 			g_Player.SpeedX = -0.3;
 		}
+
 	}
 	
 	if (GetKeyPress(KEYNAME::KEY_D) && g_Player.PosX < SCREEN_RIGHT - 2)
@@ -102,13 +118,18 @@ void UpdatePlayer(void)
 		//熱量を移動力に変換
 		g_Player.HeatSpeed += (g_Player.Heat - 36) / 2;
 		g_Player.SpeedX *= g_Player.HeatSpeed;
+		//速度上限値
+		if (g_Player.SpeedX < 0.55)
+		{
+			g_Player.SpeedX = 0.55;
+		}
 		if (g_Player.SpeedX < 0.3)//D(→)押して負の値になってしまったら正の限りなく小さい数に
 		{
 			g_Player.SpeedX = 0.3;
 		}
 	}
 	//座標制御
-	if (g_Player.PosX < SCREEN_LEFT + 1)
+	/*if (g_Player.PosX < SCREEN_LEFT + 1)
 	{
 		g_Player.PosX = SCREEN_LEFT + 1;
 	}
@@ -124,7 +145,7 @@ void UpdatePlayer(void)
 	else if (g_Player.PosY > SCREEN_BOTTOM-2)
 	{
 		g_Player.PosY = SCREEN_BOTTOM-2;
-	}
+	}*/
 
 
 	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//シールド

@@ -4,7 +4,7 @@
 //////////////
 //マクロ定義
 //////////////
-#define PLAYER_MOVE_SPEED_X (0.5)
+#define PLAYER_MOVE_SPEED_X (0.4)
 #define PLAYER_MOVE_SPEED_Y (0.2)
 //#define GRAVITY        (0.04)//重力
 //#define JUMP_POWER     (0.75)//ジャンプ力
