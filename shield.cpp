@@ -42,9 +42,9 @@ void UpdateShield(void)
 			g_Shield[i].PosX += tPlayer->SpeedX;
 			g_Shield[i].PosY += tPlayer->SpeedY;
 			// ウィンドウの境界を超えないように制御
-			if (g_Shield[i].PosX < SCREEN_LEFT)
+			if (g_Shield[i].PosX < SCREEN_LEFT - 1)
 			{
-				g_Shield[i].PosX = SCREEN_LEFT;
+				g_Shield[i].PosX = SCREEN_LEFT - 1;
 			}
 			else if (g_Shield[i].PosX > SCREEN_RIGHT)
 			{

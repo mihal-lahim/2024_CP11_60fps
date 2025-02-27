@@ -6,6 +6,7 @@
 #include"player.h"
 #include"item.h"
 #include"score.h"
+#include"enemy.h"
 
 /////////////////////
 //グローバル変数
@@ -65,7 +66,7 @@ void DrawUI(void)
 		{
 			for (int j = 1; j < 81; j++)
 			{
-				if (j < SCREEN_LEFT || SCREEN_RIGHT < j)
+				if (j < SCREEN_LEFT - 1 || SCREEN_RIGHT + 1 < j)
 				{
 					gotoxy(j, i);
 					textbackground(g_UI.Color);
@@ -107,6 +108,20 @@ void DrawUI(void)
 	std::cout << "Temperature";
 	gotoxy(5, 16);
 	std::cout << round(Player->Heat * 10) / 10 << "℃  ";
+	//敵の残り数
+	ENEMY* Enemy = GetEnemy();
+	int UseCount = 0;
+	for (int i = 0; i < ENEMY_MAX; i++)
+	{
+		if (Enemy[i].Use)
+		{
+			UseCount++;
+		}
+	}
+	gotoxy(2, 8);
+	std::cout << "敵　残り";
+	gotoxy(2, 9);
+	std::cout << UseCount << "体";
 	//プレイヤーのタイプ表示
 	gotoxy(69, 10);
 	std::cout << "You Type";
@@ -130,8 +145,6 @@ void DrawUI(void)
 	default:
 		break;
 	}
-	
-	
 	//色変え
 	textcolor(WHITE);
 	//スコア表示

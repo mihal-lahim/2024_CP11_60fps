@@ -14,7 +14,13 @@
 ENEMY g_Enemy[ENEMY_MAX];//敵構造体配列
 int g_KillCount = 0;//キル数
 DWORD StageClearTime;//クリアタイム
+
 DWORD StageBetween;//ステージとステージの間
+int countdownValue = 5; // カウントダウンの初期値
+DWORD lastCountdownUpdate = 0; // 最後にカウントダウンを更新した時間
+bool EndCountDown;
+int CountDownHyouji = 4;//表示回数の限界
+
 
 ////////////////////////////////
 //敵キャラ初期配置情報　構造体//
@@ -33,77 +39,85 @@ struct EnemyData
 EnemyData g_EnemyTable[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{17,	14	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //1体目
-		{19,	12	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //2体目
-		{21,	10	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //3体目
-		{23,	8	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //4体目
-		{25,	6	,  0.1f,	 0.0f,	2,ITEM_FIRE}, //5体目
-
-		{54,	6	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //6体目
-		{56,	8	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //7体目
-		{58,	10	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //8体目
-		{60,	12	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //9体目
-		{62,	14	,  -0.1f,	 0.0f,	2,ITEM_ICE}, //10体目
+		{17,	14	,  0.1f,	 0.0f,	20,ITEM_FIRE}, //1体目
+		{19,	12	,  0.1f,	 0.0f,	20,ITEM_FIRE}, //2体目
+		{21,	10	,  0.1f,	 0.0f,	20,ITEM_FIRE}, //3体目
+		{23,	8	,  0.1f,	 0.0f,	20,ITEM_FIRE}, //4体目
+		{25,	6	,  0.1f,	 0.0f,	20,ITEM_FIRE}, //5体目
+										
+		{54,	6	,  -0.1f,	 0.0f,	20,ITEM_ICE}, //6体目
+		{56,	8	,  -0.1f,	 0.0f,	20,ITEM_ICE}, //7体目
+		{58,	10	,  -0.1f,	 0.0f,	20,ITEM_ICE}, //8体目
+		{60,	12	,  -0.1f,	 0.0f,	20,ITEM_ICE}, //9体目
+		{62,	14	,  -0.1f,	 0.0f,	20,ITEM_ICE}, //10体目
 };
 
 EnemyData g_EnemyTable2[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{19,	20	,  0.6f,	 0.15f,1,ITEM_FIRE}, //1体目
-		{16,	20	,  0.25f,	 0.15f,1,ITEM_FIRE}, //2体目
-		{24,	20	,  0.2f,	 0.15f,1,ITEM_FIRE}, //3体目
-		{32,	20	,  0.3f,	 0.15f,1,ITEM_FIRE}, //4体目
-		{40,	20	,  0.25f,	 0.15f,1,ITEM_FIRE}, //5体目
-		{48,	20	,  0.2f,	 0.15f,1,ITEM_FIRE}, //6体目
-		{56,	20	,  0.15f,	 0.15f,1,ITEM_FIRE}, //7体目
-		{29,	20	,  0.1f,	 0.15f,1,ITEM_FIRE}, //8体目
-		{57,	20	,  0.05f,	 0.15f,1,ITEM_FIRE}, //9体目
-		{24,	20	,  0.0f,	 0.15f,1,ITEM_FIRE}, //10体目
+		{17,	2	,  0.2f,	 0.15f,20,ITEM_FIRE}, //1体目
+		{17,	3	,  0.19f,	 0.16f,20,ITEM_FIRE}, //2体目
+		{17,	4	,  0.18f,	 0.17f,20,ITEM_FIRE}, //3体目
+		{17,	5	,  0.17f,	 0.18f,20,ITEM_FIRE}, //4体目
+		{17,	6	,  0.16f,	 0.19f,20,ITEM_FIRE}, //5体目
+									   
+		{17,	7	,  0.15f,	 0.20f,20,ITEM_FIRE}, //6体目
+		{17,	8	,  0.14f,	 0.21f,20,ITEM_FIRE}, //7体目
+		{17,	9	,  0.13f,	 0.22f,20,ITEM_FIRE}, //8体目
+		{17,	9	,  0.12f,	 0.23f,20,ITEM_FIRE}, //9体目
+		{17,	10	,  0.11f,	 0.24f,20,ITEM_FIRE}, //10体目
 };
 
 EnemyData g_EnemyTable3[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{19,	20	,  0.6f,	 0.15f,1,ITEM_ICE}, //1体目
-		{16,	20	,  0.25f,	 0.15f,1,ITEM_ICE}, //2体目
-		{24,	20	,  0.2f,	 0.15f,1,ITEM_ICE}, //3体目
-		{32,	20	,  0.3f,	 0.15f,1,ITEM_ICE}, //4体目
-		{40,	20	,  0.25f,	 0.15f,1,ITEM_ICE}, //5体目
-		{48,	20	,  0.2f,	 0.15f,1,ITEM_ICE}, //6体目
-		{56,	20	,  0.15f,	 0.15f,1,ITEM_ICE}, //7体目
-		{29,	20	,  0.1f,	 0.15f,1,ITEM_ICE}, //8体目
-		{57,	20	,  0.05f,	 0.15f,1,ITEM_ICE}, //9体目
-		{24,	20	,  0.0f,	 0.15f,1,ITEM_ICE}, //10体目
+		{62,	14	,  -0.11f,	 -0.15f,20,ITEM_ICE}, //1体目
+		{62,	15	,  -0.12f,	 -0.14f,20,ITEM_ICE}, //2体目
+		{62,	16	,  -0.13f,	 -0.13f,20,ITEM_ICE}, //3体目
+		{62,	17	,  -0.14f,	 -0.12f,20,ITEM_ICE}, //4体目
+		{62,	18	,  -0.15f,	 -0.11f,20,ITEM_ICE}, //5体目
+		{62,	19	,  -0.16f,	 -0.10f,20,ITEM_ICE}, //6体目
+		{62,	20	,  -0.17f,	 -0.09f,20,ITEM_ICE}, //7体目
+		{62,	21	,  -0.18f,	 -0.08f,20,ITEM_ICE}, //8体目
+		{62,	22	,  -0.19f,	 -0.07f,20,ITEM_ICE}, //9体目
+		{62,	23	,  -0.2f,	 -0.06f,20,ITEM_ICE}, //10体目
+
+
+
+
+
 };
 
 EnemyData g_EnemyTable4[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{19,	20	,  0.6f,	 0.15f,ITEM_FIRE}, //1体目
-		{16,	20	,  0.25f,	 0.15f,ITEM_FIRE}, //2体目
-		{24,	20	,  0.2f,	 0.15f,ITEM_FIRE}, //3体目
-		{32,	20	,  0.3f,	 0.15f,ITEM_FIRE}, //4体目
-		{40,	20	,  0.25f,	 0.15f,ITEM_FIRE}, //5体目
-		{48,	20	,  0.2f,	 0.15f,1,ITEM_ICE}, //6体目
-		{56,	20	,  0.15f,	 0.15f,1,ITEM_ICE}, //7体目
-		{29,	20	,  0.1f,	 0.15f,1,ITEM_ICE}, //8体目
-		{57,	20	,  0.05f,	 0.15f,1,ITEM_ICE}, //9体目
-		{24,	20	,  0.0f,	 0.15f,1,ITEM_ICE}, //10体目
+		{18,	2	,   0.15f,	 0.15f,50,ITEM_FIRE}, //1体目
+		{20,	2	,   0.16f,	 0.14f,50,ITEM_FIRE}, //2体目
+		{22,	2	,   0.17f,	 0.13f,50,ITEM_FIRE}, //3体目
+		{24,	2	,   0.18f,	 0.12f,50,ITEM_FIRE}, //4体目
+		{26,	2	,   0.19f,	 0.11f,50,ITEM_FIRE}, //5体目
+									   
+		{52,	2	,  -0.15f,	-0.15f,50,ITEM_ICE}, //6体目
+		{54,	2	,  -0.16f,	-0.14f,50,ITEM_ICE}, //7体目
+		{58,	2	,  -0.17f,	-0.13f,50,ITEM_ICE}, //8体目
+		{60,	2	,  -0.18f,	-0.12f,50,ITEM_ICE}, //9体目
+		{62,	2	,  -0.19f,	-0.11f,50,ITEM_ICE}, //10体目
 };
 
 EnemyData g_EnemyTable5[] =
 {
 	//	X位置,Y位置,X移動力,Y移動力,敵色,	  体力,タイプ
-		{19,	20	,  0.6f,	 0.15f,	1,ITEM_FIRE}, //1体目
-		{16,	20	,  0.25f,	 0.15f,	1,ITEM_ICE}, //2体目
-		{24,	20	,  0.2f,	 0.15f,	1,ITEM_FIRE}, //3体目
-		{32,	20	,  0.3f,	 0.15f,	1,ITEM_ICE}, //4体目
-		{40,	20	,  0.25f,	 0.15f,	1,ITEM_FIRE}, //5体目
-		{48,	20	,  0.2f,	 0.15f,	1,ITEM_ICE}, //6体目
-		{56,	20	,  0.15f,	 0.15f,	1,ITEM_FIRE}, //7体目
-		{29,	20	,  0.1f,	 0.15f,	1,ITEM_ICE}, //8体目
-		{57,	20	,  0.05f,	 0.15f,	1,ITEM_FIRE}, //9体目
-		{24,	20	,  0.0f,	 0.15f,	1,ITEM_ICE}, //10体目
+		{17,	12	,  0.2f,	 0.10f,	70,ITEM_FIRE}, //1体目
+		{23,	6	,  0.1f,	 0.1f,	70,ITEM_ICE}, //2体目
+		{39,	2	,  0.0f,	 0.10f,	70,ITEM_FIRE}, //3体目
+		{55,	6	, -0.1f,	 0.1f,	70,ITEM_ICE}, //4体目
+		{63,	12	, -0.2f,	 0.10f,	70,ITEM_FIRE}, //5体目
+
+		{17,	14	,  0.2f,	 -0.10f,70,ITEM_ICE}, //6体目
+		{23,	17	,  0.1f,	 -0.1f,	70,ITEM_FIRE}, //7体目
+		{39,	23	,  0.0f,	 -0.10f,70,ITEM_ICE}, //8体目
+		{55,	17	, -0.1f,	 -0.1f,	70,ITEM_FIRE}, //9体目
+		{63,	14	, -0.2f,	 -0.10f,70,ITEM_ICE}, //10体目
 };
 
 //初期化処理
@@ -119,6 +133,12 @@ void InitEnemy() {
 	// クリアタイム/ステージ間の初期化
 	StageClearTime = timeGetTime();
 	StageBetween = 0;
+	
+	//カウントダウン終わってないよ
+	EndCountDown = false;
+
+	//表示回数の限界
+	CountDownHyouji = 4;
 }
 
 //終了処理
@@ -251,9 +271,18 @@ void UpdateEnemy()
 				if (StageBetween == 0)
 				{
 					StageBetween = timeGetTime();
+					lastCountdownUpdate = StageBetween;
+					countdownValue = 5; // カウントダウンの初期値
+				}
+				//カウントダウンの更新
+				DWORD currentTime = timeGetTime();
+				if (currentTime - lastCountdownUpdate >= 1000)
+				{
+					countdownValue--;
+					lastCountdownUpdate = currentTime;
 				}
 				//５秒ディレイ
-				else if (timeGetTime() - StageBetween > 5000)
+				if (timeGetTime() - StageBetween > 5000)
 				{
 					//クリア
 					PLAYER* Player = GetPlayer();
@@ -262,7 +291,9 @@ void UpdateEnemy()
 					Player->ShieldCharge = 2;
 					//クリアタイムの加算
 					Player->ClearTime += timeGetTime() - StageClearTime;
-					StageClearTime = timeGetTime();
+					StageClearTime = currentTime;
+					//カウントダウン終わったよ
+					EndCountDown = true;
 					//クリアした層により出す敵変える
 					switch (Player->Stage)
 					{
@@ -291,16 +322,21 @@ void UpdateEnemy()
 						StageBetween = 0;
 						break;
 					case 5:
-						//ステージ４
+						//ステージ５
 						for (int j = 0; j < ENEMY_MAX; j++)
 						{
 							CreateEnemy(g_EnemyTable5[j].X, g_EnemyTable5[j].Y, g_EnemyTable5[j].Mx, g_EnemyTable5[j].My, g_EnemyTable5[j].Life, g_EnemyTable5[j].Type);
 						}
 						StageBetween = 5000;
+						
 						break;
 					default:
 						break;
 					}
+					//カウントダウン終わったよ
+					EndCountDown = true;
+					//残り表示回数減らす
+					CountDownHyouji--;
 				}
 			}
 		}
@@ -335,6 +371,29 @@ void DrawEnemy()
 				std::cout << "    ";
 			}
 		}
+	}
+	// カウントダウンの値を描画
+	if (StageBetween != 0 && CountDownHyouji > 0)
+	{
+		PLAYER* Player = GetPlayer();
+		// 画面中央に表示
+		if (countdownValue == 5 || countdownValue == 4)
+		{
+			gotoxy(33, 11);
+			std::cout << "STAGE " << Player->Stage << " CLEAR!!";
+		}
+		else
+		{
+			gotoxy(28, 11);
+			std::cout << "Next stage in: " << countdownValue << " seconds";
+		}
+		
+	}
+	if (EndCountDown == true)
+	{
+		gotoxy(28, 11); // 画面中央に表示
+		std::cout << "                         ";
+		EndCountDown = false;
 	}
 }
 

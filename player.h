@@ -4,8 +4,8 @@
 //////////////
 //マクロ定義
 //////////////
-#define PLAYER_MOVE_SPEED_X (0.25)
-#define PLAYER_MOVE_SPEED_Y (0.1)
+#define PLAYER_MOVE_SPEED_X (0.5)
+#define PLAYER_MOVE_SPEED_Y (0.2)
 //#define GRAVITY        (0.04)//重力
 //#define JUMP_POWER     (0.75)//ジャンプ力
 //#define RESIST_X       (0.4)//地上のX方向摩擦
@@ -32,6 +32,7 @@ struct PLAYER
 	int ShieldCharge;//シールドの残使用数
 	float Heat;//プレイヤーの温度
 	float HeatSpeed;//温度による速度変更の値
+	int DamageCollTime;//ダメージ受けた後のクールタイム
 
 	////スコア計算用//////
 	

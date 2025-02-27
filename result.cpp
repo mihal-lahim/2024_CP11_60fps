@@ -36,7 +36,17 @@ void UpdateResult(void)
 	}
 	PLAYER* Player = GetPlayer();
 	//スコア計算
-	g_Result.TotalScore = GetScore()->nPoint * Player->ItemGetCount;
+	
+	//取得アイテム数が０の時、１加算
+	if (Player->ItemGetCount == 0)
+	{
+		g_Result.TotalScore = GetScore()->nPoint * 1;
+	}
+	else
+	{
+		g_Result.TotalScore = GetScore()->nPoint * Player->ItemGetCount;
+	}
+	//ヒット率
 	g_Result.TotalScore *= Player->HitPercent;
 	//タイムボーナス負の数になるの防止
 	if (g_Result.TimeBonus < 0)
@@ -44,6 +54,8 @@ void UpdateResult(void)
 		g_Result.TimeBonus = 1;
 	}
 	g_Result.TotalScore *= g_Result.TimeBonus;
+
+	
 
 	//ランキング用に入れる
 	g_tempRanking.Score = g_Result.TotalScore;
