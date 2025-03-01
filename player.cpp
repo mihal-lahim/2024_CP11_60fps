@@ -100,7 +100,7 @@ void UpdatePlayer(void)
 		g_Player.HeatSpeed += (g_Player.Heat - 36) / 2;
 		g_Player.SpeedX *= g_Player.HeatSpeed;
 		//速度上限値
-		if (g_Player.SpeedX > -0.55)
+		if (g_Player.SpeedX < -0.55)
 		{
 			g_Player.SpeedX = -0.55;
 		}
@@ -119,7 +119,7 @@ void UpdatePlayer(void)
 		g_Player.HeatSpeed += (g_Player.Heat - 36) / 2;
 		g_Player.SpeedX *= g_Player.HeatSpeed;
 		//速度上限値
-		if (g_Player.SpeedX < 0.55)
+		if (g_Player.SpeedX > 0.55)
 		{
 			g_Player.SpeedX = 0.55;
 		}

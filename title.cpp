@@ -44,12 +44,16 @@ void UpdateTitle(void)
 	ColorTimer_F--;
 	ColorTimer_i--;
 	ColorTimer_c--;
+
+#ifdef _DEBUG
 	gotoxy(1, 5);
 	std::cout << ColorTimer_F;
 	gotoxy(1, 6);
 	std::cout << ColorTimer_i;
 	gotoxy(1, 7);
 	std::cout << ColorTimer_c;
+#endif _DEBUG
+
 	//Fの色登録
 	if (ColorTimer_F > BLUE_POINT)
 	{
@@ -136,19 +140,26 @@ void Draw_F(void)
 {
 	//色情報入れる
 	textbackground(g_Title.F_Color);
-	for (int x = 10;x < 16;x++)
+	//横
+	for (int x = 10;x < 30;x++)
 	{
-		gotoxy(x, 10);
+		gotoxy(x, 3);
 		std::cout << " ";
 	}
-	for (int y = 11;y < 30;y++)
+	//タテ
+	for (int y = 4;y < 20;y++)
 	{
-		gotoxy(10, y);
-		std::cout << " ";
+		for (int x = 10;x < 13;x++)
+		{
+			gotoxy(x, y);
+			std::cout << " ";
+		}
+		
 	}
-	for (int x = 11;x < 13;x++)
+	//横２
+	for (int x = 11;x < 25;x++)
 	{
-		gotoxy(x, 20);
+		gotoxy(x, 11);
 		std::cout << " ";
 	}
 	//色リセット
@@ -161,18 +172,18 @@ void Draw_i(void)
 	//色情報入れる
 	textbackground(g_Title.i_Color);
 	//点の部分
-	for (int y = 10;y < 12;y++)
+	for (int y = 5;y < 7;y++)
 	{
-		for (int x = 18;x < 20;x++)
+		for (int x = 39;x < 42;x++)
 		{
 			gotoxy(x, y);
 			std::cout << " ";
 		}
 	}
 	//棒の部分
-	for (int y = 16;y < 30;y++)
+	for (int y = 10;y < 20;y++)
 	{
-		for (int x = 18;x < 20;x++)
+		for (int x = 39;x < 42;x++)
 		{
 			gotoxy(x, y);
 			std::cout << " ";
@@ -187,25 +198,106 @@ void Draw_c(void)
 {
 	//色情報入れる
 	textbackground(g_Title.c_Color);
-	for (int x = 25;x < 28;x++)
+	//  ■■■
+	//□　　　□
+	//□
+	//□　　　□
+	//　□□□
+	for (int x = 57;x < 68;x++)
 	{
-		gotoxy(x, 15);
+		gotoxy(x, 11);
 		std::cout << " ";
 	}
-	for (int y = 16;y < 20;y++)
+	//  □□□
+	//■　　　□
+	//■
+	//■　　　□
+	//　□□□
+	for (int y = 12;y < 19;y++)
 	{
-		gotoxy(24, y);
+		for (int x = 56;x < 59;x++)
+		{
+			if (x == 58)
+			{
+				if (y == 12 || y == 18)
+				{
+					gotoxy(x, y);
+					std::cout << " ";
+				}
+				else
+				{
+					//描かない
+				}
+			}
+			else
+			{
+				gotoxy(x, y);
+				std::cout << " ";
+			}
+		}
+		
+	}
+	//  □□□
+	//□　　　■
+	//□
+	//□　　　□
+	//　□□□
+	for (int y = 12;y < 14;y++)
+	{
+		for (int x = 66;x < 69;x++)
+		{
+			if (x == 66 && y == 13)
+			{
+				//描かない
+			}
+			else
+			{
+				gotoxy(x, y);
+				std::cout << " ";
+			}
+		}
+	}
+	//  □□□
+	//□　　  □　
+	//□
+	//□　　　■
+	//　□□□
+	for (int y = 17;y < 19;y++)
+	{
+		for (int x = 66;x < 69;x++)
+		{
+			if (y == 17 && x == 66)
+			{
+				//描かない
+			}
+			else
+			{
+				gotoxy(x, y);
+				std::cout << " ";
+			}
+		}
+	}
+	//  □□□
+	//□　　　□
+	//□
+	//□　　　□
+	//　■■■
+	for (int x = 57; x < 68;x++)
+	{
+		gotoxy(x, 19);
 		std::cout << " ";
 	}
-	gotoxy(29, 16);
-	std::cout << " ";
-	gotoxy(29, 19);
-	std::cout << " ";
-	for (int x = 25; x < 28;x++)
+
+	//ピリオド用の色
+	textbackground(YELLOW);
+
+	//ピリオド
+	for (int x = 73;x < 75;x++)
 	{
-		gotoxy(x, 21);
+		gotoxy(x, 19);
 		std::cout << " ";
 	}
+	
 	//色リセット
 	textbackground(BLACK);
 }

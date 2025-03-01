@@ -1,11 +1,12 @@
 #pragma once
 
-//////////////////
-/// マクロ定義////
-//////////////////
-#define RED_POINT (300)
-#define BLUE_POINT (200)
-#define WHITE_POINT (100)
+//////////////
+//マクロ定義//
+//////////////
+#define CH4NGE_SPEED (80)
+#define RED_POINT (CH4NGE_SPEED * 3)
+#define BLUE_POINT (CH4NGE_SPEED * 2)
+#define WHITE_POINT (CH4NGE_SPEED * 1)
 
 
 struct TITLE
