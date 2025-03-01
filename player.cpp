@@ -38,7 +38,7 @@ void InitPlayer(void)
 	g_Player.HeatSpeed = 1;		//速度乗算値
 	g_Player.DamageCollTime = 1000;//ダメージクールタイム
 	RESULT* Result = GetResult();
-	Result->TimeBonus = 10000;	//タイムボーナス
+	Result->TimeBonus = 25000;	//タイムボーナス
 
 	LastHitTime = timeGetTime() + 2000;//最後に当たった時間を初期化
 }
