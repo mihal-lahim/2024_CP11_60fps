@@ -142,6 +142,7 @@
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="shield.cpp" />
+    <ClCompile Include="sound.cpp" />
     <ClCompile Include="title.cpp" />
     <ClCompile Include="title2.cpp" />
     <ClCompile Include="UI.cpp" />
