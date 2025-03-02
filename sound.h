@@ -4,8 +4,8 @@
 //É}ÉNÉçíËã`//
 //////////////
 
-#define		SOUND_TITLE	"maou_bgm_8bit13"
-#define		SOUND_BATTLE "maou_bgm_8bit15"
+#define		SOUND_TITLE	"maou_bgm_8bit13.MP3"
+#define		SOUND_BATTLE "maou_bgm_8bit15.MP3"
 #define		SOUND_SHOT	"se_shot_004"
 #define		SOUND_KILL "se_hit_002"
 #define		SOUND_ENTER "se_etc_005"

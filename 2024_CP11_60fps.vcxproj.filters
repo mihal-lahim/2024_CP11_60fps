@@ -132,4 +132,21 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="se_etc_005.wav">
+      <Filter>ソース ファイル</Filter>
+    </Media>
+    <Media Include="maou_bgm_8bit13.mp3">
+      <Filter>ソース ファイル</Filter>
+    </Media>
+    <Media Include="se_shot_004.wav">
+      <Filter>ソース ファイル</Filter>
+    </Media>
+    <Media Include="se_hit_002.wav">
+      <Filter>ソース ファイル</Filter>
+    </Media>
+    <Media Include="maou_bgm_8bit15.mp3">
+      <Filter>ソース ファイル</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

@@ -168,6 +168,13 @@
     <ClInclude Include="title2.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="maou_bgm_8bit13.mp3" />
+    <Media Include="maou_bgm_8bit15.mp3" />
+    <Media Include="se_etc_005.wav" />
+    <Media Include="se_hit_002.wav" />
+    <Media Include="se_shot_004.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

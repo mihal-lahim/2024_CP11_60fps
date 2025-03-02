@@ -3,8 +3,26 @@
 #define CONIOEX
 #include	<stdio.h>
 #include	"conioex.h"
-
 #include"sound.h"
+
+
+//////////////////
+//グローバル変数//
+//////////////////
+char SoundTitle[64] = SOUND_TITLE;//タイトルBGM
+int nSoundTitle = opensound(SoundTitle);
+
+char SoundBattle[64] = SOUND_BATTLE;//バトルBGM
+int nSoundBattle = opensound(SoundBattle);
+
+char SoundShot[64] = SOUND_SHOT;//ショットSE
+int nSoundShot = opensound(SoundShot);
+
+char SoundKill[64] = SOUND_KILL;//キルSE
+int nSoundKill = opensound(SoundKill);
+
+char SoundEnter[64] = SOUND_ENTER;//エンターSE
+int nSoundEnter = opensound(SoundEnter);
 
 //=============================================================================
 //  メイン関数
@@ -126,75 +144,54 @@ int	Sound(void)
 //タイトルBGM
 void TitleBGM_Start(void)
 {
-	char aSoundName[256] = SOUND_TITLE;
-	int hSound = opensound(aSoundName);
-	playsound(hSound, 1);
+	playsound(nSoundTitle, 1);
 }
-
 void TitleBGM_End(void)
 {
-	char aSoundName[256] = SOUND_TITLE;
-	int hSound = opensound(aSoundName);
-	stopsound(hSound);
-	closesound(hSound);
-}
-//タイトルBGM
-void BattleBGM_Start(void)
-{
-	char aSoundName[64] = SOUND_BATTLE;
-	int hSound = opensound(aSoundName);
-	playsound(hSound, 1);
+	stopsound(nSoundTitle);
+	closesound(nSoundTitle);
 }
 
+//バトルBGM
+void BattleBGM_Start(void)
+{
+	playsound(nSoundBattle, 1);
+}
 void BattleBGM_End(void)
 {
-	char aSoundName[64] = SOUND_BATTLE;
-	int hSound = opensound(aSoundName);
-	stopsound(hSound);
-	closesound(hSound);
+	stopsound(nSoundBattle);
+	closesound(nSoundBattle);
 }
+
 //ショットSE
 void ShotSE_Start(void)
 {
-	char aSoundName[64] = SOUND_SHOT;
-	int hSound = opensound(aSoundName);
-	playsound(hSound, 0);
+	playsound(nSoundShot, 0);
 }
-
 void ShotSE_End(void)
 {
-	char aSoundName[64] = SOUND_SHOT;
-	int hSound = opensound(aSoundName);
-	stopsound(hSound);
-	closesound(hSound);
+	stopsound(nSoundShot);
+	closesound(nSoundShot);
 }
+
 //撃破SE
 void KillSE_Start(void)
 {
-	char aSoundName[64] = SOUND_KILL;
-	int hSound = opensound(aSoundName);
-	playsound(hSound, 0);
+	playsound(nSoundKill, 0);
 }
-
 void KillSE_End(void)
 {
-	char aSoundName[64] = SOUND_KILL;
-	int hSound = opensound(aSoundName);
-	stopsound(hSound);
-	closesound(hSound);
+	stopsound(nSoundKill);
+	closesound(nSoundKill);
 }
+
 //ENTER_SE
 void SelectSE_Start(void)
 {
-	char aSoundName[64] = SOUND_ENTER;
-	int hSound = opensound(aSoundName);
-	playsound(hSound, 0);
+	playsound(nSoundEnter, 0);
 }
-
 void SelectSE_End(void)
 {
-	char aSoundName[64] = SOUND_ENTER;
-	int hSound = opensound(aSoundName);
-	stopsound(hSound);
-	closesound(hSound);
+	stopsound(nSoundEnter);
+	closesound(nSoundEnter);
 }

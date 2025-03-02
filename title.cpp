@@ -6,6 +6,8 @@
 #include"inputkey.h"
 #include"sound.h"
 
+
+
 //////////////////
 //グローバル変数//
 //////////////////
@@ -18,6 +20,7 @@ int ColorTimer_c;//色変化のための時間c
 //初期化処理
 void InitTitle(void)
 {
+
 	TitleBGM_Start();
 	ColorTimer_F = RED_POINT;//初期値
 	ColorTimer_i = BLUE_POINT;//初期値
