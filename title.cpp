@@ -4,7 +4,6 @@
 #include"scene.h"
 #include"title.h"
 #include"inputkey.h"
-#include"score.h"
 
 //////////////////
 //グローバル変数//
@@ -35,9 +34,7 @@ void UpdateTitle(void)
 	if (GetKeyTrigger(KEYNAME::KEY_ENTER))
 	{
 		//シーンをゲーム本編へ移動させる
-		SetScene(SCENE_GAME);
-		//スコアのリセット
-		ClearPoint();
+		SetScene(SCENE_TITLE2);
 	}
 
 	//タイマーをそれぞれ減算していく

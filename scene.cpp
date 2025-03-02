@@ -5,6 +5,7 @@
 #include"game.h"
 #include"result.h"
 #include"ranking.h"
+#include"title2.h"
 
 //****************************************
 //グローバル変数
@@ -22,6 +23,10 @@ void InitScene(void)
 	case SCENE_TITLE:
 		//タイトル画面の初期化処理
 		InitTitle();
+		break;
+	case SCENE_TITLE2:
+		//タイトル画面の初期化処理
+		InitTitle2();
 		break;
 	case SCENE_GAME:
 		//ゲーム本編の初期化処理
@@ -46,6 +51,10 @@ void UnInitScene(void)
 	case SCENE_TITLE:
 		//タイトル画面の終了処理
 		UninitTitle();
+		break;
+	case SCENE_TITLE2:
+		//タイトル画面2の終了処理
+		UnInitTitle2();
 		break;
 	case SCENE_GAME:
 		//ゲーム本編の終了処理
@@ -72,6 +81,10 @@ void UpdateScene(void)
 		//タイトル画面の更新処理
 		UpdateTitle();
 		break;
+	case SCENE_TITLE2:
+		//タイトル画面2の更新処理
+		UpdateTitle2();
+		break;
 	case SCENE_GAME:
 		//ゲーム本編の更新処理
 		UpdateGame();
@@ -96,6 +109,10 @@ void DrawScene(void)
 	case SCENE_TITLE:
 		//タイトル画面の描画処理
 		DrawTitle();
+		break;
+	case SCENE_TITLE2:
+		//タイトル画面2の描画処理
+		DrawTitle2();
 		break;
 	case SCENE_GAME:
 		//ゲーム本編の描画処理

@@ -17,6 +17,7 @@
 ///////////////
 PLAYER g_Player;
 DWORD LastHitTime;//最後に当たった時間
+int CountShield;//シールドの数
 
 //初期化処理
 void InitPlayer(void)
@@ -128,29 +129,10 @@ void UpdatePlayer(void)
 			g_Player.SpeedX = 0.3;
 		}
 	}
-	//座標制御
-	/*if (g_Player.PosX < SCREEN_LEFT + 1)
+	//シールド
+	if (GetKeyTrigger(KEYNAME::KEY_SPACE))
 	{
-		g_Player.PosX = SCREEN_LEFT + 1;
-	}
-	else if (g_Player.PosX > SCREEN_RIGHT-1)
-	{
-		g_Player.PosX = SCREEN_RIGHT-1;
-	}
-
-	if (g_Player.PosY < SCREEN_TOP+1)
-	{
-		g_Player.PosY = SCREEN_TOP+1;
-	}
-	else if (g_Player.PosY > SCREEN_BOTTOM-2)
-	{
-		g_Player.PosY = SCREEN_BOTTOM-2;
-	}*/
-
-
-	if (GetKeyTrigger(KEYNAME::KEY_SPACE))//シールド
-	{
-		int CountShield = 0;
+		CountShield = 0;
 		//シールド構造体取得
 		SHIELD* shield = GetShield();
 		for (int i = 0; i < SHIELD_MAX; i++)
