@@ -163,6 +163,7 @@
     <ClInclude Include="scene.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="shield.h" />
+    <ClInclude Include="sound.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="title2.h" />
     <ClInclude Include="UI.h" />
