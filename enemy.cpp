@@ -7,7 +7,7 @@
 #include"scene.h"
 #include"score.h"
 #include"item.h"
-
+#include"sound.h"
 //////////////////
 //ƒOƒ[ƒoƒ‹•Ï”//
 //////////////////

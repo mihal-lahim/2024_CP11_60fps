@@ -8,7 +8,7 @@
 #include"Player.h"
 #include"file.h"
 #include"ranking.h"
-
+#include"sound.h"
 //////////////////
 //ƒOƒ[ƒoƒ‹•Ï”//
 //////////////////

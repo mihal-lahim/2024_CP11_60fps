@@ -5,6 +5,7 @@
 #include"inputkey.h"
 #include"score.h"
 #include <iostream>
+#include"sound.h"
 
 //‰Šú‰»
 void InitTitle2(void)

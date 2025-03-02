@@ -11,7 +11,7 @@
 #include"item.h"
 #include"score.h"
 #include"result.h"
-
+#include"sound.h"
 ///////////////
 //グローバル変数
 ///////////////
