@@ -197,8 +197,8 @@ void UpdateEnemy()
 			if (g_Enemy[i].Hit)
 			{
 				//使用中のみ当たり判定あり
-				if (g_Enemy[i].Use)
-				{
+				//if (g_Enemy[i].Use)
+				
 					BULLET* bullet = GetBullet();
 					//敵のタイプと弾のタイプを比較して与えられるダメージを決定する
 					switch (bullet->Type)
@@ -233,8 +233,7 @@ void UpdateEnemy()
 					default:
 						break;
 					}
-					//ヒットフラグをfalseにする
-					g_Enemy[i].Hit = false;
+					
 					if (g_Enemy[i].Life < 1)
 					{
 						KillSE_Start();
@@ -243,11 +242,18 @@ void UpdateEnemy()
 						std::cout << "     ";
 						AddPoint(100);//スコア加算
 					}
+					//ヒットフラグをfalseにする
+					g_Enemy[i].Hit = false;
+					BULLET* Bullet = GetBullet();
+					for (int j = 0; j < BULLET_MAX; j++)
+					{
+						Bullet[j].Use = false;
+					}
 					//プレイヤー情報取得
 					PLAYER* Player = GetPlayer();
 					//当たった情報を飛ばす
 					Player->HitCount++;
-				}
+				
 			}
 			//シールドに当たると跳ね返る
 			if (g_Enemy[i].ShieldHit || g_Enemy[i].PlayerHit)

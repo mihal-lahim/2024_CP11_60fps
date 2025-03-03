@@ -228,6 +228,12 @@ void UpdatePlayer(void)
 	}
 	//ヒット率計算
 	g_Player.HitPercent = g_Player.HitCount / g_Player.ShotCount;
+	gotoxy(2, 3);
+	std::cout << g_Player.HitPercent;
+	gotoxy(2, 4);
+	std::cout << g_Player.ShotCount;
+	gotoxy(2, 5);
+	std::cout << g_Player.HitCount;
 	//タイムボーナス減算
 	RESULT* Result = GetResult();
 	if (g_Player.Stage < STAGE_MAX)

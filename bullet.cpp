@@ -50,22 +50,6 @@ void UpdateBullet(void)
 		PLAYER* Player = GetPlayer();
 		//アイテムタイプを入れる
 		g_Bullet[i].Type = Player->Item;
-
-		//当たり判定////////////////
-		g_Bullet[i].Hit = BulletCollisionEnemy(&g_Bullet[i]);
-		//当たったら
-		if (g_Bullet[i].Hit == true)
-		{
-			//使用中のみ当たり判定あり
-			if (g_Bullet[i].Use)
-			{
-				//Hitふぉるす
-				g_Bullet[i].Use = false;
-				g_Bullet[i].Hit = false;
-				gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);
-				std::cout << "  ";
-			}
-		}
 	}
 }
 

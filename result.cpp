@@ -19,6 +19,7 @@ RANKING g_tempRanking;
 //‰Šú‰»ˆ—
 void InitResult(void)
 {
+	BattleBGM_End();//ƒoƒgƒ‹BGM’â~
 }
 
 //I—¹ˆ—
