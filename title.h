@@ -3,7 +3,7 @@
 //////////////
 //É}ÉNÉçíËã`//
 //////////////
-#define CH4NGE_SPEED (80)
+#define CH4NGE_SPEED (60)
 #define RED_POINT (CH4NGE_SPEED * 3)
 #define BLUE_POINT (CH4NGE_SPEED * 2)
 #define WHITE_POINT (CH4NGE_SPEED * 1)

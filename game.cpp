@@ -34,6 +34,7 @@ void UnInitGame(void)
 	//UnInitField();
 	UnInitItem();
 	UnInitUI();
+	
 }
 
 void UpdateGame(void)

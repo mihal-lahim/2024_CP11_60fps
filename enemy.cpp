@@ -81,11 +81,6 @@ EnemyData g_EnemyTable3[] =
 		{62,	21	,  -0.18f,	 -0.08f,20,ITEM_ICE}, //8‘Ì–Ú
 		{62,	22	,  -0.19f,	 -0.07f,20,ITEM_ICE}, //9‘Ì–Ú
 		{62,	23	,  -0.2f,	 -0.06f,20,ITEM_ICE}, //10‘Ì–Ú
-
-
-
-
-
 };
 
 EnemyData g_EnemyTable4[] =
@@ -242,6 +237,7 @@ void UpdateEnemy()
 					g_Enemy[i].Hit = false;
 					if (g_Enemy[i].Life < 1)
 					{
+						KillSE_Start();
 						g_Enemy[i].Use = false;
 						gotoxy(g_Enemy[i].PosX - 2, g_Enemy[i].PosY);
 						std::cout << "     ";

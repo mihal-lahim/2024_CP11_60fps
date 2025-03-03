@@ -18,7 +18,7 @@
 PLAYER g_Player;
 DWORD LastHitTime;//最後に当たった時間
 int CountShield;//シールドの数
-
+DWORD LastShotTime;//最後にうった時間
 //初期化処理
 void InitPlayer(void)
 {
@@ -42,11 +42,14 @@ void InitPlayer(void)
 	Result->TimeBonus = 25000;	//タイムボーナス
 
 	LastHitTime = timeGetTime() + 2000;//最後に当たった時間を初期化
+	BattleBGM_Start();//バトルBGM再生
+	LastShotTime = timeGetTime();//最後にうった時間を初期化
 }
 
 //終了処理
 void UnInitPlayer(void)
 {
+	
 }
 
 //更新処理
@@ -162,7 +165,16 @@ void UpdatePlayer(void)
 	if (GetKeyPress(KEYNAME::KEY_UP)	|| GetKeyPress(KEYNAME::KEY_DOWN) ||
 		GetKeyPress(KEYNAME::KEY_RIGHT) || GetKeyPress(KEYNAME::KEY_LEFT))
 	{
-		Shot();
+		if (timeGetTime() - LastShotTime < 300)
+		{
+		}
+		else
+		{
+			//最後に撃った時間を更新
+			LastShotTime = timeGetTime();
+			ShotSE_Start();
+			Shot();
+		}
 	}
 	
 	//当たり判定//////////////////
@@ -184,8 +196,10 @@ void UpdatePlayer(void)
 			g_Player.Item = ITEM_NONE;
 			//最後に当たった時間を更新
 			LastHitTime = timeGetTime();
+			//体力が0になったら
 			if (g_Player.Life == 0)
 			{
+				BattleBGM_End();//バトルBGM停止
 				//シーンをタイトルへ移動させる
 				SetScene(SCENE_TITLE);
 			}

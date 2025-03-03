@@ -133,9 +133,9 @@ int	Sound(void)
 	setcursortype(NORMALCURSOR);
 
 	// サウンドハンドルの解放 [conioex.h]
-	closesound(hSound1);
+	/*closesound(hSound1);
 	closesound(hSound2);
-	closesound(hSound3);
+	closesound(hSound3);*/
 
 	return 0;
 }
@@ -149,7 +149,6 @@ void TitleBGM_Start(void)
 void TitleBGM_End(void)
 {
 	stopsound(nSoundTitle);
-	closesound(nSoundTitle);
 }
 
 //バトルBGM
@@ -160,7 +159,7 @@ void BattleBGM_Start(void)
 void BattleBGM_End(void)
 {
 	stopsound(nSoundBattle);
-	closesound(nSoundBattle);
+	
 }
 
 //ショットSE
@@ -171,7 +170,7 @@ void ShotSE_Start(void)
 void ShotSE_End(void)
 {
 	stopsound(nSoundShot);
-	closesound(nSoundShot);
+
 }
 
 //撃破SE
@@ -182,7 +181,7 @@ void KillSE_Start(void)
 void KillSE_End(void)
 {
 	stopsound(nSoundKill);
-	closesound(nSoundKill);
+	
 }
 
 //ENTER_SE
@@ -193,5 +192,15 @@ void SelectSE_Start(void)
 void SelectSE_End(void)
 {
 	stopsound(nSoundEnter);
+	
+}
+
+//サウンドファイル閉じ
+void SoundEnd(void)
+{
+	closesound(nSoundTitle);
+	closesound(nSoundBattle);
+	closesound(nSoundShot);
+	closesound(nSoundKill);
 	closesound(nSoundEnter);
 }

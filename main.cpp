@@ -7,6 +7,7 @@
 #include <iostream>
 #include"scene.h"
 #include"inputkey.h"
+#include"sound.h"
 
 #if defined(_WIN64) || defined(_M_X64)
 #ifndef _DEBUG
@@ -146,7 +147,7 @@ int main(void)
 
 	// タイマー分解能を戻す
 	timeEndPeriod(1);
-
+	
 	return 0;
 }
 
@@ -221,6 +222,7 @@ void Uninit()
 {
 	UnInitScene();
 	UninitKey();
+	SoundEnd();
 }
 // =============================================================================
 // 更新処理

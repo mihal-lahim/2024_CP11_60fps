@@ -6,9 +6,9 @@
 
 #define		SOUND_TITLE	"maou_bgm_8bit13.MP3"
 #define		SOUND_BATTLE "maou_bgm_8bit15.MP3"
-#define		SOUND_SHOT	"se_shot_004"
-#define		SOUND_KILL "se_hit_002"
-#define		SOUND_ENTER "se_etc_005"
+#define		SOUND_SHOT	"se_shot_004.wav"
+#define		SOUND_KILL "se_hit_002.wav"
+#define		SOUND_ENTER "se_etc_005.wav"
 
 
 //プロトタイプ宣言
@@ -22,3 +22,4 @@ void KillSE_Start(void);
 void KillSE_End(void);
 void SelectSE_Start(void);
 void SelectSE_End(void);
+void SoundEnd(void);

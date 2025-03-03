@@ -719,7 +719,7 @@ void closesound(int hsound)
 		mciSendCommand(psi->wDeviceID, MCI_CLOSE, 0, 0);
 		psi->wDeviceID = 0;
 	}
-	free(psi);
+s	free(psi);
 }
 #endif /* CONIOEX */
 
