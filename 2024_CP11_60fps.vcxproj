@@ -169,11 +169,16 @@
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="8bit-ME_Victory01.mp3" />
+    <Media Include="8bit-ME_Victory02.mp3" />
+    <Media Include="8bitダメージ5.mp3" />
+    <Media Include="falled-sound-effect-278635.mp3" />
     <Media Include="maou_bgm_8bit13.mp3" />
     <Media Include="maou_bgm_8bit15.mp3" />
     <Media Include="se_etc_005.wav" />
     <Media Include="se_hit_002.wav" />
     <Media Include="se_shot_004.wav" />
+    <Media Include="斬撃11.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,6 +12,7 @@
 char SoundTitle[64] = SOUND_TITLE;//タイトルBGM
 int nSoundTitle = opensound(SoundTitle);
 
+
 char SoundBattle[64] = SOUND_BATTLE;//バトルBGM
 int nSoundBattle = opensound(SoundBattle);
 
@@ -23,6 +24,22 @@ int nSoundKill = opensound(SoundKill);
 
 char SoundEnter[64] = SOUND_ENTER;//エンターSE
 int nSoundEnter = opensound(SoundEnter);
+
+char SoundShield[64] = SOUND_SHIELD;//シールドSE
+int nSoundShield = opensound(SoundShield);
+
+char SoundClear[64] = SOUND_CLEAR;//クリアSE
+int nSoundClear = opensound(SoundClear);
+
+char SoundAllClear[64] = SOUND_ALLCLEAR;//オールクリアSE
+int nSoundAllClear = opensound(SoundAllClear);
+
+char SoundDamage[64] = SOUND_DAMAGE;//ダメージSE
+int nSoundDamage = opensound(SoundDamage);
+
+char SoundGameOver[64] = SOUND_GAMEOVER;//ゲームオーバーSE
+int nSoundGameOver = opensound(SoundGameOver);
+
 
 //=============================================================================
 //  メイン関数
@@ -140,7 +157,6 @@ int	Sound(void)
 	return 0;
 }
 
-
 //タイトルBGM
 void TitleBGM_Start(void)
 {
@@ -195,6 +211,58 @@ void SelectSE_End(void)
 	
 }
 
+
+//シールドSE
+void ShieldSE_Start(void)
+{
+	playsound(nSoundShield, 0);
+}
+void ShieldSE_End(void)
+{
+	stopsound(nSoundShield);
+
+}
+
+//クリアSE
+void ClearSE_Start(void)
+{
+	playsound(nSoundClear, 0);
+}
+void ClearSE_End(void)
+{
+	stopsound(nSoundClear);
+}
+
+//オールクリアSE
+void AllClearSE_Start(void)
+{
+	playsound(nSoundAllClear, 0);
+}
+void AllClearSE_End(void)
+{
+	stopsound(nSoundAllClear);
+}
+
+//ダメージSE
+void DamageSE_Start(void)
+{
+	playsound(nSoundDamage, 0);
+}
+void DamageSE_End(void)
+{
+	stopsound(nSoundDamage);
+}
+
+//ゲームオーバーSE
+void GameOverSE_Start(void)
+{
+	playsound(nSoundGameOver, 0);
+}
+void GameOverSE_End(void)
+{
+	stopsound(nSoundGameOver);
+}
+
 //サウンドファイル閉じ
 void SoundEnd(void)
 {
@@ -203,4 +271,9 @@ void SoundEnd(void)
 	closesound(nSoundShot);
 	closesound(nSoundKill);
 	closesound(nSoundEnter);
+	closesound(nSoundShield);
+	closesound(nSoundClear);
+	closesound(nSoundAllClear);
+	closesound(nSoundDamage);
+	closesound(nSoundGameOver);
 }
