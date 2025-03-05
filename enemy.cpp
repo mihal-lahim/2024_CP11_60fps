@@ -14,7 +14,6 @@
 ENEMY g_Enemy[ENEMY_MAX];//敵構造体配列
 int g_KillCount = 0;//キル数
 DWORD StageClearTime;//クリアタイム
-
 DWORD StageBetween;//ステージとステージの間
 int countdownValue = 5; // カウントダウンの初期値
 DWORD lastCountdownUpdate = 0; // 最後にカウントダウンを更新した時間
@@ -196,67 +195,63 @@ void UpdateEnemy()
 			//敵に弾が当たると体力が減り、体力が０になると消える
 			if (g_Enemy[i].Hit)
 			{
-				//使用中のみ当たり判定あり
-				//if (g_Enemy[i].Use)
+				BULLET* bullet = GetBullet();
+				//敵のタイプと弾のタイプを比較して与えられるダメージを決定する
+				switch (bullet->Type)
+				{
+				case ITEM_NONE:
+					g_Enemy[i].Life -= 2;
+					break;
+				case ITEM_FIRE:
+					//同タイプなら与えるダメージが減る
+					if (bullet->Type == g_Enemy[i].Type)
+					{
+						g_Enemy[i].Life--;
+					}
+					//違うタイプなら与えるダメージが増える
+					else
+					{
+						g_Enemy[i].Life -= 5;
+					}
+					break;
+				case ITEM_ICE:
+					//同タイプなら与えるダメージが減る
+					if (bullet->Type == g_Enemy[i].Type)
+					{
+						g_Enemy[i].Life--;
+					}
+					//違うタイプなら与えるダメージが増える
+					else
+					{
+						g_Enemy[i].Life -= 5;
+					}
+					break;
+				default:
+					break;
+				}
 				
-					BULLET* bullet = GetBullet();
-					//敵のタイプと弾のタイプを比較して与えられるダメージを決定する
-					switch (bullet->Type)
-					{
-					case ITEM_NONE:
-						g_Enemy[i].Life -= 2;
-						break;
-					case ITEM_FIRE:
-						//同タイプなら与えるダメージが減る
-						if (bullet->Type == g_Enemy[i].Type)
-						{
-							g_Enemy[i].Life--;
-						}
-						//違うタイプなら与えるダメージが増える
-						else
-						{
-							g_Enemy[i].Life -= 5;
-						}
-						break;
-					case ITEM_ICE:
-						//同タイプなら与えるダメージが減る
-						if (bullet->Type == g_Enemy[i].Type)
-						{
-							g_Enemy[i].Life--;
-						}
-						//違うタイプなら与えるダメージが増える
-						else
-						{
-							g_Enemy[i].Life -= 5;
-						}
-						break;
-					default:
-						break;
-					}
-					
-					if (g_Enemy[i].Life < 1)
-					{
-						KillSE_Start();
-						g_Enemy[i].Use = false;
-						gotoxy(g_Enemy[i].PosX - 2, g_Enemy[i].PosY);
-						std::cout << "     ";
-						AddPoint(100);//スコア加算
-					}
-					//ヒットフラグをfalseにする
-					g_Enemy[i].Hit = false;
-					BULLET* Bullet = GetBullet();
-					for (int j = 0; j < BULLET_MAX; j++)
-					{
-						Bullet[j].Use = false;
-					}
-					//プレイヤー情報取得
-					PLAYER* Player = GetPlayer();
-					//当たった情報を飛ばす
-					Player->HitCount++;
-				
+				if (g_Enemy[i].Life < 1)
+				{
+					KillSE_Start();
+					g_Enemy[i].Use = false;
+					gotoxy(g_Enemy[i].PosX , g_Enemy[i].PosY);
+					std::cout << "     ";
+					AddPoint(100);//スコア加算
+				}
+				//ヒットフラグをfalseにする
+				g_Enemy[i].Hit = false;
+				BULLET* Bullet = GetBullet();
+				for (int j = 0; j < BULLET_MAX; j++)
+				{
+					Bullet[j].Use = false;
+				}
+				//プレイヤー情報取得
+				PLAYER* Player = GetPlayer();
+				//当たった情報を飛ばす
+				Player->HitCount++;
 			}
 			//シールドに当たると跳ね返る
-			if (g_Enemy[i].ShieldHit || g_Enemy[i].PlayerHit)
+			if (g_Enemy[i].ShieldHit)
 			{
 				//移動量の反転
 				g_Enemy[i].SpeedX *= -1;
@@ -272,6 +267,12 @@ void UpdateEnemy()
 				//現在時間
 				if (StageBetween == 0)
 				{
+					//クリアSE
+					ClearSE_Start();
+					//BGM止める
+					BattleBGM_End();
+					//カウントダウンSE
+					CountDownSE_Start();
 					StageBetween = timeGetTime();
 					lastCountdownUpdate = StageBetween;
 					countdownValue = 5; // カウントダウンの初期値
@@ -280,12 +281,17 @@ void UpdateEnemy()
 				DWORD currentTime = timeGetTime();
 				if (currentTime - lastCountdownUpdate >= 1000)
 				{
+					
 					countdownValue--;
 					lastCountdownUpdate = currentTime;
 				}
 				//５秒ディレイ
 				if (timeGetTime() - StageBetween > 5000)
 				{
+					//BGM再開
+					BattleBGM_Start();
+					//カウントダウンSE終了
+					CountDownSE_End();
 					//クリア
 					PLAYER* Player = GetPlayer();
 					Player->Stage++;

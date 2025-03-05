@@ -149,6 +149,9 @@ void UpdatePlayer(void)
 		//シールドがプレイヤーについていない、かつシールドの残量があればシールドを張れる
 		if (CountShield == 0 && g_Player.ShieldCharge > 0)
 		{
+			//シールドSE
+			ShieldSE_Start();
+			//シールド残量減算
 			g_Player.ShieldCharge--;
 			//シールド生成
 			CreateShield(g_Player.PosX, g_Player.PosY, 2.0);
@@ -165,7 +168,7 @@ void UpdatePlayer(void)
 	if (GetKeyPress(KEYNAME::KEY_UP)	|| GetKeyPress(KEYNAME::KEY_DOWN) ||
 		GetKeyPress(KEYNAME::KEY_RIGHT) || GetKeyPress(KEYNAME::KEY_LEFT))
 	{
-		if (timeGetTime() - LastShotTime < 300)
+		if (timeGetTime() - LastShotTime < 150)
 		{
 		}
 		else
@@ -192,6 +195,7 @@ void UpdatePlayer(void)
 		}
 		else
 		{
+			//体力減算
 			g_Player.Life--;
 			g_Player.Item = ITEM_NONE;
 			//最後に当たった時間を更新
@@ -228,12 +232,6 @@ void UpdatePlayer(void)
 	}
 	//ヒット率計算
 	g_Player.HitPercent = g_Player.HitCount / g_Player.ShotCount;
-	gotoxy(2, 3);
-	std::cout << g_Player.HitPercent;
-	gotoxy(2, 4);
-	std::cout << g_Player.ShotCount;
-	gotoxy(2, 5);
-	std::cout << g_Player.HitCount;
 	//タイムボーナス減算
 	RESULT* Result = GetResult();
 	if (g_Player.Stage < STAGE_MAX)

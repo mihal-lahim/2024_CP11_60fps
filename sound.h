@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 
 //////////////
-//�}�N����`//
+//マクロ定義//
 //////////////
 
 #define		SOUND_TITLE	"maou_bgm_8bit13.MP3"
@@ -9,15 +9,16 @@
 #define		SOUND_SHOT	"se_shot_004.wav"
 #define		SOUND_KILL "se_hit_002.wav"
 #define		SOUND_ENTER "se_etc_005.wav"
-#define		SOUND_SHIELD "�a��11.mp3"
-#define		SOUND_CLEAR "8bit-ME_Victory02.MP3"
-#define		SOUND_ALLCLEAR "8bit-ME_Victory01.MP3"
-#define		SOUND_DAMAGE "8bit�_���[�W5.MP3"
+#define		SOUND_SHIELD "斬撃11.mp3"
+#define		SOUND_CLEAR "8bit-ME_Victory01.MP3"
+#define		SOUND_ALLCLEAR "8bit-ME_Victory02.MP3"
+#define		SOUND_DAMAGE "8bitダメージ5.MP3"//音源探し直し
 #define		SOUND_GAMEOVER "falled-sound-effect-278635.MP3"
+#define		SOUND_COUNTDOWN "5秒カウントダウン-8ビット-効果音.mp3"//音源探し直し
 
 
 
-//�v���g�^�C�v�錾
+//プロトタイプ宣言
 void TitleBGM_Start(void);
 void TitleBGM_End(void);
 void BattleBGM_Start(void);
@@ -38,4 +39,6 @@ void DamageSE_Start(void);
 void DamageSE_End(void);
 void GameOverSE_Start(void);
 void GameOverSE_End(void);
+void CountDownSE_Start(void);
+void CountDownSE_End(void);
 void SoundEnd(void);

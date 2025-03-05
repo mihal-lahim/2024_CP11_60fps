@@ -20,6 +20,8 @@ void UpdateTitle2(void)
 {
 	if (GetKeyTrigger(KEYNAME::KEY_ENTER))
 	{
+		//エンターSE
+		SelectSE_Start();
 		//シーンをゲーム本編へ移動させる
 		SetScene(SCENE_GAME);
 		//スコアのリセット

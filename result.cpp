@@ -20,6 +20,7 @@ RANKING g_tempRanking;
 void InitResult(void)
 {
 	BattleBGM_End();//バトルBGM停止
+	AllClearSE_Start();//全クリアSE
 }
 
 //終了処理

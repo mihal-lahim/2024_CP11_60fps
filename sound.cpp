@@ -1,9 +1,9 @@
 
 //#define _CRT_SECURE_NO_WARNINGS
 #define CONIOEX
-#include	<stdio.h>
-#include	"conioex.h"
-#include"sound.h"
+#include <stdio.h>
+#include "conioex.h"
+#include "sound.h"
 
 
 //////////////////
@@ -39,6 +39,9 @@ int nSoundDamage = opensound(SoundDamage);
 
 char SoundGameOver[64] = SOUND_GAMEOVER;//ゲームオーバーSE
 int nSoundGameOver = opensound(SoundGameOver);
+
+char SoundCountDown[64] = SOUND_COUNTDOWN;//カウントダウンSE
+int nSoundCountDown = opensound(SoundCountDown);
 
 
 //=============================================================================
@@ -175,7 +178,6 @@ void BattleBGM_Start(void)
 void BattleBGM_End(void)
 {
 	stopsound(nSoundBattle);
-	
 }
 
 //ショットSE
@@ -220,7 +222,6 @@ void ShieldSE_Start(void)
 void ShieldSE_End(void)
 {
 	stopsound(nSoundShield);
-
 }
 
 //クリアSE
@@ -261,6 +262,16 @@ void GameOverSE_Start(void)
 void GameOverSE_End(void)
 {
 	stopsound(nSoundGameOver);
+}
+
+//カウントダウンSE
+void CountDownSE_Start(void)
+{
+	playsound(nSoundCountDown, 0);
+}
+void CountDownSE_End(void)
+{
+	stopsound(nSoundCountDown);
 }
 
 //サウンドファイル閉じ

@@ -39,6 +39,8 @@ void UpdateTitle(void)
 {
 	if (GetKeyTrigger(KEYNAME::KEY_ENTER))
 	{
+		SelectSE_Start();
+
 		//シーンをゲーム本編へ移動させる
 		SetScene(SCENE_TITLE2);
 	}
