@@ -133,6 +133,7 @@
     <ClCompile Include="field.cpp" />
     <ClCompile Include="file.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="gameover.cpp" />
     <ClCompile Include="inputkey.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="main.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="field.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gameover.h" />
     <ClInclude Include="inputkey.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="player.h" />
@@ -171,9 +173,11 @@
   <ItemGroup>
     <Media Include="8bit-ME_Victory01.mp3" />
     <Media Include="8bit-ME_Victory02.mp3" />
+    <Media Include="Damage.mp3" />
     <Media Include="falled-sound-effect-278635.mp3" />
     <Media Include="maou_bgm_8bit13.mp3" />
     <Media Include="maou_bgm_8bit15.mp3" />
+    <Media Include="PowerUp.mp3" />
     <Media Include="se_etc_005.wav" />
     <Media Include="se_hit_002.wav" />
     <Media Include="se_shot_004.wav" />

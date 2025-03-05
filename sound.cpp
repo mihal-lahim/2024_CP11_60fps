@@ -43,121 +43,31 @@ int nSoundGameOver = opensound(SoundGameOver);
 char SoundCountDown[64] = SOUND_COUNTDOWN;//カウントダウンSE
 int nSoundCountDown = opensound(SoundCountDown);
 
+char SoundPowerUp[64] = SOUND_POWERUP;//パワーアップSE
+int nSoundPowerUp = opensound(SoundPowerUp);
+
+char SoundHeal[64] = SOUND_HEAL;//回復SE
+int nSoundHeal = opensound(SoundHeal);
+
 
 //=============================================================================
 //  メイン関数
 //=============================================================================
 int	Sound(void)
-{
-	// サウンドファイルネーム
-	char aSoundName1[64] = SOUND_TITLE;
-	char aSoundName2[64] = SOUND_BATTLE;
-	char aSoundName3[64] = SOUND_SHOT;
-
-	// サウンドハンドルの取得 [conioex.h]
-	int hSound1 = opensound(aSoundName1);
-	int hSound2 = opensound(aSoundName2);
-	int hSound3 = opensound(aSoundName3);
-
-	// サウンドボリューム
-	int nPercent = 50;
-
-	//カーソル非表示 [conioex.h]
-	setcursortype(NOCURSOR);
-
-	do {
-		//**************************************
-		// 入力処理
-		//**************************************
-
-		// Aキー押下 [conioex.h]
-		if (inport(PK_A))
-		{
-			// 音声再生 [conioex.h]
-			playsound(hSound1, 0);
-		}
-
-		// Sキー押下 [conioex.h]
-		if (inport(PK_S))
-		{
-			// 音声再生 [conioex.h]
-			playsound(hSound2, 0);
-		}
-
-		// Dキー押下 [conioex.h]
-		if (inport(PK_D))
-		{
-			// 音声再生 [conioex.h]
-			playsound(hSound3, 0);
-		}
-
-		// Qキー押下 [conioex.h]
-		if (inport(PK_Q))
-		{
-			// 音声停止 [conioex.h]
-			stopsound(hSound1);
-			stopsound(hSound2);
-			stopsound(hSound3);
-		}
-
-		// Wキー押下 [conioex.h]
-		if (inport(PK_W))
-		{
-			// 音量を上げる
-			if (nPercent < 100)
-			{
-				nPercent++;
-			}
-			// 音量の設定  [conioex.h]
-			setvolume(hSound1, nPercent);
-			setvolume(hSound2, nPercent);
-			setvolume(hSound3, nPercent);
-		}
-
-		// Eキー押下 [conioex.h]
-		if (inport(PK_E))
-		{
-			// 音量を下げる
-			if (nPercent > 0)
-			{
-				nPercent--;
-			}
-			// 音量の設定  [conioex.h]
-			setvolume(hSound1, nPercent);
-			setvolume(hSound2, nPercent);
-			setvolume(hSound3, nPercent);
-		}
-
-		//**************************************
-		// 表示処理
-		//**************************************
-
-		// 色設定 [conioex.h]
-		textcolor(YELLOW);
-
-		// 座標の固定 [conioex.h]
-		gotoxy(2, 2);
-
-		printf("ボリューム：%03d\n ", nPercent);
-
-		printf("[Q]キーでサウンド停止　[W]キーで音量を上げる　[E]キーで音量を下げる　\n ");
-
-		printf("[A]キーでサウンド１再生　[S]キーでサウンド２再生　[D]キーでサウンド３再生　\n ");
-
-		printf("[ESC]キーで終了　\n ");
-
-		// ESCキー押下 [conioex.h]
-	} while (!inport(PK_ESC));
-
-	//カーソル表示 [conioex.h]
-	setcursortype(NORMALCURSOR);
-
-	// サウンドハンドルの解放 [conioex.h]
-	/*closesound(hSound1);
-	closesound(hSound2);
-	closesound(hSound3);*/
-
-	return 0;
+{	
+	setvolume(nSoundTitle, 30);
+	setvolume(nSoundBattle, 30);
+	setvolume(nSoundShot, 30);
+	setvolume(nSoundKill, 30);
+	setvolume(nSoundEnter, 30);
+	setvolume(nSoundShield, 30);
+	setvolume(nSoundClear, 30);
+	setvolume(nSoundAllClear, 30);
+	setvolume(nSoundDamage, 30);
+	setvolume(nSoundGameOver, 30);
+	setvolume(nSoundCountDown, 30);
+	setvolume(nSoundPowerUp, 30);
+	setvolume(nSoundHeal, 30);
 }
 
 //タイトルBGM
@@ -274,6 +184,26 @@ void CountDownSE_End(void)
 	stopsound(nSoundCountDown);
 }
 
+//パワーアップSE
+void PowerUpSE_Start(void)
+{
+	playsound(nSoundPowerUp, 0);
+}
+void PowerUpSE_End(void)
+{
+	stopsound(nSoundPowerUp);
+}
+
+//回復SE
+void HealSE_Start(void)
+{
+	playsound(nSoundHeal, 0);
+}
+void HealSE_End(void)
+{
+	stopsound(nSoundHeal);
+}
+
 //サウンドファイル閉じ
 void SoundEnd(void)
 {
@@ -287,4 +217,7 @@ void SoundEnd(void)
 	closesound(nSoundAllClear);
 	closesound(nSoundDamage);
 	closesound(nSoundGameOver);
+	closesound(nSoundCountDown);
+	closesound(nSoundPowerUp);
+	closesound(nSoundHeal);
 }

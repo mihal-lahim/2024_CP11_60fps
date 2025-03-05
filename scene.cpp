@@ -6,6 +6,7 @@
 #include"result.h"
 #include"ranking.h"
 #include"title2.h"
+#include"gameover.h"
 
 //****************************************
 //グローバル変数
@@ -38,6 +39,9 @@ void InitScene(void)
 	case SCENE_RANKING:
 		//ランキング画面の初期化処理
 		InitRanking();
+	case SCENE_GAMEOVER:
+		//ゲームオーバー画面の初期化処理
+		InitGameOver();
 		break;
 	}
 	return;
@@ -68,6 +72,10 @@ void UnInitScene(void)
 		//ランキング画面の終了処理
 		UnInitRanking();
 		break;
+	case SCENE_GAMEOVER:
+		//ゲームオーバー画面の終了処理
+		UnInitGameOver();
+		break;
 	}
 	return;
 }
@@ -97,6 +105,10 @@ void UpdateScene(void)
 		//リザルト画面の更新処理
 		UpdateRanking();
 		break;
+	case SCENE_GAMEOVER:
+		//ゲームオーバー画面の更新処理
+		UpdateGameOver();
+		break;
 	}
 	return;
 }
@@ -125,6 +137,10 @@ void DrawScene(void)
 	case SCENE_RANKING:
 		//リザルト画面の描画処理
 		DrawRanking();
+		break;
+	case SCENE_GAMEOVER:
+		//ゲームオーバー画面の描画処理
+		DrawGameOver();
 		break;
 	}
 	return;

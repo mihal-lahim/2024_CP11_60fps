@@ -195,6 +195,8 @@ void UpdatePlayer(void)
 		}
 		else
 		{
+			//SE
+			DamageSE_Start();
 			//体力減算
 			g_Player.Life--;
 			g_Player.Item = ITEM_NONE;
@@ -204,8 +206,9 @@ void UpdatePlayer(void)
 			if (g_Player.Life == 0)
 			{
 				BattleBGM_End();//バトルBGM停止
+				DamageSE_End();//ダメージSE停止
 				//シーンをタイトルへ移動させる
-				SetScene(SCENE_TITLE);
+				SetScene(SCENE_GAMEOVER);
 			}
 		}
 	}
@@ -222,8 +225,13 @@ void UpdatePlayer(void)
 		//アイテムタイプを入れる
 		g_Player.Item = g_Player.ItemHit;
 		AddPoint(10);
+		//SE
+		PowerUpSE_Start();
 		break;
 	case ITEM_LIFE:
+		//SE
+		HealSE_Start();
+		//体力回復
 		g_Player.Life += 3;
 		AddPoint(1);
 		break;
