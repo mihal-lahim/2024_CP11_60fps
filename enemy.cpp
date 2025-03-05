@@ -271,8 +271,7 @@ void UpdateEnemy()
 					ClearSE_Start();
 					//BGM止める
 					BattleBGM_End();
-					////カウントダウンSE
-					//CountDownSE_Start();
+					
 					StageBetween = timeGetTime();
 					lastCountdownUpdate = StageBetween;
 					countdownValue = 5; // カウントダウンの初期値
@@ -281,7 +280,11 @@ void UpdateEnemy()
 				DWORD currentTime = timeGetTime();
 				if (currentTime - lastCountdownUpdate >= 1000)
 				{
-					
+					if (countdownValue < 4)
+					{
+						//カウントダウンSE
+						CountDownSE_Start();
+					}
 					countdownValue--;
 					lastCountdownUpdate = currentTime;
 				}

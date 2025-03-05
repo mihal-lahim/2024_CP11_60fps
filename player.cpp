@@ -37,11 +37,10 @@ void InitPlayer(void)
 	g_Player.ShieldCharge = 2;	//シールド利用可能数
 	g_Player.Heat = 36.0;		//温度
 	g_Player.HeatSpeed = 1;		//速度乗算値
-	g_Player.DamageCollTime = 1000;//ダメージクールタイム
 	RESULT* Result = GetResult();
-	Result->TimeBonus = 25000;	//タイムボーナス
+	Result->TimeBonus = 15000;	//タイムボーナス
 
-	LastHitTime = timeGetTime() + 2000;//最後に当たった時間を初期化
+	LastHitTime = timeGetTime() + 1500;//最後に当たった時間を初期化
 	BattleBGM_Start();//バトルBGM再生
 	LastShotTime = timeGetTime();//最後にうった時間を初期化
 }
@@ -203,7 +202,7 @@ void UpdatePlayer(void)
 			//最後に当たった時間を更新
 			LastHitTime = timeGetTime();
 			//体力が0になったら
-			if (g_Player.Life == 0)
+			if (g_Player.Life < 1)
 			{
 				BattleBGM_End();//バトルBGM停止
 				DamageSE_End();//ダメージSE停止

@@ -173,8 +173,10 @@
   <ItemGroup>
     <Media Include="8bit-ME_Victory01.mp3" />
     <Media Include="8bit-ME_Victory02.mp3" />
+    <Media Include="cursor_2.mp3" />
     <Media Include="Damage.mp3" />
     <Media Include="falled-sound-effect-278635.mp3" />
+    <Media Include="iwa_gameover012.mp3" />
     <Media Include="maou_bgm_8bit13.mp3" />
     <Media Include="maou_bgm_8bit15.mp3" />
     <Media Include="PowerUp.mp3" />

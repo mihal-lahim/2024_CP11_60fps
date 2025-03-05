@@ -20,7 +20,8 @@ int ColorTimer_c;//F•Ï‰»‚Ì‚½‚ß‚ÌŠÔc
 //‰Šú‰»ˆ—
 void InitTitle(void)
 {
-
+	//‰¹—Êİ’è
+	SoundSetVol();
 	TitleBGM_Start();
 	ColorTimer_F = RED_POINT;//‰Šú’l
 	ColorTimer_i = BLUE_POINT;//‰Šú’l

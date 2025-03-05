@@ -14,15 +14,17 @@
 #define		SOUND_ALLCLEAR "8bit-ME_Victory02.MP3"
 #define		SOUND_DAMAGE "Damage.mp3"
 #define		SOUND_HEAL "Heal.mp3"
-#define		SOUND_GAMEOVER "falled-sound-effect-278635.MP3"
-
-//#define		SOUND_COUNTDOWN "5秒カウントダウン-8ビット-効果音.mp3"//音源探し直し
+#define		SOUND_GAMEOVER "iwa_gameover012.mp3"
 #define		SOUND_POWERUP "PowerUp.mp3"
+
+#define		SOUND_COUNTDOWN "cursor_2.mp3"//音源探し直し
+#define		VOLUME 20
 
 
 
 
 //プロトタイプ宣言
+void SoundSetVol(void);
 void TitleBGM_Start(void);
 void TitleBGM_End(void);
 void BattleBGM_Start(void);
@@ -43,8 +45,8 @@ void DamageSE_Start(void);
 void DamageSE_End(void);
 void GameOverSE_Start(void);
 void GameOverSE_End(void);
-//void CountDownSE_Start(void);
-//void CountDownSE_End(void);
+void CountDownSE_Start(void);
+void CountDownSE_End(void);
 void PowerUpSE_Start(void);
 void PowerUpSE_End(void);
 void HealSE_Start(void);

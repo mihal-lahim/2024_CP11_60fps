@@ -19,6 +19,8 @@ RANKING g_tempRanking;
 //初期化処理
 void InitResult(void)
 {
+	//BGM停止
+	GameOverSE_End();//ゲームオーバーSE
 	BattleBGM_End();//バトルBGM停止
 	AllClearSE_Start();//全クリアSE
 }

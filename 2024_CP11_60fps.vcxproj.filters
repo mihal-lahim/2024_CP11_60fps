@@ -172,5 +172,11 @@
     <Media Include="maou_bgm_8bit13.mp3">
       <Filter>リソース ファイル</Filter>
     </Media>
+    <Media Include="cursor_2.mp3">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="iwa_gameover012.mp3">
+      <Filter>リソース ファイル</Filter>
+    </Media>
   </ItemGroup>
 </Project>

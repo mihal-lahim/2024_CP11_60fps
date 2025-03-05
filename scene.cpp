@@ -36,9 +36,11 @@ void InitScene(void)
 	case SCENE_RESULT:
 		//リザルト画面の初期化処理
 		InitResult();
+		break;
 	case SCENE_RANKING:
 		//ランキング画面の初期化処理
 		InitRanking();
+		break;
 	case SCENE_GAMEOVER:
 		//ゲームオーバー画面の初期化処理
 		InitGameOver();

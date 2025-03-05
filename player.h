@@ -32,7 +32,6 @@ struct PLAYER
 	int ShieldCharge;//シールドの残使用数
 	float Heat;//プレイヤーの温度
 	float HeatSpeed;//温度による速度変更の値
-	int DamageCollTime;//ダメージ受けた後のクールタイム
 
 	////スコア計算用//////
 	
