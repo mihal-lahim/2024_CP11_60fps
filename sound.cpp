@@ -40,8 +40,8 @@ int nSoundDamage = opensound(SoundDamage);
 char SoundGameOver[64] = SOUND_GAMEOVER;//ゲームオーバーSE
 int nSoundGameOver = opensound(SoundGameOver);
 
-char SoundCountDown[64] = SOUND_COUNTDOWN;//カウントダウンSE
-int nSoundCountDown = opensound(SoundCountDown);
+//char SoundCountDown[64] = SOUND_COUNTDOWN;//カウントダウンSE
+//int nSoundCountDown = opensound(SoundCountDown);
 
 char SoundPowerUp[64] = SOUND_POWERUP;//パワーアップSE
 int nSoundPowerUp = opensound(SoundPowerUp);
@@ -65,7 +65,7 @@ int	Sound(void)
 	setvolume(nSoundAllClear, 30);
 	setvolume(nSoundDamage, 30);
 	setvolume(nSoundGameOver, 30);
-	setvolume(nSoundCountDown, 30);
+	//setvolume(nSoundCountDown, 30);
 	setvolume(nSoundPowerUp, 30);
 	setvolume(nSoundHeal, 30);
 }
@@ -174,15 +174,15 @@ void GameOverSE_End(void)
 	stopsound(nSoundGameOver);
 }
 
-//カウントダウンSE
-void CountDownSE_Start(void)
-{
-	playsound(nSoundCountDown, 0);
-}
-void CountDownSE_End(void)
-{
-	stopsound(nSoundCountDown);
-}
+////カウントダウンSE
+//void CountDownSE_Start(void)
+//{
+//	playsound(nSoundCountDown, 0);
+//}
+//void CountDownSE_End(void)
+//{
+//	stopsound(nSoundCountDown);
+//}
 
 //パワーアップSE
 void PowerUpSE_Start(void)
@@ -217,7 +217,7 @@ void SoundEnd(void)
 	closesound(nSoundAllClear);
 	closesound(nSoundDamage);
 	closesound(nSoundGameOver);
-	closesound(nSoundCountDown);
+	//closesound(nSoundCountDown);
 	closesound(nSoundPowerUp);
 	closesound(nSoundHeal);
 }

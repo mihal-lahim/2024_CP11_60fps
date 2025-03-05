@@ -271,8 +271,8 @@ void UpdateEnemy()
 					ClearSE_Start();
 					//BGM止める
 					BattleBGM_End();
-					//カウントダウンSE
-					CountDownSE_Start();
+					////カウントダウンSE
+					//CountDownSE_Start();
 					StageBetween = timeGetTime();
 					lastCountdownUpdate = StageBetween;
 					countdownValue = 5; // カウントダウンの初期値
@@ -290,8 +290,8 @@ void UpdateEnemy()
 				{
 					//BGM再開
 					BattleBGM_Start();
-					//カウントダウンSE終了
-					CountDownSE_End();
+					////カウントダウンSE終了
+					//CountDownSE_End();
 					//クリア
 					PLAYER* Player = GetPlayer();
 					Player->Stage++;

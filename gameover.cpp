@@ -27,6 +27,9 @@ void UpdateGameOver(void)
 	//エンターキーが押されたら
 	if (GetKeyTrigger(KEYNAME::KEY_ENTER))
 	{
+		//SE
+		SelectSE_Start();
+
 		//タイトルへ移動
 		SetScene(SCENE_TITLE);
 	}
