@@ -104,7 +104,7 @@ void DrawUI(void)
 	gotoxy(69, 8);
 	std::cout << "Shield:" << Player->ShieldCharge;
 	//プレイヤーの体温表示
-	gotoxy(3, 15);
+	gotoxy(2, 15);
 	std::cout << "Temperature";
 	gotoxy(5, 16);
 	std::cout << round(Player->Heat * 10) / 10 << "℃  ";

@@ -280,7 +280,7 @@ void UpdateEnemy()
 				DWORD currentTime = timeGetTime();
 				if (currentTime - lastCountdownUpdate >= 1000)
 				{
-					if (countdownValue < 4)
+					if (countdownValue < 5)
 					{
 						//カウントダウンSE
 						CountDownSE_Start();
@@ -378,8 +378,8 @@ void DrawEnemy()
 			if (g_Enemy[i].Life < 1)
 			{
 				g_Enemy[i].Life = 0;
-				gotoxy(g_Enemy[i].PosX - 2, g_Enemy[i].PosY);
-				std::cout << "    ";
+				gotoxy(g_Enemy[i].PosX, g_Enemy[i].PosY);
+				std::cout << "  ";
 			}
 		}
 	}

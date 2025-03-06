@@ -163,19 +163,34 @@ void UpdatePlayer(void)
 	//座標更新
 	g_Player.PosX += g_Player.SpeedX;
 	g_Player.PosY += g_Player.SpeedY;
+
+	////弾発射SE
+	//if (GetKeyTrigger(KEYNAME::KEY_UP) || GetKeyTrigger(KEYNAME::KEY_DOWN) ||
+	//	GetKeyTrigger(KEYNAME::KEY_RIGHT) || GetKeyTrigger(KEYNAME::KEY_LEFT))
+	//{
+	//	
+	//}
+	////SE終了
+	//if (GetKeyRelease(KEYNAME::KEY_UP) || GetKeyRelease(KEYNAME::KEY_DOWN) ||
+	//	GetKeyRelease(KEYNAME::KEY_RIGHT) || GetKeyRelease(KEYNAME::KEY_LEFT))
+	//{
+	//	ShotSE_End();
+	//}
+
+
 	//弾発射　上下左右
 	if (GetKeyPress(KEYNAME::KEY_UP)	|| GetKeyPress(KEYNAME::KEY_DOWN) ||
 		GetKeyPress(KEYNAME::KEY_RIGHT) || GetKeyPress(KEYNAME::KEY_LEFT))
 	{
-		if (timeGetTime() - LastShotTime < 150)
-		{
-		}
-		else
-		{
+		
+		if (timeGetTime() - LastShotTime > 200)
+		{//弾が最大数に達していたら発射しない
+			//SE
+			ShotSE_Start();
 			//最後に撃った時間を更新
 			LastShotTime = timeGetTime();
-			ShotSE_Start();
 			Shot();
+			g_Player.ShotCount++;
 		}
 	}
 	
@@ -316,25 +331,26 @@ PLAYER* GetPlayer()
 //玉発射関数
 void Shot(void)
 {
+	
 	//弾の速さ（加える力）の指定に使用する
 	float direct_x = 0.0;//横方向
 	float direct_y = 0.0;//縦方向
 	if (GetKeyPress(KEYNAME::KEY_UP))
 	{
-		direct_y += -1;
+		direct_y += -0.5;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_DOWN))
 	{
-		direct_y += 1;
+		direct_y += 0.5;
 	}
 
 	if (GetKeyPress(KEYNAME::KEY_RIGHT))
 	{
-		direct_x += 2;
+		direct_x += 1;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_LEFT))
 	{
-		direct_x += -2;
+		direct_x += -1;
 	}
 	//弾生成
 	CreateBullet(g_Player.PosX, g_Player.PosY, direct_x, direct_y);

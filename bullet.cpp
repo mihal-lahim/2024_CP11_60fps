@@ -6,6 +6,7 @@
 #include"player.h"
 #include"item.h"
 #include"collision.h"
+#include"sound.h"
 //////////////////
 //グローバル変数//
 //////////////////
@@ -39,17 +40,19 @@ void UpdateBullet(void)
 			//現在の座標へ移動量を加算
 			g_Bullet[i].PosX += g_Bullet[i].SpeedX;
 			g_Bullet[i].PosY += g_Bullet[i].SpeedY;
+
+			//現在の座標が画面外なら使用中フラグをfalseにする
+			if ((g_Bullet[i].PosX < SCREEN_LEFT) || (g_Bullet[i].PosX > SCREEN_RIGHT) ||
+				(g_Bullet[i].PosY < SCREEN_TOP) || (g_Bullet[i].PosY > SCREEN_BOTTOM))
+			{
+				g_Bullet[i].Use = false;//構造体を未使用にする
+			}
+			//取得しているアイテムによって弾の属性を変える
+			PLAYER* Player = GetPlayer();
+			//アイテムタイプを入れる
+			g_Bullet[i].Type = Player->Item;
 		}
-		//現在の座標が画面外なら使用中フラグをfalseにする
-		if ((g_Bullet[i].PosX < SCREEN_LEFT) || (g_Bullet[i].PosX > SCREEN_RIGHT) || 
-			(g_Bullet[i].PosY < SCREEN_TOP)  || (g_Bullet[i].PosY > SCREEN_BOTTOM))
-		{
-			g_Bullet[i].Use = false;//構造体を未使用にする
-		}
-		//取得しているアイテムによって弾の属性を変える
-		PLAYER* Player = GetPlayer();
-		//アイテムタイプを入れる
-		g_Bullet[i].Type = Player->Item;
+	
 	}
 }
 
@@ -68,7 +71,7 @@ void DrawBullet(void)
 			//構造体が使用中なら
 			if (g_Bullet[i].Use == true)
 			{
-				gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);//今回の場所への移動
+				
 				PLAYER* Player = GetPlayer();
 				//アイテムにより色変え
 				switch (Player->Item)
@@ -85,6 +88,7 @@ void DrawBullet(void)
 				default:
 					break;
 				}
+				gotoxy(g_Bullet[i].PosX, g_Bullet[i].PosY);//今回の場所への移動
 				std::cout << "・";
 				textcolor(WHITE);//色変え
 			}
@@ -101,14 +105,14 @@ void CreateBullet(float X,float Y,float Mx,float My)
 		//構造体が未使用なら
 		if (!g_Bullet[i].Use)
 		{
-			g_Bullet[i].PosX = g_Bullet[i].OldPosX = X;
-			g_Bullet[i].PosY = g_Bullet[i].OldPosY = Y;
+			g_Bullet[i].OldPosX = 0;
+			g_Bullet[i].OldPosY = 0;
+			g_Bullet[i].PosX =  X;
+			g_Bullet[i].PosY =  Y;
 			g_Bullet[i].SpeedX = Mx;
 			g_Bullet[i].SpeedY = My;
 			g_Bullet[i].Use = true;
-			//プレイヤー情報取得
-			PLAYER* Player = GetPlayer();
-			Player->ShotCount++;
+			
 			break;//弾を一つ作成したら終了
 		}
 	}
