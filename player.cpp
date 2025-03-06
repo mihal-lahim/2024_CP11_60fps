@@ -183,7 +183,7 @@ void UpdatePlayer(void)
 		GetKeyPress(KEYNAME::KEY_RIGHT) || GetKeyPress(KEYNAME::KEY_LEFT))
 	{
 		
-		if (timeGetTime() - LastShotTime > 200)
+		if (timeGetTime() - LastShotTime > 150)
 		{//弾が最大数に達していたら発射しない
 			//SE
 			ShotSE_Start();
@@ -221,7 +221,7 @@ void UpdatePlayer(void)
 			{
 				BattleBGM_End();//バトルBGM停止
 				DamageSE_End();//ダメージSE停止
-				//シーンをタイトルへ移動させる
+				//シーンをゲームオーバーへ移動させる
 				SetScene(SCENE_GAMEOVER);
 			}
 		}
@@ -337,20 +337,20 @@ void Shot(void)
 	float direct_y = 0.0;//縦方向
 	if (GetKeyPress(KEYNAME::KEY_UP))
 	{
-		direct_y += -0.5;
+		direct_y += -1;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_DOWN))
 	{
-		direct_y += 0.5;
+		direct_y += 1;
 	}
 
 	if (GetKeyPress(KEYNAME::KEY_RIGHT))
 	{
-		direct_x += 1;
+		direct_x += 2;
 	}
 	else if (GetKeyPress(KEYNAME::KEY_LEFT))
 	{
-		direct_x += -1;
+		direct_x += -2;
 	}
 	//弾生成
 	CreateBullet(g_Player.PosX, g_Player.PosY, direct_x, direct_y);
