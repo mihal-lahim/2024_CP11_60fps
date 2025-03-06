@@ -14,7 +14,7 @@
 //////////////////
 RESULT g_Result;
 RANKING g_tempRanking;
-
+int Timer2 = 0;
 
 //初期化処理
 void InitResult(void)
@@ -33,6 +33,9 @@ void UninitResult(void)
 //更新処理
 void UpdateResult(void)
 {
+	//タイマー加算
+	Timer2++;
+
 	if (GetKeyTrigger(KEYNAME::KEY_ENTER))
 	{
 		//シーンをランキングへ移動させる
@@ -70,20 +73,41 @@ void DrawResult(void)
 	PLAYER* Player = GetPlayer();
 	gotoxy(30, 5);
 	std::cout << "ゲームクリアおめでとう";
-	gotoxy(32, 7);
-	std::cout << "SCORE      :"<< GetScore()->nPoint;
-	gotoxy(32, 9);
-	std::cout << "CLEARTIME  :" << Player->ClearTime / 1000 << " sec";
-	gotoxy(32, 11);
-	std::cout << "HIT LATE   :" << round(Player->HitPercent * 1000) / 10 << " %";
-	gotoxy(32, 13);
-	std::cout << "GET ITEMS  :" << Player->ItemGetCount;
-	gotoxy(32, 15);
-	std::cout << "TIME BONUS :" << g_Result.TimeBonus;
-	gotoxy(32, 17);
-	std::cout << "TOTAL SCORE:" << g_Result.TotalScore;
-	gotoxy(30, 21);
-	std::cout << "ENTER　で次へ進む";
+	if (Timer2 > 10)
+	{
+		gotoxy(32, 7);
+		std::cout << "SCORE      :" << GetScore()->nPoint;
+	}
+	if (Timer2 > 20)
+	{
+		gotoxy(32, 9);
+		std::cout << "CLEARTIME  :" << Player->ClearTime / 1000 << " sec";
+	}
+	if (Timer2 > 30)
+	{
+		gotoxy(32, 11);
+		std::cout << "HIT LATE   :" << round(Player->HitPercent * 1000) / 10 << " %";
+	}
+	if (Timer2 > 40)
+	{
+		gotoxy(32, 13);
+		std::cout << "GET ITEMS  :" << Player->ItemGetCount;
+	}
+	if (Timer2 > 50)
+	{
+		gotoxy(32, 15);
+		std::cout << "TIME BONUS :" << g_Result.TimeBonus;
+	}
+	if (Timer2 > 70)
+	{
+		gotoxy(32, 17);
+		std::cout << "TOTAL SCORE:" << g_Result.TotalScore;
+	}
+	if (Timer2 > 80)
+	{
+		gotoxy(30, 21);
+		std::cout << "ENTER　で次へ進む";
+	}
 }
 
 //構造体情報取得

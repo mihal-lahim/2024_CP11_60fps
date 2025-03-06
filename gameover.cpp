@@ -6,6 +6,7 @@
 #include "gameover.h"
 #include "sound.h"
 #include<iostream>
+#include"Player.h"
 
 //初期化処理
 void InitGameOver(void)
@@ -39,8 +40,12 @@ void UpdateGameOver(void)
 void DrawGameOver(void)
 {
 	//ゲームオーバー表示
-	gotoxy(35, 10);
-	std::cout << "Game Over";
+	gotoxy(34, 10);
+	std::cout << "Mission Failed...";
+	//ステージ表示
+	PLAYER* Player = GetPlayer();
+	gotoxy(33, 13);
+	std::cout << "記録：ステージ" << Player->Stage;
 	gotoxy(30, 15);
 	std::cout << "Press Enter Key to Title";
 }

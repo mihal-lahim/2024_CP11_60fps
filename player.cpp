@@ -185,8 +185,7 @@ void UpdatePlayer(void)
 		
 		if (timeGetTime() - LastShotTime > 150)
 		{//弾が最大数に達していたら発射しない
-			//SE
-			ShotSE_Start();
+			
 			//最後に撃った時間を更新
 			LastShotTime = timeGetTime();
 			Shot();

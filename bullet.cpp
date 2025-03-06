@@ -112,7 +112,8 @@ void CreateBullet(float X,float Y,float Mx,float My)
 			g_Bullet[i].SpeedX = Mx;
 			g_Bullet[i].SpeedY = My;
 			g_Bullet[i].Use = true;
-			
+			//SE
+			ShotSE_Start();
 			break;//’e‚ğˆê‚Âì¬‚µ‚½‚çI—¹
 		}
 	}

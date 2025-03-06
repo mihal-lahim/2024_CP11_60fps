@@ -20,7 +20,6 @@ void FileWrite(RANKING* ranking)
 	for (int i = 0; i < RANKING_MAX; i++,ranking++)
 	{
 		File.write((char*)ranking, sizeof(RANKING));
-		
 	}
 
 	File.close();
@@ -40,7 +39,7 @@ void FileRead(RANKING* ranking)
 	//読み込み
 	File.open("ranking.dat", std::ios::binary);
 	
-
+	//ファイル読み込み
 	if (File)
 	{
 		for (int i = 0; i < RANKING_MAX; i++, ranking++)
@@ -54,6 +53,5 @@ void FileRead(RANKING* ranking)
 	{
 		std::cout << "ファイル読み込みエラー\n";
 	}
-
 	return;
 }
